@@ -7,7 +7,7 @@
 
       	 <!-- You Logo - Change X,Y,Width and Height --> 
       	 
-         <image x="0.03cm" y="0.05cm" height="29.6cm" width="22.2cm" file="/opt/bas_erp/openerp/addons/nsm_followup_layout/image/payment_followup.png"/>
+         <image x="0.03cm" y="0.05cm" height="29.6cm" width="22.2cm" file="/home/openerp/git/OCB/addons/nsm_followup_layout/image/payment_followup.jpg"/>
          
        </pageGraphics>
 

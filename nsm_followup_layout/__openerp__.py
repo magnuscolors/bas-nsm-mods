@@ -24,7 +24,7 @@
     "author": "BAS Solutions",
     "website": "http://www.bas-solutions.nl",
     "category": "Sales Management",
-    "depends": ["base", "account_followup","bas_erp_company_header"],
+    "depends": ["base", "account_followup"],
     "summary": "Customized Payment Followup layout",
     "description": """
                 This is the internal Customized Payment Followup layout
