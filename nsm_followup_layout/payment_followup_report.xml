@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <report auto="False" id="account_followup.account_followup_followup_report" menu="False" model="account_followup.followup" name="account_followup.followup.print.nsm" rml="nsm_followup_layout/report/account_followup_print.rml" string="Follow-up Report" header="False"/>
+        
+    </data>
+</openerp>
