@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+        <menuitem id="menu_supplier_main"
+            sequence="10"
+            name="Supplier"
+            groups="group_module_supplier_portal"/>
+
+        <menuitem id = "menu_supplier_portal_main"
+            parent = "menu_supplier_main"
+            sequence="1"
+            name = "Supplier"/>
+
+        <record id="mail_inboxfeeds_new" model="ir.ui.menu">
+            <field name="name">Inbox</field>
+            <field name="sequence" eval="1"/>
+            <field name="action" ref="mail.action_mail_inbox_feeds"/>
+            <field name="parent_id" ref="menu_supplier_portal_main"/>
+        </record>
+
+        <record id="mail_archivesfeeds_new" model="ir.ui.menu">
+            <field name="name">Archives</field>
+            <field name="sequence" eval="2"/>
+            <field name="action" ref="mail.action_mail_archives_feeds"/>
+            <field name="parent_id" ref="menu_supplier_portal_main"/>
+        </record>
+
+        <menuitem action="account.action_invoice_tree4"
+            id="menu_action_invoice_tree4_custom"
+            sequence="5"
+            parent="menu_supplier_portal_main"/>
+
+    </data>
+</openerp>

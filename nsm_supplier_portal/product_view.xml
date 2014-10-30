@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+            <record id="view_product_view_form" model="ir.ui.view">
+                <field name="name">product.product.form</field>
+                <field name="model">product.product</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="product.product_normal_form_view"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//label[@for='sale_ok']" position="after">
+                        <field name="avail_supplier_portal"/>
+                        <label for="avail_supplier_portal"/>
+                    </xpath>
+                </field>
+            </record>
+    </data>
+</openerp>

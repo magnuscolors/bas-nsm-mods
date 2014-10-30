@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+
+    <data noupdate="0">
+        <record model="res.groups" id="group_module_supplier_portal">
+            <field name="name">Supplier Portal</field>
+         </record>
+  </data>
+</openerp>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+custom_portal_supplier_invoice,custom_supplier_invoice,account.model_account_invoice,group_module_supplier_portal,1,0,0,0
