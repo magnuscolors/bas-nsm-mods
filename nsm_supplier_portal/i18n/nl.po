@@ -1,0 +1,79 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* nsm_supplier_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-31 06:41+0000\n"
+"PO-Revision-Date: 2014-10-31 06:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.act_window,name:nsm_supplier_portal.new_action_invoice_tree2
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_action_invoice_tree2_new
+msgid "Supplier Invoices"
+msgstr "Inkoopfacturen"
+
+#. module: nsm_supplier_portal
+#: model:ir.model,name:nsm_supplier_portal.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: nsm_supplier_portal
+#. openerp-web
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:34
+#, python-format
+msgid "Compose a new message"
+msgstr "Compose a new message"
+
+#. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_action_invoice_tree4_custom
+msgid "Supplier Refunds"
+msgstr "Credit inkoopfacturen"
+
+#. module: nsm_supplier_portal
+#. openerp-web
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:39
+#, python-format
+msgid "Write to my followers"
+msgstr "Write to my followers"
+
+#. module: nsm_supplier_portal
+#: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal
+msgid "Supplier Portal"
+msgstr "Supplier Portal"
+
+#. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.mail_archivesfeeds_new
+msgid "Archives"
+msgstr "Archieven"
+
+#. module: nsm_supplier_portal
+#: field:product.product,avail_supplier_portal:0
+msgid "Available Supplier Portal"
+msgstr "Available Supplier Portal"
+
+#. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_main
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_portal_main
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: nsm_supplier_portal
+#. openerp-web
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:37
+#, python-format
+msgid "or"
+msgstr "or"
+
+#. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.mail_inboxfeeds_new
+msgid "Inbox"
+msgstr "Postvak in"
