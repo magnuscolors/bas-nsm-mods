@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-31 06:41+0000\n"
-"PO-Revision-Date: 2014-10-31 06:41+0000\n"
+"POT-Creation-Date: 2014-11-03 06:57+0000\n"
+"PO-Revision-Date: 2014-11-03 06:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Product"
 
 #. module: nsm_supplier_portal
 #. openerp-web
-#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:34
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:41
 #, python-format
 msgid "Compose a new message"
 msgstr "Compose a new message"
@@ -40,7 +40,8 @@ msgstr "Credit inkoopfacturen"
 
 #. module: nsm_supplier_portal
 #. openerp-web
-#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:39
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:35
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:46
 #, python-format
 msgid "Write to my followers"
 msgstr "Write to my followers"
@@ -67,13 +68,33 @@ msgid "Supplier"
 msgstr "Supplier"
 
 #. module: nsm_supplier_portal
+#: model:ir.actions.client,help:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
+msgid "<p>\n"
+"                            <b>Good Job!</b> Your inbox is empty.\n"
+"                        </p><p>\n"
+"                            Your inbox contains private messages or emails sent to you\n"
+"                            as well as information related to documents or people you\n"
+"                            follow.\n"
+"                        </p>\n"
+"                    "
+msgstr "<p>\n"
+"                            <b>Good Job!</b> Your inbox is empty.\n"
+"                        </p><p>\n"
+"                            Your inbox contains private messages or emails sent to you\n"
+"                            as well as information related to documents or people you\n"
+"                            follow.\n"
+"                        </p>\n"
+"                    "
+
+#. module: nsm_supplier_portal
 #. openerp-web
-#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:37
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:44
 #, python-format
 msgid "or"
 msgstr "or"
 
 #. module: nsm_supplier_portal
-#: model:ir.ui.menu,name:nsm_supplier_portal.mail_inboxfeeds_new
+#: model:ir.actions.client,name:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.supplier_portal_inbox
 msgid "Inbox"
 msgstr "Postvak in"
