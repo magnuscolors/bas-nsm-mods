@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    
+
+        <!-- Top menu item -->
+        
         <menuitem id="menu_supplier_main"
             sequence="10"
             name="Supplier"
@@ -11,25 +13,47 @@
             parent = "menu_supplier_main"
             sequence="1"
             name = "Supplier"/>
+        
 
-        <record id="mail_inboxfeeds_new" model="ir.ui.menu">
+        <record id="action_mail_inbox_feeds_supplier_portal" model="ir.actions.client">
             <field name="name">Inbox</field>
-            <field name="sequence" eval="1"/>
-            <field name="action" ref="mail.action_mail_inbox_feeds"/>
-            <field name="parent_id" ref="menu_supplier_portal_main"/>
+            <field name="tag">mail.wall</field>
+            <field name="res_model">mail.message</field>
+            <field name="context">{
+              'default_model': 'res.users',
+              'default_res_id': uid,
+            }</field>
+            <field name="params" eval="&quot;{
+                'domain': [
+                  ('to_read', '=', True),
+                ],
+                'show_compose_message': False,
+                'show_link': False,
+                'view_mailbox': True,
+                'is_true': True,
+                'view_inbox': True,
+                'read_action': 'read'
+            }&quot;"/>
+            <field name="help" type="html">
+                <p>
+                    <b>Good Job!</b> Your inbox is empty.
+                </p><p>
+                    Your inbox contains private messages or emails sent to you
+                    as well as information related to documents or people you
+                    follow.
+                </p>
+            </field>
         </record>
 
+
+        <menuitem name="Inbox" id="supplier_portal_inbox" parent="menu_supplier_portal_main"
+            action="action_mail_inbox_feeds_supplier_portal" sequence="1" groups="group_module_supplier_portal"/>
+        
         <record id="mail_archivesfeeds_new" model="ir.ui.menu">
             <field name="name">Archives</field>
             <field name="sequence" eval="2"/>
             <field name="action" ref="mail.action_mail_archives_feeds"/>
             <field name="parent_id" ref="menu_supplier_portal_main"/>
         </record>
-
-        <menuitem action="account.action_invoice_tree4"
-            id="menu_action_invoice_tree4_custom"
-            sequence="5"
-            parent="menu_supplier_portal_main"/>
-
     </data>
 </openerp>
