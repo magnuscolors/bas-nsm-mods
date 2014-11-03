@@ -29,7 +29,7 @@
                 </td>
                 <td><div class="oe_view_manager_view_search" t-opentag="true"/></td>
             </tr>
-            <tr class="oe_header_row" t-if="widget.action.params.is_true">
+            <tr class="oe_header_row" t-if="widget.action.params.supplier_portal">
                 <td colspan="2">
                     <span class='oe_alternative'>
                         <a href='#'  class='oe_write_onwall oe_bold' help='Your followers can read this message'>Write to my followers</a>

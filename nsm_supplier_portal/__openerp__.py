@@ -27,10 +27,11 @@
     """,
     'author': 'BAS Solutions',
     'website': 'http://www.bas-solutions.nl',
-    'depends': ['base', 'account',],
+    'depends': ['base', 'account','mail'],
     'data': [
         "security/supplier_portal_security_view.xml",
         "security/ir.model.access.csv",
+        "mail_thread_view.xml",
         "menu_view.xml",
         "account_invoice_view.xml",
         "product_view.xml",
