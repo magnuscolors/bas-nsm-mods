@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-
+    
+        <!--record id="custom_invoice_tree" model="ir.ui.view">
+            <field name="name">account.invoice.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice">
+                    <field name="partner_id" groups="base.group_user"/>
+                    <field name="date_invoice"/>
+                    <field name="number"/>
+                    <field name="reference" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="period_id" invisible="1" groups="account.group_account_user"/>
+                    <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                    <field name="user_id"/>
+                    <field name="date_due"/>
+                    <field name="origin"/>
+                    <field name="currency_id" groups="base.group_multi_currency"/>
+                    <field name="residual" sum="Residual Amount"/>
+                    <field name="amount_untaxed" sum="Untaxed Amount"/>
+                    <field name="amount_total" sum="Total Amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
         
         <record id="new_action_invoice_tree2" model="ir.actions.act_window">
             <field name="name">Supplier Invoices</field>
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree</field>
             <field eval="False" name="view_id"/>
             <field name="domain">[('type','=','in_invoice')]</field>
             <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase'}</field>
@@ -17,6 +41,74 @@
         <menuitem action="new_action_invoice_tree2"
             id="menu_action_invoice_tree2_new"
             sequence="4"
-            parent="menu_supplier_portal_main"/>
+            parent="menu_supplier_portal_main"/-->
+
+            <record id="view_supplier_invoice_tree" model="ir.ui.view">
+                <field name="name">account.invoice.tree</field>
+                <field name="model">account.invoice</field>
+                <field name="type">tree</field>
+                <field name="priority" eval="1000"/>
+                <field name="arch" type="xml">
+                <!--tree string="Supplier Invoices"-->
+                <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice" create="false">
+                    <field name="partner_id" />
+                    <field name="date_invoice"/>
+                    <field name="number"/>
+                    <field name="reference" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="period_id" invisible="1"/>
+                    <field name="company_id" widget="selection"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="date_due"/>
+                    <field name="origin" invisible="1"/>
+                    <field name="currency_id"/>
+                    <field name="residual" sum="Residual Amount"/>
+                    <field name="amount_untaxed" sum="Untaxed Amount"/>
+                    <field name="amount_total" sum="Total Amount"/>
+                    <field name="state"/>
+                </tree>
+                </field>
+            </record>
+            
+            <!--record id="view_supplier_invoice_form" model="ir.ui.view">
+                <field name="name">account.invoice.form</field>
+                <field name="model">account.invoice</field>
+                <field name="type">form</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                <form string="Supplier Invoices">
+                </form>
+                </field>
+            </record-->
+            
+            <record model="ir.actions.act_window" id="act_open_supplier_invoice_view">
+                <field name="name">Supplier Invoices</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.invoice</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree</field>
+                <field name="domain">[('type','=','in_invoice'),('user_id', '=', context.get('uid'))]</field>
+                <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase'}</field>
+            </record>
+            
+            <!--record model="ir.actions.act_window.view" id="act_open_supplier_invoice_view_form">
+                <field name="act_window_id" ref="act_open_supplier_invoice_view"/>
+                <field name="sequence" eval="20"/>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="view_supplier_invoice_form"/>
+            </record-->
+            
+            <record model="ir.actions.act_window.view" id="act_open_supplier_invoice_view_tree">
+                <field name="act_window_id" ref="act_open_supplier_invoice_view"/>
+                <field name="sequence" eval="10"/>
+                <field name="view_mode">tree</field>
+                <field name="view_id" ref="view_supplier_invoice_tree"/>
+            </record>
+            
+            <menuitem id="menu_supplier_invoice"
+                parent="menu_supplier_portal_main"
+                sequence="4"
+                action="act_open_supplier_invoice_view"/>
     </data>
 </openerp>

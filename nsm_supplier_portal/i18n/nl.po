@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 06:57+0000\n"
-"PO-Revision-Date: 2014-11-03 06:57+0000\n"
+"POT-Creation-Date: 2014-11-04 14:17+0000\n"
+"PO-Revision-Date: 2014-11-04 14:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,35 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: nsm_supplier_portal
-#: model:ir.actions.act_window,name:nsm_supplier_portal.new_action_invoice_tree2
-#: model:ir.ui.menu,name:nsm_supplier_portal.menu_action_invoice_tree2_new
-msgid "Supplier Invoices"
-msgstr "Inkoopfacturen"
-
-#. module: nsm_supplier_portal
-#: model:ir.model,name:nsm_supplier_portal.model_product_product
-msgid "Product"
-msgstr "Product"
-
-#. module: nsm_supplier_portal
-#. openerp-web
-#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:41
-#, python-format
-msgid "Compose a new message"
-msgstr "Compose a new message"
-
-#. module: nsm_supplier_portal
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_action_invoice_tree4_custom
 msgid "Supplier Refunds"
 msgstr "Credit inkoopfacturen"
 
 #. module: nsm_supplier_portal
-#. openerp-web
-#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:35
-#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:46
-#, python-format
-msgid "Write to my followers"
-msgstr "Write to my followers"
+#: field:account.invoice,main_account_analytic_id:0
+msgid "Main Analytic account"
+msgstr "Main Analytic account"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,sub_account_analytic_id:0
+msgid "Sub Analytic account"
+msgstr "Sub Analytic account"
 
 #. module: nsm_supplier_portal
 #: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal
@@ -62,10 +46,12 @@ msgid "Available Supplier Portal"
 msgstr "Available Supplier Portal"
 
 #. module: nsm_supplier_portal
+#: view:account.invoice:0
+#: field:account.invoice,supplier_id:0
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_main
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_portal_main
 msgid "Supplier"
-msgstr "Supplier"
+msgstr "Leverancier"
 
 #. module: nsm_supplier_portal
 #: model:ir.actions.client,help:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
@@ -77,14 +63,124 @@ msgid "<p>\n"
 "                            follow.\n"
 "                        </p>\n"
 "                    "
-msgstr "<p>\n"
-"                            <b>Good Job!</b> Your inbox is empty.\n"
-"                        </p><p>\n"
-"                            Your inbox contains private messages or emails sent to you\n"
-"                            as well as information related to documents or people you\n"
-"                            follow.\n"
-"                        </p>\n"
-"                    "
+msgstr "<p>                            <b>Good Job!</b> Your inbox is empty.                        </p><p>                            Your inbox contains private messages or emails sent to you                            as well as information related to documents or people you                            follow.                        </p>                    "
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_supplier_invoice_view
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice
+msgid "Supplier Invoices"
+msgstr "Inkoopfacturen"
+
+#. module: nsm_supplier_portal
+#: field:account.analytic.account,portal_main:0
+msgid "Portal Main"
+msgstr "Portal Main"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Recompute taxes and total"
+msgstr "Belastingen en totalen opnieuw berekenen"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Total Amount"
+msgstr "Totaalbedrag"
+
+#. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/account_analytic.py:37
+#, python-format
+msgid "Portal Warning!"
+msgstr "Portal Warning!"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice.line,file:0
+msgid "Upload File"
+msgstr "Upload File"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Validate"
+msgstr "Bevestig"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Invoice lines"
+msgstr "Factuurregels"
+
+#. module: nsm_supplier_portal
+#. openerp-web
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:35
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:46
+#, python-format
+msgid "Write to my followers"
+msgstr "Write to my followers"
+
+#. module: nsm_supplier_portal
+#: model:ir.model,name:nsm_supplier_portal.model_custom_account_invoice
+msgid "custom.account.invoice"
+msgstr "custom.account.invoice"
+
+#. module: nsm_supplier_portal
+#: model:ir.model,name:nsm_supplier_portal.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+#: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_custom_supplier_invoice_view
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_custom_supplier_invoice
+msgid "Enter Your Invoice"
+msgstr "Enter Your Invoice"
+
+#. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/account_analytic.py:38
+#, python-format
+msgid "You can not use same analytic account for Main portal as well as Sub portal"
+msgstr "You can not use same analytic account for Main portal as well as Sub portal"
+
+#. module: nsm_supplier_portal
+#: field:account.analytic.account,portal_sub:0
+msgid "Portal Sub"
+msgstr "Portal Sub"
+
+#. module: nsm_supplier_portal
+#. openerp-web
+#: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:41
+#, python-format
+msgid "Compose a new message"
+msgstr "Compose a new message"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Residual Amount"
+msgstr "Restbedrag"
+
+#. module: nsm_supplier_portal
+#: model:ir.model,name:nsm_supplier_portal.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Factuurregel"
+
+#. module: nsm_supplier_portal
+#: model:ir.model,name:nsm_supplier_portal.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Kostenplaats"
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.client,name:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.supplier_portal_inbox
+msgid "Inbox"
+msgstr "Postvak IN"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+#: model:ir.model,name:nsm_supplier_portal.model_account_invoice
+msgid "Invoice"
+msgstr "Factuur"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "(update)"
+msgstr "(bijwerken)"
 
 #. module: nsm_supplier_portal
 #. openerp-web
@@ -94,7 +190,7 @@ msgid "or"
 msgstr "or"
 
 #. module: nsm_supplier_portal
-#: model:ir.actions.client,name:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
-#: model:ir.ui.menu,name:nsm_supplier_portal.supplier_portal_inbox
-msgid "Inbox"
-msgstr "Postvak in"
+#: view:account.invoice:0
+msgid "Untaxed Amount"
+msgstr "Netto bedrag"
+
