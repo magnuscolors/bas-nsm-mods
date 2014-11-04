@@ -18,6 +18,30 @@
 #
 ##############################################################################
 
-import product
-import account_analytic
+from openerp.osv import osv
+from openerp.osv import fields
+from openerp.tools.translate import _
+
+class account_analytic(osv.osv):
+    _inherit = 'account.analytic.account'
+
+    _columns = {
+        'portal_main': fields.boolean('Portal Main'),
+        'portal_sub': fields.boolean('Portal Sub'),
+    }
+
+    def onchange_portal(self, cr, uid, ids, portal_main, portal_sub, field,
+                        context={}):
+        if portal_main and portal_sub:
+            return {'warning': {
+                'title': _('Portal Warning!'),
+                'message': _('You can not use same analytic account for '
+                             'Main portal as well as Sub portal')},
+                'value': {field:False}
+            }
+        return {}
+
+account_analytic()
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

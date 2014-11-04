@@ -35,6 +35,7 @@
         "menu_view.xml",
         "account_invoice_view.xml",
         "product_view.xml",
+        "account_analytic_view.xml",
     ],
     'demo': [],
     'test': [
