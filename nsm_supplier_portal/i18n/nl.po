@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-04 16:24+0100\n"
+"PO-Revision-Date: 2014-11-05 08:32+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Inkoopfacturen"
 #. module: nsm_supplier_portal
 #: field:account.analytic.account,portal_main:0
 msgid "Portal Main"
-msgstr "Portal Main"
+msgstr "Portaal hoofd-kostenplaatst"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -157,7 +157,7 @@ msgstr ""
 #. module: nsm_supplier_portal
 #: field:account.analytic.account,portal_sub:0
 msgid "Portal Sub"
-msgstr "Portal Sub"
+msgstr "Portaal sub-kostenplaatst"
 
 #. module: nsm_supplier_portal
 #. openerp-web
