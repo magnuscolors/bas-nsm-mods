@@ -1,4 +1,22 @@
 # -*- coding: utf-8 -*-
+##############################################################################
+#
+#    Copyright 2014 BAS Solutions
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
 
 from openerp.osv import osv
 from openerp.osv import fields
@@ -12,6 +30,35 @@ class custom_account_invoice(osv.osv):
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account'),
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
     }
+
+class account_invoice(osv.osv):
+    _inherit = 'account.invoice'
+
+    def create(self, cr, uid, vals, context={}):
+        follower_ids = []
+        partner_id = self.pool.get('res.partner').browse(
+            cr, uid, vals['partner_id'], context=context)
+        if partner_id.message_follower_ids:
+            for follower_id in partner_id.message_follower_ids:
+                follower_ids.append(follower_id.id)
+        vals['message_follower_ids'] = follower_ids
+        res = super(account_invoice, self).create(
+            cr, uid, vals, context=context)
+        obj = self.browse(cr, uid, res, context=context)
+        partner_ids = []
+        if obj.partner_id.message_follower_ids:
+            for follower_id in partner_id.message_follower_ids:
+                partner_ids.append(follower_id.id)
+        partner_id = self.pool.get('res.users').browse(
+            cr, uid, uid, context=context).partner_id.id
+        if partner_id in partner_ids:
+            partner_ids.remove(partner_id)
+        if obj.message_ids:
+            for msg in obj.message_ids:
+             self.pool.get('mail.notification')._notify(
+                 cr, uid, msg.id, partners_to_notify=partner_ids,
+                 context=context)
+        return res
 
     def _get_supplier(self, cr, uid, ids, context={}):
         res_user_obj = self.pool.get('res.users').browse(cr, uid, uid, context=context)
