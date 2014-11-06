@@ -65,8 +65,7 @@ class custom_account_invoice(osv.osv):
     def supplier_id_change(self, cr, uid, ids, supplier_id, context={}):
         res = {}
         if not supplier_id:
-            return res
-        res = {'value': {'partner_id': supplier_id}}
+            res = {'value': {'partner_id': supplier_id}}
         return res
     _defaults = {
         'supplier_id': _get_supplier,
