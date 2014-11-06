@@ -24,6 +24,16 @@ from openerp.tools.translate import _
 
 class account_analytic(osv.osv):
     _inherit = 'account.analytic.account'
+    def name_get(self, cr, uid, ids, context=None):
+        res = []
+        if not ids:
+            return res
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for id in ids:
+            elmt = self.browse(cr, uid, id, context=context)
+            res.append((id, elmt.name))
+        return res
 
     _columns = {
         'portal_main': fields.boolean('Portal Main'),
