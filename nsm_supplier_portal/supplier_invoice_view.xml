@@ -35,10 +35,11 @@
                 <field name="priority" eval="1000"/>
                 <field name="arch" type="xml">
                 <!--tree string="Supplier Invoices"-->
-                <tree colors="blue:state == 'draft';black:state in ('proforma','proforma2','open');gray:state == 'cancel'" string="Invoice">
+                <tree colors="blue:is_submitted != True;green:is_submitted==True;gray:state == 'cancel'" string="Invoice">
                     <field name="partner_id" />
                     <field name="date_invoice"/>
                     <field name="number"/>
+                    <field name="is_submitted" invisible="True"/>
                     <field name="reference" invisible="1"/>
                     <field name="name" invisible="1"/>
                     <field name="journal_id" invisible="1"/>
@@ -63,7 +64,7 @@
             <field name="arch" type="xml">
             <form string="Enter Your Invoice" version="7.0"  create="false">
                 <header>
-                        <button name="invoice_open" states="draft,proforma2" string="Validate" class="oe_highlight"/>
+                        <button name="act_submit" states="draft,proforma2" string="Submit" class="oe_highlight" type="object"/>
                         <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
                         <button name="invoice_cancel" states="draft,proforma2" string="Cancel Invoice" invisible="1"/>
                         <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
@@ -73,11 +74,14 @@
                 <sheet string="Supplier Invoice">
                     <div class="oe_title">
                         <h1>
-                            <label string="Draft Invoice" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('type','&lt;&gt;','in_invoice')]}"/>
-                            <label string="Draft Refund" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('type','&lt;&gt;','in_refund')]}" invisible="1"/>
-                            <label string="Invoice" attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','in_invoice')]}" invisible="1"/>
-                            <label string="Refund" attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','in_refund')]}" invisible="1"/>
-                            <field name="number" class="oe_inline" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                            <label string="Draft Invoice" attrs="{'invisible': ['|', ('state','&lt;&gt;','draft'), ('is_submitted','=', True)]}"/>
+                            <label string="Submitted Invoice" attrs="{'invisible': ['|', ('state','&lt;&gt;','draft'), ('is_submitted','!=', True)]}"/>
+                            <field name="supplier_ref_related" class="oe_inline" attrs="{'invisible': ['|', ('state','&lt;&gt;','draft'), ('is_submitted','!=', True)]}" readonly="1"/>
+                            <label string="Draft Refund" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('type','&lt;&gt;','in_refund')]}"/>
+                            <label string="Invoice" attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','in_invoice')]}"/>
+                            <label string="Refund" attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','in_refund')]}"/>
+                            <field name="number" class="oe_inline"  attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                            <field name="is_submitted" invisible="1"/>
                         </h1>
                     </div>
                     <field name="type" invisible="1"/>
