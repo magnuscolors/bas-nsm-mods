@@ -37,10 +37,10 @@ class account_analytic(osv.osv):
                 'title': _('Portal Warning!'),
                 'message': _('You can not use same analytic account for '
                              'Main portal as well as Sub portal')},
-                'value': {field:False}
+                'value': {field:False
+                          }
             }
         return {}
-
 account_analytic()
 
 

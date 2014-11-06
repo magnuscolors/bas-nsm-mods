@@ -29,6 +29,7 @@ class custom_account_invoice(osv.osv):
         'supplier_id': fields.many2one('res.partner', 'Supplier',),
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account'),
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
+        'is_portal': fields.boolean('Portal'),
     }
 
     def create(self, cr, uid, vals, context={}):
@@ -70,6 +71,25 @@ class custom_account_invoice(osv.osv):
     _defaults = {
         'supplier_id': _get_supplier,
     }
+    
+    def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
+        if not main_analytic:
+            return {}
+        return {'value': {'sub_account_analytic_id': False}}
+    
+    def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+        """
+        Overrides orm field_view_get.
+        @return: Dictionary of Fields, arch and toolbar.
+        """
+        
+        res = {}
+        res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id, view_type,
+                                                       context, toolbar=toolbar, submenu=submenu)
+        if not context.get('is_portal'):
+            return res
+        res['toolbar'] = {'print': [], 'other':[]}
+        return res
 
 custom_account_invoice()
 
@@ -78,15 +98,20 @@ class account_invoice_line(osv.osv):
     _inherit = 'account.invoice.line'
 
     _columns = {
-        'file': fields.many2one('ir.attachment', "Upload File")
+        'file': fields.binary("Upload File"),
     }
-    def onchange_product_id(self, cr, uid, ids, product_id, context={}):
-        res = {}
-        if not product_id:
+    
+    def product_id_change(self, cr, uid, ids, product, uom_id, qty=0, name='', type='out_invoice', partner_id=False,                fposition_id=False, price_unit=False, currency_id=False, context=None, company_id=None):
+        res = super(account_invoice_line,self).product_id_change(cr, uid, ids, product=product,uom_id=uom_id , qty=qty, name=name, type=type, partner_id=partner_id,fposition_id=fposition_id, price_unit=price_unit, currency_id=currency_id, context=context, company_id=company_id)
+        if not context.get('is_portal'):
             return res
-        product_obj = self.pool.get('product.product').browse(cr, uid, product_id, context=context)
-        res = {'value': {'name': product_obj.name}}
+        uom_pool = self.pool.get('product.uom')
+        search_id = uom_pool.search(cr, uid, [('name', '=', 'Piece')], context=context)
+        if not search_id:
+            return res
+        res['value'].update({'uos_id':search_id[0]})
         return res
+    
 account_invoice_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
