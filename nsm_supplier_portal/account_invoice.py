@@ -30,6 +30,7 @@ class custom_account_invoice(osv.osv):
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account'),
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
         'is_portal': fields.boolean('Portal'),
+        'file': fields.binary("Upload File"),
     }
 
     def create(self, cr, uid, vals, context={}):
@@ -98,9 +99,6 @@ custom_account_invoice()
 class account_invoice_line(osv.osv):
     _inherit = 'account.invoice.line'
 
-    _columns = {
-        'file': fields.binary("Upload File"),
-    }
     
     def product_id_change(self, cr, uid, ids, product, uom_id, qty=0, name='', type='out_invoice', partner_id=False,                fposition_id=False, price_unit=False, currency_id=False, context=None, company_id=None):
         res = super(account_invoice_line,self).product_id_change(cr, uid, ids, product=product,uom_id=uom_id , qty=qty, name=name, type=type, partner_id=partner_id,fposition_id=fposition_id, price_unit=price_unit, currency_id=currency_id, context=context, company_id=company_id)
