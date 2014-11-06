@@ -65,7 +65,8 @@ class custom_account_invoice(osv.osv):
     def supplier_id_change(self, cr, uid, ids, supplier_id, context={}):
         res = {}
         if not supplier_id:
-            res = {'value': {'partner_id': supplier_id}}
+            return res
+        res = {'value': {'partner_id': supplier_id}}
         return res
     _defaults = {
         'supplier_id': _get_supplier,
@@ -73,8 +74,9 @@ class custom_account_invoice(osv.osv):
     
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
         if not main_analytic:
-            return {}
-        return {'value': {'sub_account_analytic_id': False}}
+            return {'value': {'sub_account_analytic_id': False}}
+        return {}
+        
     
     def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         """
