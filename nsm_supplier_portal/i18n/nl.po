@@ -231,3 +231,8 @@ msgstr "Error!"
 #, python-format
 msgid "Please Upload your invoice File before submit."
 msgstr "Please Upload your invoice File before submit."
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Submitted Invoice"
+msgstr "Submitted Invoice"
