@@ -18,6 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.6.10\n"
 
 #. module: nsm_supplier_portal
+#: model:ir.actions.act_window,name:nsm_supplier_portal.action_invoice_tree4
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_action_invoice_tree4_custom
 msgid "Supplier Refunds"
 msgstr "Credit inkoopfacturen"
@@ -100,7 +101,7 @@ msgid "Total Amount"
 msgstr "Totaalbedrag"
 
 #. module: nsm_supplier_portal
-#: code:addons/nsm_supplier_portal/account_analytic.py:37
+#: code:addons/nsm_supplier_portal/account_analytic.py:47
 #, python-format
 msgid "Portal Warning!"
 msgstr "Portaal Waarschuwing!"
@@ -146,7 +147,7 @@ msgid "Enter Your Invoice"
 msgstr "Voer uw factuur in"
 
 #. module: nsm_supplier_portal
-#: code:addons/nsm_supplier_portal/account_analytic.py:38
+#: code:addons/nsm_supplier_portal/account_analytic.py:48
 #, python-format
 msgid ""
 "You can not use same analytic account for Main portal as well as Sub portal"
@@ -221,13 +222,13 @@ msgid "Upload your invoice"
 msgstr "Upload your invoice"
 
 #. module: nsm_supplier_portal
-#: code:addons/nsm_supplier_portal/account_invoice.py:82
+#: code:addons/nsm_supplier_portal/account_invoice.py:83
 #, python-format
 msgid "Error!"
 msgstr "Error!"
 
 #. module: nsm_supplier_portal
-#: code:addons/nsm_supplier_portal/account_invoice.py:82
+#: code:addons/nsm_supplier_portal/account_invoice.py:83
 #, python-format
 msgid "Please Upload your invoice File before submit."
 msgstr "Please Upload your invoice File before submit."
@@ -236,3 +237,99 @@ msgstr "Please Upload your invoice File before submit."
 #: view:account.invoice:0
 msgid "Submitted Invoice"
 msgstr "Submitted Invoice"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Other Info"
+msgstr "Overige gegevens"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Supplier Invoice"
+msgstr "Inkoopfactuur"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Draft Refund"
+msgstr "Concept credit factuur"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Set to Draft"
+msgstr "Zet op concept"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created."
+msgstr "Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat (en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te klikken op deze knop wordt de factuur heropend en kunt u de problemen oplossen."
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,is_portal:0
+msgid "Portal"
+msgstr "Portal"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Payment Date"
+msgstr "Betaaldatum"
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.act_window,help:nsm_supplier_portal.action_invoice_tree4
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to register a refund you received from a supplier.\n"
+"              </p><p>\n"
+"                Instead of creating the supplier refund manually, you can generate\n"
+"                refunds and reconcile them directly from the related supplier invoice.\n"
+"              </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken van een credit factuur van uw leverancier.              </p><p>                In plaats van het handmatig maken van de credit factuur, kunt u ook rechtstreeks                een credit factuur genereren en deze afletteren bij de bijbehorende inkoopfactuur.              </p>            "
+
+#. module: nsm_supplier_portal
+#: model:ir.model,name:nsm_supplier_portal.model_product_template
+msgid "Product Template"
+msgstr "Productsjabloon"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Cancel Invoice"
+msgstr "Annuleer factuur"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Taxes"
+msgstr "Belastingen"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,is_submitted:0
+msgid "Submitted"
+msgstr "Submitted"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Payments"
+msgstr "Betalingen"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Draft Invoice"
+msgstr "Concept factuur"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Refund"
+msgstr "Credit factuur"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Ask Refund"
+msgstr "Vraag een credit aan"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Re-Open"
+msgstr "Open opnieuw"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,supplier_ref_related:0
+msgid "unknown"
+msgstr "unknown"
