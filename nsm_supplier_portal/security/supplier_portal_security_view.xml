@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-
     <data noupdate="0">
+    
         <record model="res.groups" id="group_module_supplier_portal">
             <field name="name">Supplier Portal</field>
-         </record>
-  </data>
+        </record>
+        
+        <record model="ir.rule" id="account_user_rule">
+            <field name="name">Supplier Invoices</field>
+            <field name="model_id" ref="model_account_invoice"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('supplier_id', '=', [user.partner_id.id]), '|', ('type', '=', 'in_invoice'), ('type', '=', 'in_refund')]</field>
+        </record>
+        
+    </data>
 </openerp>
