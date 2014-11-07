@@ -21,6 +21,7 @@
 from openerp.osv import osv
 from openerp.osv import fields
 from openerp.tools.translate import _
+import time
 
 
 class custom_account_invoice(osv.osv):
@@ -77,10 +78,11 @@ class custom_account_invoice(osv.osv):
     }
    
     def act_submit(self, cr, uid, ids, context={}):
-        self_obj = self.browse(cr, uid, ids, context=context)[0]
-        if not self_obj.file:
-            raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
-        self.write(cr, uid, ids, {'is_submitted': True})
+        for self_obj in self.browse(cr, uid, ids, context=context):
+            if not self_obj.file:
+                raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
+        date = time.strftime('%Y-%m-%d')
+        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date})
         return True
         
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):

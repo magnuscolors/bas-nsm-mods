@@ -104,7 +104,7 @@
                               domain="[('supplier', '=', True)]"/>
                             <field name="fiscal_position" widget="selection"/>
                             <field name="origin"/>
-                            <field name="supplier_invoice_number"/>
+                            <field name="supplier_invoice_number" required="1"/>
                             <label for="reference_type"/>
                             <div>
                                 <field name="reference_type" class="oe_inline oe_edit_only"/>
