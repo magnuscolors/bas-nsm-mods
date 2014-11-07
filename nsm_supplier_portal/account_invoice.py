@@ -20,6 +20,7 @@
 
 from openerp.osv import osv
 from openerp.osv import fields
+from openerp.tools.translate import _
 
 
 class custom_account_invoice(osv.osv):
@@ -30,7 +31,7 @@ class custom_account_invoice(osv.osv):
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account'),
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
         'is_portal': fields.boolean('Portal'),
-        'file': fields.binary("Upload File"),
+        'file': fields.binary("Upload your invoice"),
         'is_submitted': fields.boolean('Submitted'),
         'supplier_ref_related': fields.related("supplier_invoice_number", type="char", size=256),
     }
@@ -74,10 +75,14 @@ class custom_account_invoice(osv.osv):
     _defaults = {
         'supplier_id': _get_supplier,
     }
+   
     def act_submit(self, cr, uid, ids, context={}):
-        print "#########fffffffffffffffffffffffffffffffffffff"
+        self_obj = self.browse(cr, uid, ids, context=context)[0]
+        if not self_obj.file:
+            raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
         self.write(cr, uid, ids, {'is_submitted': True})
         return True
+        
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
         if not main_analytic:
             return {'value': {'sub_account_analytic_id': False}}

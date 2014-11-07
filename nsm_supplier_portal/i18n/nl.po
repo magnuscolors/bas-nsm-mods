@@ -209,3 +209,25 @@ msgstr "of"
 #: view:account.invoice:0
 msgid "Untaxed Amount"
 msgstr "Netto bedrag"
+
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Submit"
+msgstr "Submit"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,file:0
+msgid "Upload your invoice"
+msgstr "Upload your invoice"
+
+#. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/account_invoice.py:82
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/account_invoice.py:82
+#, python-format
+msgid "Please Upload your invoice File before submit."
+msgstr "Please Upload your invoice File before submit."

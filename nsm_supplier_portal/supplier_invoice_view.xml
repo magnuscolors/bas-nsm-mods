@@ -144,7 +144,7 @@
                                 </tree>
                             </field>
                             <group>
-                                <field name="file" required="1"/>
+                                <field name="file"/>
                             </group>
                             <group class="oe_subtotal_footer oe_right">
                                 <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
