@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-05 08:32+0100\n"
+"PO-Revision-Date: 2014-11-07 10:50+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Sub-kostenplaats"
 #. module: nsm_supplier_portal
 #: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal
 msgid "Supplier Portal"
-msgstr "Leveranciers Portaal"
+msgstr "Leveranciers portaal"
 
 #. module: nsm_supplier_portal
 #: model:ir.ui.menu,name:nsm_supplier_portal.mail_archivesfeeds_new
@@ -214,29 +214,29 @@ msgstr "Netto bedrag"
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
 msgid "Submit"
-msgstr "Submit"
+msgstr "Indienen"
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,file:0
 msgid "Upload your invoice"
-msgstr "Upload your invoice"
+msgstr "Upload uw factuur"
 
 #. module: nsm_supplier_portal
 #: code:addons/nsm_supplier_portal/account_invoice.py:83
 #, python-format
 msgid "Error!"
-msgstr "Error!"
+msgstr "Fout!"
 
 #. module: nsm_supplier_portal
 #: code:addons/nsm_supplier_portal/account_invoice.py:83
 #, python-format
 msgid "Please Upload your invoice File before submit."
-msgstr "Please Upload your invoice File before submit."
+msgstr "U dient u factuur te uploaden voordat u, uw factuur kunt indienen."
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
 msgid "Submitted Invoice"
-msgstr "Submitted Invoice"
+msgstr "Ingediende factuur"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -260,13 +260,24 @@ msgstr "Zet op concept"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
-msgid "This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created."
-msgstr "Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat (en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te klikken op deze knop wordt de factuur heropend en kunt u de problemen oplossen."
+msgid ""
+"This button only appears when the state of the invoice is 'paid' (showing "
+"that it has been fully reconciled) and auto-computed boolean 'reconciled' is "
+"False (depicting that it's not the case anymore). In other words, the "
+"invoice has been dereconciled and it does not fit anymore the 'paid' state. "
+"You should press this button to re-open it and let it continue its normal "
+"process after having resolved the eventual exceptions it may have created."
+msgstr ""
+"Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat "
+"(en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een "
+"instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te "
+"klikken op deze knop wordt de factuur heropend en kunt u de problemen "
+"oplossen."
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,is_portal:0
 msgid "Portal"
-msgstr "Portal"
+msgstr "Portaal"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -275,14 +286,23 @@ msgstr "Betaaldatum"
 
 #. module: nsm_supplier_portal
 #: model:ir.actions.act_window,help:nsm_supplier_portal.action_invoice_tree4
-msgid "<p class=\"oe_view_nocontent_create\">\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
 "                Click to register a refund you received from a supplier.\n"
 "              </p><p>\n"
-"                Instead of creating the supplier refund manually, you can generate\n"
-"                refunds and reconcile them directly from the related supplier invoice.\n"
+"                Instead of creating the supplier refund manually, you can "
+"generate\n"
+"                refunds and reconcile them directly from the related "
+"supplier invoice.\n"
 "              </p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken van een credit factuur van uw leverancier.              </p><p>                In plaats van het handmatig maken van de credit factuur, kunt u ook rechtstreeks                een credit factuur genereren en deze afletteren bij de bijbehorende inkoopfactuur.              </p>            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken "
+"van een credit factuur van uw leverancier.              </"
+"p><p>                In plaats van het handmatig maken van de credit "
+"factuur, kunt u ook rechtstreeks                een credit factuur genereren "
+"en deze afletteren bij de bijbehorende inkoopfactuur.              </"
+"p>            "
 
 #. module: nsm_supplier_portal
 #: model:ir.model,name:nsm_supplier_portal.model_product_template
@@ -302,7 +322,7 @@ msgstr "Belastingen"
 #. module: nsm_supplier_portal
 #: field:account.invoice,is_submitted:0
 msgid "Submitted"
-msgstr "Submitted"
+msgstr "Ingedient"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -332,4 +352,4 @@ msgstr "Open opnieuw"
 #. module: nsm_supplier_portal
 #: field:account.invoice,supplier_ref_related:0
 msgid "unknown"
-msgstr "unknown"
+msgstr "onbekend"
