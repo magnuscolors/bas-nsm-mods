@@ -246,6 +246,43 @@
                 parent="menu_supplier_portal_main"
                 sequence="4"
                 action="act_open_supplier_invoice_view"/>
-    
+
+        <record id="action_invoice_tree4" model="ir.actions.act_window">
+            <field name="name">Supplier Refunds</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field ref="view_supplier_invoice_tree" name="view_id"/>
+            <field name="domain">[('type','=','in_refund')]</field>
+            <field name="context">{'default_type': 'in_refund', 'type': 'in_refund', 'journal_type': 'purchase_refund', 'is_portal': True, 'no_create':True}</field>
+            <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to register a refund you received from a supplier.
+              </p><p>
+                Instead of creating the supplier refund manually, you can generate
+                refunds and reconcile them directly from the related supplier invoice.
+              </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_action_invoice_tree4_tree">
+                <field name="act_window_id" ref="action_invoice_tree4"/>
+                <field name="sequence" eval="10"/>
+                <field name="view_mode">tree</field>
+                <field name="view_id" ref="view_supplier_invoice_tree"/>
+            </record>
+            
+        <record model="ir.actions.act_window.view" id="act_open_action_invoice_tree4_form">
+                <field name="act_window_id" ref="action_invoice_tree4"/>
+                <field name="sequence" eval="20"/>
+                <field name="view_mode">form</field>
+                <!--field name="view_id" ref="view_supplier_invoice_form"/-->
+                <field name="view_id" ref="view_custom_supplier_invoice_form"/>
+            </record>
+        <menuitem action="action_invoice_tree4"
+            id="menu_action_invoice_tree4_custom"
+            sequence="5"
+            parent="menu_supplier_portal_main"/>
+
     </data>
 </openerp>
