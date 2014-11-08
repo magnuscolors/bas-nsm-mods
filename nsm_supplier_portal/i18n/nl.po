@@ -18,6 +18,11 @@ msgstr ""
 "X-Generator: Poedit 1.6.10\n"
 
 #. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_portal_main
+msgid "Messaging"
+msgstr "Berichtgeving"
+
+#. module: nsm_supplier_portal
 #: model:ir.actions.act_window,name:nsm_supplier_portal.action_invoice_tree4
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_action_invoice_tree4_custom
 msgid "Supplier Refunds"
@@ -34,6 +39,7 @@ msgid "Sub Analytic account"
 msgstr "Sub-kostenplaats"
 
 #. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_main
 #: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal
 msgid "Supplier Portal"
 msgstr "Leveranciers portaal"
@@ -50,8 +56,7 @@ msgstr "Beschikbaar in leveranciers portaal"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0 field:account.invoice,supplier_id:0
-#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_main
-#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_portal_main
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_details_main
 msgid "Supplier"
 msgstr "Leverancier"
 
@@ -189,8 +194,10 @@ msgid "Inbox"
 msgstr "Postvak IN"
 
 #. module: nsm_supplier_portal
-#: view:account.invoice:0
+#: code:_description:0 view:account.invoice:0
 #: model:ir.model,name:nsm_supplier_portal.model_account_invoice
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice_main
+#, python-format
 msgid "Invoice"
 msgstr "Factuur"
 
@@ -353,3 +360,8 @@ msgstr "Open opnieuw"
 #: field:account.invoice,supplier_ref_related:0
 msgid "unknown"
 msgstr "onbekend"
+
+#. module: nsm_supplier_portal
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_custom_supplier_details
+msgid "Your Details"
+msgstr "Your Details"
