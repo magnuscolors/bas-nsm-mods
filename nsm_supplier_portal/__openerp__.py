@@ -33,11 +33,11 @@
         "security/ir.model.access.csv",
         "mail_thread_view.xml",
         "res_partner_view.xml",
-        "menu_view.xml",
         "account_invoice_view.xml",
         "supplier_invoice_view.xml",
         "product_view.xml",
         "account_analytic_view.xml",
+        "menu_view.xml",
     ],
     'demo': [],
     'test': [
