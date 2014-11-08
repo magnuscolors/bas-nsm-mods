@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-07 10:50+0100\n"
+"PO-Revision-Date: 2014-11-08 16:44+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -364,7 +364,7 @@ msgstr "onbekend"
 #. module: nsm_supplier_portal
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_custom_supplier_details
 msgid "Your Details"
-msgstr "Your Details"
+msgstr "Uw gegevens"
 
 #. module: nsm_supplier_portal
 #: model:ir.actions.act_window,name:nsm_supplier_portal.action_supplier_form
@@ -460,4 +460,3 @@ msgstr "Financieel"
 #: view:res.partner:0
 msgid "at"
 msgstr "bij"
-
