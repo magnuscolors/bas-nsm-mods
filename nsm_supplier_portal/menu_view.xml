@@ -2,27 +2,62 @@
 <openerp>
     <data>
 
-        <!-- Top menu item -->
-        
+    <!-- Header Menu Item -->
+
         <menuitem id="menu_supplier_main"
             sequence="10"
-            name="Supplier"
+            name="Supplier Portal"
             groups="group_module_supplier_portal"/>
+
+    <!-- Messaging Menu Item -->
 
         <menuitem id = "menu_supplier_portal_main"
             parent = "menu_supplier_main"
             sequence="1"
-            name = "Supplier"/>
-        
+            name = "Messaging"/>
 
-        <menuitem name="Inbox" id="supplier_portal_inbox" parent="menu_supplier_portal_main"
-            action="action_mail_inbox_feeds_supplier_portal" sequence="1" groups="group_module_supplier_portal"/>
-        
+        <menuitem id="supplier_portal_inbox"
+            parent="menu_supplier_portal_main"
+            action="action_mail_inbox_feeds_supplier_portal"
+            sequence="1"
+            name="Inbox"
+            groups="group_module_supplier_portal"/>
+
         <record id="mail_archivesfeeds_new" model="ir.ui.menu">
             <field name="name">Archives</field>
             <field name="sequence" eval="2"/>
             <field name="action" ref="mail.action_mail_archives_feeds"/>
             <field name="parent_id" ref="menu_supplier_portal_main"/>
         </record>
+
+    <!-- Supplier Menu Item -->
+
+        <menuitem id = "menu_supplier_details_main"
+            parent = "menu_supplier_main"
+            sequence="2"
+            name = "Supplier"/>
+
+    <!-- Invoice Menu Item -->
+
+        <menuitem id = "menu_supplier_invoice_main"
+            parent = "menu_supplier_main"
+            sequence="3"
+            name = "Invoice"/>
+
+        <menuitem id="menu_custom_supplier_invoice"
+            parent="menu_supplier_invoice_main"
+            sequence="1"
+            action="act_open_custom_supplier_invoice_view"/>
+
+        <menuitem id="menu_supplier_invoice"
+            parent="menu_supplier_invoice_main"
+            sequence="2"
+            action="act_open_supplier_invoice_view"/>
+
+        <menuitem action="action_invoice_tree4"
+            id="menu_action_invoice_tree4_custom"
+            sequence="3"
+            parent="menu_supplier_invoice_main"/>
+
     </data>
 </openerp>
