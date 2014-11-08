@@ -37,6 +37,12 @@
             sequence="2"
             name = "Supplier"/>
 
+        <menuitem id="menu_custom_supplier_details"
+            parent="menu_supplier_details_main"
+            sequence="1"
+            name = "Your Details"
+            action="base.action_partner_supplier_form"/>
+
     <!-- Invoice Menu Item -->
 
         <menuitem id = "menu_supplier_invoice_main"
