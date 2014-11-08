@@ -102,7 +102,7 @@
                         <field name="payment_term" widget="selection" invisible="1"/>
                         <field domain="[('partner_id', '=', partner_id)]" name="partner_bank_id" on_change="onchange_partner_bank(partner_bank_id)" invisible="1"/>
                         <field name="company_id" on_change="onchange_company_id(company_id,partner_id,type,invoice_line,currency_id)" widget="selection" invisible="1"/>
-                            <field name="supplier_id" select="1" readonly="1" on_change="supplier_id_change(supplier_id,context)" options='{"no_open": True}'/>
+                            <field name="supplier_id" select="1" readonly="1" on_change="supplier_id_change(supplier_id,context)" context="{'form_view_ref':'nsm_supplier_portal.view_partner_supplier_form'}"/>
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
                             <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}'/>
                         <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}'/>
@@ -258,7 +258,7 @@
                         <field name="payment_term" widget="selection" invisible="1"/>
                         <field domain="[('partner_id', '=', partner_id)]" name="partner_bank_id" on_change="onchange_partner_bank(partner_bank_id)" invisible="1"/>
                         <field name="company_id" on_change="onchange_company_id(company_id,partner_id,type,invoice_line,currency_id)" widget="selection" invisible="1"/>
-                            <field name="supplier_id" select="1" readonly="1" on_change="supplier_id_change(supplier_id,context)" options='{"no_open": True}'/>
+                            <field name="supplier_id" select="1" readonly="1" on_change="supplier_id_change(supplier_id,context)" context="{'form_view_ref':'nsm_supplier_portal.view_partner_supplier_form'}"/>
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
                             <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}'/>
                         <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}'/>

@@ -32,6 +32,7 @@
         "security/supplier_portal_security_view.xml",
         "security/ir.model.access.csv",
         "mail_thread_view.xml",
+        "res_partner_view.xml",
         "menu_view.xml",
         "account_invoice_view.xml",
         "supplier_invoice_view.xml",

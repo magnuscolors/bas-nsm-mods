@@ -365,3 +365,99 @@ msgstr "onbekend"
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_custom_supplier_details
 msgid "Your Details"
 msgstr "Your Details"
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.act_window,name:nsm_supplier_portal.action_supplier_form
+msgid "Suppliers"
+msgstr "Leveranciers"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "e.g. +32.81.81.37.00"
+msgstr "Bijv. +31 (0)20 -12 34 567"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "City"
+msgstr "Plaats"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Contacts"
+msgstr "Contactpersonen"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "(edit company address)"
+msgstr "(bijwerken bedrijfsadres)"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Country"
+msgstr "Land"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Company"
+msgstr "Bedrijf"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Address"
+msgstr "Adres"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Name"
+msgstr "Naam"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "e.g. www.openerp.com"
+msgstr "Bijv. www.openerp.com"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Partners"
+msgstr "Relaties"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Is a Company?"
+msgstr "Is dit een bedrijf?"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Street..."
+msgstr "Straat..."
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Bank Details"
+msgstr "Bankrekeningen"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "ZIP"
+msgstr "Postcode"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "State"
+msgstr "Provincie/Staat"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Tags..."
+msgstr "Labels..."
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Accounting"
+msgstr "Financieel"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "at"
+msgstr "bij"
+

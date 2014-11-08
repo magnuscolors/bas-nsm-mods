@@ -41,7 +41,7 @@
             parent="menu_supplier_details_main"
             sequence="1"
             name = "Your Details"
-            action="base.action_partner_supplier_form"/>
+            action="action_supplier_form"/>
 
     <!-- Invoice Menu Item -->
 
