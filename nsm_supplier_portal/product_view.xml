@@ -8,9 +8,8 @@
                 <field name="type">form</field>
                 <field name="inherit_id" ref="product.product_normal_form_view"/>
                 <field name="arch" type="xml">
-                    <xpath expr="//label[@for='sale_ok']" position="after">
+                    <xpath expr="//field[@name='default_code']" position="after">
                         <field name="avail_supplier_portal"/>
-                        <label for="avail_supplier_portal"/>
                     </xpath>
                 </field>
             </record>

@@ -25,11 +25,11 @@ import openerp.addons.decimal_precision as dp
 
 class product_template(osv.osv):
     _inherit = "product.template"
-    
+
     _columns = {
         'standard_price': fields.float('Cost', digits_compute=dp.get_precision('Product Price'), help="Cost price of the product used for standard stock valuation in accounting and used as a base price on purchase orders.",),
     }
-    
+
 product_template()
 
 
@@ -38,7 +38,10 @@ class product_product(osv.osv):
     _inherit = 'product.product'
 
     _columns = {
-        'avail_supplier_portal': fields.boolean('Available Supplier Portal',),
+        'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
+                                                   ('editorial', 'Editorial')],
+                                                  "Available Supplier Portal",),
+
     }
 
 product_product()

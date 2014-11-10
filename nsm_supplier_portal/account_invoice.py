@@ -35,6 +35,9 @@ class custom_account_invoice(osv.osv):
         'file': fields.binary("Upload your invoice"),
         'is_submitted': fields.boolean('Submitted'),
         'supplier_ref_related': fields.related("supplier_invoice_number", type="char", size=256),
+        'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
+                                                   ('editorial', 'Editorial')],
+                                                  "Available Supplier Portal",),
     }
 
     def create(self, cr, uid, vals, context={}):

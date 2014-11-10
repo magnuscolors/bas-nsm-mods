@@ -51,6 +51,7 @@ msgstr "Archieven"
 
 #. module: nsm_supplier_portal
 #: field:product.product,avail_supplier_portal:0
+#: field:account.invoice,avail_supplier_portal:0
 msgid "Available Supplier Portal"
 msgstr "Beschikbaar in leveranciers portaal"
 
@@ -460,3 +461,15 @@ msgstr "Financieel"
 #: view:res.partner:0
 msgid "at"
 msgstr "bij"
+
+#. module: nsm_supplier_portal
+#: selection:account.invoice,avail_supplier_portal:0
+#: selection:product.product,avail_supplier_portal:0
+msgid "Marketing"
+msgstr "Marketing"
+
+#. module: nsm_supplier_portal
+#: selection:account.invoice,avail_supplier_portal:0
+#: selection:product.product,avail_supplier_portal:0
+msgid "Editorial"
+msgstr "Editorial"
