@@ -32,6 +32,7 @@ class res_partner(osv.osv):
     def create_supplier_user(self, cr, uid, ids, context={}):
         if not context:
             context = {}
+        partner_ids = []
         for obj in self.browse(cr, uid, ids, context=context):
             if obj.user_create:
                 continue
@@ -45,9 +46,10 @@ class res_partner(osv.osv):
                 'partner_id': obj.id,
                 'tz': context['tz']
             }, context=context)
-            user_pool.action_reset_password(cr, uid, [user_id], context)
+            partner_ids.append(user_id)
             self.write(cr, uid, obj.id, {
                 'user_create': True,
             }, context=context)
+        user_pool.action_reset_password(cr, uid, partner_ids, context)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
