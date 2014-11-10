@@ -232,6 +232,7 @@ msgstr "Upload uw factuur"
 #: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/account_invoice.py:89
 #: code:addons/nsm_supplier_portal/account_invoice.py:87
 #: code:addons/nsm_supplier_portal/account_invoice.py:89
+#: code:addons/nsm_supplier_portal/res_partner.py:41
 #, python-format
 msgid "Error!"
 msgstr "Fout!"
@@ -525,3 +526,16 @@ msgstr "Re-Submit"
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice_submited
 msgid "Submited Supplier Invoices"
 msgstr "Submited Supplier Invoices"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+msgid "Create User"
+msgstr "Create User"
+
+#. module: nsm_supplier_portal
+#: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/res_partner.py:41
+#: code:addons/nsm_supplier_portal/res_partner.py:41
+#, python-format
+msgid "%s user is already created"
+msgstr "%s user is already created"
+
