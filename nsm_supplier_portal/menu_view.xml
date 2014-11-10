@@ -7,7 +7,7 @@
         <menuitem id="menu_supplier_main"
             sequence="10"
             name="Supplier Portal"
-            groups="group_module_supplier_portal"/>
+            groups="group_module_supplier_portal,group_module_supplier_portal_controller"/>
 
     <!-- Messaging Menu Item -->
 
@@ -21,7 +21,7 @@
             action="action_mail_inbox_feeds_supplier_portal"
             sequence="1"
             name="Inbox"
-            groups="group_module_supplier_portal"/>
+            groups="group_module_supplier_portal,group_module_supplier_portal_controller"/>
 
         <record id="mail_archivesfeeds_new" model="ir.ui.menu">
             <field name="name">Archives</field>
@@ -35,35 +35,49 @@
         <menuitem id = "menu_supplier_details_main"
             parent = "menu_supplier_main"
             sequence="2"
+            groups="group_module_supplier_portal"
             name = "Supplier"/>
 
         <menuitem id="menu_custom_supplier_details"
             parent="menu_supplier_details_main"
             sequence="1"
             name = "Your Details"
+            groups="group_module_supplier_portal"
             action="action_supplier_form"/>
 
     <!-- Invoice Menu Item -->
 
         <menuitem id = "menu_supplier_invoice_main"
             parent = "menu_supplier_main"
+            groups="group_module_supplier_portal,group_module_supplier_portal_controller"
             sequence="3"
             name = "Invoice"/>
 
         <menuitem id="menu_custom_supplier_invoice"
             parent="menu_supplier_invoice_main"
             sequence="1"
+            groups="group_module_supplier_portal"
             action="act_open_custom_supplier_invoice_view"/>
 
         <menuitem id="menu_supplier_invoice"
             parent="menu_supplier_invoice_main"
             sequence="2"
+            groups="group_module_supplier_portal"
             action="act_open_supplier_invoice_view"/>
 
         <menuitem action="action_invoice_tree4"
             id="menu_action_invoice_tree4_custom"
             sequence="3"
+            groups="group_module_supplier_portal"
             parent="menu_supplier_invoice_main"/>
+    
+    <!-- Submited Invoice Menu Item -->
+        <menuitem id="menu_supplier_invoice_submited"
+            parent="menu_supplier_invoice_main"
+            sequence="2"
+            groups="group_module_supplier_portal_controller"
+            action="act_open_supplier_invoice_submited_view"/>
 
+    
     </data>
 </openerp>

@@ -85,6 +85,8 @@ msgstr ""
 #. module: nsm_supplier_portal
 #: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_supplier_invoice_view
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice
+#: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_supplier_invoice_submited_view
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice_submited
 msgid "Supplier Invoices"
 msgstr "Inkoopfacturen"
 
@@ -513,3 +515,13 @@ msgstr "Verkoper"
 msgid "Sales Team"
 msgstr "Verkoopteam"
 
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Re-Submit"
+msgstr "Re-Submit"
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_supplier_invoice_submited_view
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice_submited
+msgid "Submited Supplier Invoices"
+msgstr "Submited Supplier Invoices"
