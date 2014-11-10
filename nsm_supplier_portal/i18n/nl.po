@@ -512,3 +512,32 @@ msgstr "Supplier Invoice Reuse-authorization File"
 #: view:res.company:0
 msgid "Reuse-authorization"
 msgstr "Reuse-authorization"
+
+#. module: nsm_supplier_portal
+#: sql_constraint:sales.team:0
+msgid "The combination of Analytic account and Product Category must be unique!"
+msgstr "The combination of Analytic account and Product Category must be unique!"
+
+
+#. module: nsm_supplier_portal
+#: field:sales.team,analytic_account_id:0
+msgid "Analytic Account"
+msgstr "Analytic Account"
+
+#. module: nsm_supplier_portal
+#: field:sales.team,product_cat_id:0
+msgid "Product Category"
+msgstr "Product Category"
+
+#. module: nsm_supplier_portal
+#: field:sales.team,sale_person_id:0
+msgid "Sales Person"
+msgstr "Sales Person"
+
+#. module: nsm_supplier_portal
+#: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_sales_team_view
+#: model:ir.model,name:nsm_supplier_portal.model_sales_team
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_sales_team
+#: view:sales.team:0
+msgid "Sales Team"
+msgstr "Sales Team"

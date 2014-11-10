@@ -40,6 +40,7 @@
         "menu_view.xml",
         "res_config_view.xml",
         "res_company_view.xml",
+        "sales_team_view.xml",
     ],
     'demo': [],
     'test': [

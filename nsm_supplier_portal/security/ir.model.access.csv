@@ -27,3 +27,4 @@ custom_res_partner_bank,custom_res_partner,base.model_res_partner_bank,group_mod
 custom_account_journal_period,custom_account.journal.period,account.model_account_journal_period,group_module_supplier_portal,1,1,1,0
 custom_account_payment_term_line,custom_account_payment_term_line,account.model_account_payment_term_line,group_module_supplier_portal,1,0,0,0
 custom_res_partner_category,custom_res_partner_category,base.model_res_partner_category,group_module_supplier_portal,1,1,0,0
+access_sales_team,access_sales_team,model_sales_team,,1,1,1,1
