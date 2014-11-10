@@ -488,3 +488,27 @@ msgstr "Ik accepteer de hergebruik voorwaarden"
 #, python-format
 msgid "Please Accept re-use terms"
 msgstr "U dient de hergebruik voorwaarden te accepteren"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,data_file:0
+#: field:account.invoice,data_supplier_terms_file_name:0
+#: field:base.config.settings,data_fname:0
+#: field:res.company,data_fname:0
+msgid "File Name"
+msgstr "File Name"
+
+#. module: nsm_supplier_portal
+#: field:base.config.settings,supplier_terms:0
+msgid "Upload Supplier Invoice Reuse-authorization File"
+msgstr "Upload Supplier Invoice Reuse-authorization File"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,supplier_terms:0
+#: field:res.company,supplier_terms:0
+msgid "Supplier Invoice Reuse-authorization File"
+msgstr "Supplier Invoice Reuse-authorization File"
+
+#. module: nsm_supplier_portal
+#: view:res.company:0
+msgid "Reuse-authorization"
+msgstr "Reuse-authorization"

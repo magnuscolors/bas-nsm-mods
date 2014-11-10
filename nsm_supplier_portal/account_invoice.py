@@ -32,14 +32,37 @@ class custom_account_invoice(osv.osv):
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account'),
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
         'is_portal': fields.boolean('Portal'),
+        'data_file': fields.char('File Name'),
         'file': fields.binary("Upload your invoice"),
         'is_submitted': fields.boolean('Submitted'),
         'supplier_ref_related': fields.related("supplier_invoice_number", type="char", size=256),
         'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
                                                    ('editorial', 'Editorial')],
                                                   "Available Supplier Portal",),
+        'data_supplier_terms_file_name': fields.char('File Name'),
+        'supplier_terms': fields.binary("Supplier Invoice Reuse-authorization File"),
         'terms': fields.boolean('I accept the re-use terms'),
     }
+
+    def _get_terms(self, cr, uid, context=None):
+        context = context or {}
+        company_id = self.pool.get('res.company')._company_default_get(
+            cr, uid, 'account.invoice', context=context)
+        company_obj = self.pool.get('res.company').browse(
+            cr, uid, company_id, context=context)
+        if company_obj.supplier_terms:
+            return company_obj.supplier_terms
+        return False
+
+    def _get_term_file_name(self, cr, uid, context=None):
+        context = context or {}
+        company_id = self.pool.get('res.company')._company_default_get(
+            cr, uid, 'account.invoice', context=context)
+        company_obj = self.pool.get('res.company').browse(
+            cr, uid, company_id, context=context)
+        if company_obj.supplier_terms and company_obj.data_fname:
+            return company_obj.data_fname
+        return False
 
     def create(self, cr, uid, vals, context={}):
         follower_ids = []
@@ -79,6 +102,8 @@ class custom_account_invoice(osv.osv):
         return res
     _defaults = {
         'supplier_id': _get_supplier,
+        'supplier_terms': _get_terms,
+        'data_supplier_terms_file_name': _get_term_file_name,
     }
 
     def act_submit(self, cr, uid, ids, context={}):
