@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-08 16:44+0100\n"
+"PO-Revision-Date: 2014-11-10 08:09+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -475,16 +475,16 @@ msgstr "Marketing"
 #: selection:account.invoice,avail_supplier_portal:0
 #: selection:product.product,avail_supplier_portal:0
 msgid "Editorial"
-msgstr "Editorial"
+msgstr "Redactie"
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,terms:0
 msgid "I accept the re-use terms"
-msgstr "I accept the re-use terms"
+msgstr "Ik accepteer de hergebruik voorwaarden"
 
 #. module: nsm_supplier_portal
 #: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/account_invoice.py:89
 #: code:addons/nsm_supplier_portal/account_invoice.py:89
 #, python-format
 msgid "Please Accept re-use terms"
-msgstr "Please Accept re-use terms"
+msgstr "U dient de hergebruik voorwaarden te accepteren"
