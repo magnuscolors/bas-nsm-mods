@@ -193,6 +193,11 @@
                             <field name="comment"/>
                         </page>
                     </notebook>
+                    <footer>
+                        <group>
+                            <field name="terms"/>
+                        </group>
+                    </footer>
                 </sheet>
             </form>
             </field>

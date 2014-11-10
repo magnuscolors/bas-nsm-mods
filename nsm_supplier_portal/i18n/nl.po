@@ -230,7 +230,10 @@ msgid "Upload your invoice"
 msgstr "Upload uw factuur"
 
 #. module: nsm_supplier_portal
-#: code:addons/nsm_supplier_portal/account_invoice.py:83
+#: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/account_invoice.py:87
+#: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/account_invoice.py:89
+#: code:addons/nsm_supplier_portal/account_invoice.py:87
+#: code:addons/nsm_supplier_portal/account_invoice.py:89
 #, python-format
 msgid "Error!"
 msgstr "Fout!"
@@ -473,3 +476,15 @@ msgstr "Marketing"
 #: selection:product.product,avail_supplier_portal:0
 msgid "Editorial"
 msgstr "Editorial"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,terms:0
+msgid "I accept the re-use terms"
+msgstr "I accept the re-use terms"
+
+#. module: nsm_supplier_portal
+#: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/account_invoice.py:89
+#: code:addons/nsm_supplier_portal/account_invoice.py:89
+#, python-format
+msgid "Please Accept re-use terms"
+msgstr "Please Accept re-use terms"

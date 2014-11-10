@@ -38,6 +38,7 @@ class custom_account_invoice(osv.osv):
         'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
                                                    ('editorial', 'Editorial')],
                                                   "Available Supplier Portal",),
+        'terms': fields.boolean('I accept the re-use terms'),
     }
 
     def create(self, cr, uid, vals, context={}):
@@ -79,27 +80,29 @@ class custom_account_invoice(osv.osv):
     _defaults = {
         'supplier_id': _get_supplier,
     }
-   
+
     def act_submit(self, cr, uid, ids, context={}):
         for self_obj in self.browse(cr, uid, ids, context=context):
             if not self_obj.file:
                 raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
+            if not self_obj.terms:
+                raise osv.except_osv(_('Error!'), _('Please Accept re-use terms'))
         date = time.strftime('%Y-%m-%d')
         self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date})
         return True
-        
+
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
         if not main_analytic:
             return {'value': {'sub_account_analytic_id': False}}
         return {}
-        
-    
+
+
     def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         """
         Overrides orm field_view_get.
         @return: Dictionary of Fields, arch and toolbar.
         """
-        
+
         res = {}
         res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id, view_type,
                                                        context, toolbar=toolbar, submenu=submenu)
@@ -114,7 +117,7 @@ custom_account_invoice()
 class account_invoice_line(osv.osv):
     _inherit = 'account.invoice.line'
 
-    
+
     def product_id_change(self, cr, uid, ids, product, uom_id, qty=0, name='', type='out_invoice', partner_id=False,                fposition_id=False, price_unit=False, currency_id=False, context=None, company_id=None):
         res = super(account_invoice_line,self).product_id_change(cr, uid, ids, product=product,uom_id=uom_id , qty=qty, name=name, type=type, partner_id=partner_id,fposition_id=fposition_id, price_unit=price_unit, currency_id=currency_id, context=context, company_id=company_id)
         if context is None:
@@ -127,7 +130,7 @@ class account_invoice_line(osv.osv):
             return res
         res['value'].update({'uos_id':search_id[0]})
         return res
-    
+
 account_invoice_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
