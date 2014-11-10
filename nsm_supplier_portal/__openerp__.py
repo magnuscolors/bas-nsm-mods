@@ -38,8 +38,8 @@
         "product_view.xml",
         "account_analytic_view.xml",
         "menu_view.xml",
-        "res_company_view.xml",
         "res_config_view.xml",
+        "res_company_view.xml",
     ],
     'demo': [],
     'test': [

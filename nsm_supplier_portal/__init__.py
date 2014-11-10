@@ -19,9 +19,9 @@
 ##############################################################################
 
 import product
+import res_company
 import account_analytic
 import account_invoice
-import res_company
 import res_config
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
