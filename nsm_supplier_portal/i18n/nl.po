@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-10 13:06+0100\n"
+"PO-Revision-Date: 2014-11-12 13:07+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -67,8 +67,10 @@ msgid ""
 "<p>\n"
 "                            <b>Good Job!</b> Your inbox is empty.\n"
 "                        </p><p>\n"
-"                            Your inbox contains private messages or emails sent to you\n"
-"                            as well as information related to documents or people you\n"
+"                            Your inbox contains private messages or emails "
+"sent to you\n"
+"                            as well as information related to documents or "
+"people you\n"
 "                            follow.\n"
 "                        </p>\n"
 "                    "
@@ -76,7 +78,8 @@ msgstr ""
 "<p>\n"
 "                    <b>Goed gedaan!</b> Uw postvak in is leeg.\n"
 "                </p><p>\n"
-"                    Uw postvak in bevat privé berichten of e-mails naar u toegestuurd\n"
+"                    Uw postvak in bevat privé berichten of e-mails naar u "
+"toegestuurd\n"
 "                    alsmede informatie over documenten of mensen die u\n"
 "                    volgt.\n"
 "                </p>\n"
@@ -154,8 +157,11 @@ msgstr "Voer uw factuur in"
 #. module: nsm_supplier_portal
 #: code:addons/nsm_supplier_portal/account_analytic.py:48
 #, python-format
-msgid "You can not use same analytic account for Main portal as well as Sub portal"
-msgstr "Het is niet toegestaan om dezelfde hoofd-kostenplaats en sub-kostenplaats te gebruiken"
+msgid ""
+"You can not use same analytic account for Main portal as well as Sub portal"
+msgstr ""
+"Het is niet toegestaan om dezelfde hoofd-kostenplaats en sub-kostenplaats te "
+"gebruiken"
 
 #. module: nsm_supplier_portal
 #: field:account.analytic.account,portal_sub:0
@@ -184,7 +190,6 @@ msgstr "Factuurregel"
 #: field:sales.team,analytic_account_id:0
 msgid "Analytic Account"
 msgstr "Kostenplaats"
-
 
 #. module: nsm_supplier_portal
 #: model:ir.actions.client,name:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
@@ -270,8 +275,19 @@ msgstr "Zet op concept"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
-msgid "This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created."
-msgstr "Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat (en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te klikken op deze knop wordt de factuur heropend en kunt u de problemen oplossen."
+msgid ""
+"This button only appears when the state of the invoice is 'paid' (showing "
+"that it has been fully reconciled) and auto-computed boolean 'reconciled' is "
+"False (depicting that it's not the case anymore). In other words, the "
+"invoice has been dereconciled and it does not fit anymore the 'paid' state. "
+"You should press this button to re-open it and let it continue its normal "
+"process after having resolved the eventual exceptions it may have created."
+msgstr ""
+"Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat "
+"(en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een "
+"instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te "
+"klikken op deze knop wordt de factuur heropend en kunt u de problemen "
+"oplossen."
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,is_portal:0
@@ -289,11 +305,19 @@ msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "                Click to register a refund you received from a supplier.\n"
 "              </p><p>\n"
-"                Instead of creating the supplier refund manually, you can generate\n"
-"                refunds and reconcile them directly from the related supplier invoice.\n"
+"                Instead of creating the supplier refund manually, you can "
+"generate\n"
+"                refunds and reconcile them directly from the related "
+"supplier invoice.\n"
 "              </p>\n"
 "            "
-msgstr "<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken van een credit factuur van uw leverancier.              </p><p>                In plaats van het handmatig maken van de credit factuur, kunt u ook rechtstreeks                een credit factuur genereren en deze afletteren bij de bijbehorende inkoopfactuur.              </p>            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken "
+"van een credit factuur van uw leverancier.              </"
+"p><p>                In plaats van het handmatig maken van de credit "
+"factuur, kunt u ook rechtstreeks                een credit factuur genereren "
+"en deze afletteren bij de bijbehorende inkoopfactuur.              </"
+"p>            "
 
 #. module: nsm_supplier_portal
 #: model:ir.model,name:nsm_supplier_portal.model_product_template
@@ -391,7 +415,7 @@ msgid "Address"
 msgstr "Adres"
 
 #. module: nsm_supplier_portal
-#: view:res.partner:0
+#: view:res.partner:0 field:sales.team,name:0
 msgid "Name"
 msgstr "Naam"
 
@@ -472,8 +496,7 @@ msgstr "U dient de hergebruik voorwaarden te accepteren"
 #. module: nsm_supplier_portal
 #: field:account.invoice,data_file:0
 #: field:account.invoice,data_supplier_terms_file_name:0
-#: field:base.config.settings,data_fname:0
-#: field:res.company,data_fname:0
+#: field:base.config.settings,data_fname:0 field:res.company,data_fname:0
 msgid "File Name"
 msgstr "Bestandsnaam"
 
@@ -483,8 +506,7 @@ msgid "Upload Supplier Invoice Reuse-authorization File"
 msgstr "Upload het leveranciers hergebruik voorwaardenbestand"
 
 #. module: nsm_supplier_portal
-#: field:account.invoice,supplier_terms:0
-#: field:res.company,supplier_terms:0
+#: field:account.invoice,supplier_terms:0 field:res.company,supplier_terms:0
 msgid "Supplier Invoice Reuse-authorization File"
 msgstr "Hergebruik voorwaarden bestand"
 
@@ -495,8 +517,10 @@ msgstr "Hergebruik voorwaarden"
 
 #. module: nsm_supplier_portal
 #: sql_constraint:sales.team:0
-msgid "The combination of Analytic account and Product Category must be unique!"
-msgstr "De combinatie van de kostenplaats en de productcategorie moet uniek zijn!"
+msgid ""
+"The combination of Analytic account and Product Category must be unique!"
+msgstr ""
+"De combinatie van de kostenplaats en de productcategorie moet uniek zijn!"
 
 #. module: nsm_supplier_portal
 #: field:sales.team,product_cat_id:0
@@ -511,62 +535,49 @@ msgstr "Verkoper"
 #. module: nsm_supplier_portal
 #: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_sales_team_view
 #: model:ir.model,name:nsm_supplier_portal.model_sales_team
-#: model:ir.ui.menu,name:nsm_supplier_portal.menu_sales_team
-#: view:sales.team:0
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_sales_team view:sales.team:0
 msgid "Sales Team Mapping"
-msgstr "Sales Team Mapping"
+msgstr "Verkoopteam koppeling"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
 msgid "Re-Submit"
-msgstr "Re-Submit"
+msgstr "Opnieuw indienen"
 
 #. module: nsm_supplier_portal
 #: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_supplier_invoice_submited_view
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice_submited
 msgid "Submitted Supplier Invoices"
-msgstr "Submitted Supplier Invoices"
+msgstr "Ingediende facturen"
 
 #. module: nsm_supplier_portal
 #: view:res.partner:0
 msgid "Create User"
-msgstr "Create User"
+msgstr "Aanmaken gebruiker"
 
 #. module: nsm_supplier_portal
 #: code:addons/bas_erp_custom_nsm/nsm_supplier_portal/res_partner.py:41
 #: code:addons/nsm_supplier_portal/res_partner.py:41
 #, python-format
 msgid "%s user is already created"
-msgstr "%s user is already created"
-
-#. module: nsm_supplier_portal
-#: view:account.invoice:0
-msgid "Submitted Invoice"
-msgstr "Submitted Invoice"
+msgstr "%s gebruiker is al aangemaakt"
 
 #. module: nsm_supplier_portal
 #: model:ir.module.category,name:nsm_supplier_portal.module_supplier_portal
 msgid "Supplier portal"
-msgstr "Supplier portal"
+msgstr "Leveranciers portaal"
 
 #. module: nsm_supplier_portal
 #: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal
 msgid "Supplier Portal User"
-msgstr "Supplier Portal User"
+msgstr "Leverancier portaal gebruiker"
 
 #. module: nsm_supplier_portal
 #: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal_controller
 msgid "Supplier Portal Controller"
-msgstr "Supplier Portal Controller"
+msgstr "Leverancier portaal controller"
 
 #. module: nsm_supplier_portal
-#: view:res.partner:0
-#: field:sales.team,name:0
-msgid "Name"
-msgstr "Naam"
-
-#. module: nsm_supplier_portal
-#: field:account.invoice,sales_team_id:0
-#: field:sales.team,sales_team_id:0
+#: field:account.invoice,sales_team_id:0 field:sales.team,sales_team_id:0
 msgid "Sales Team"
-msgstr "Sales Team"
+msgstr "Verkoopteam"
