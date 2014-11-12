@@ -107,7 +107,7 @@
                             <field name="avail_supplier_portal" required="1" attrs="{'readonly': [('is_submitted','=',True)]}"/>
                             <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
                         <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
-                        <field name="sales_team_id"/>
+                        <field name="sales_team_id" widget="selection"/>
                             <field string="Supplier" name="partner_id"
                               on_change="onchange_partner_id(type,partner_id,date_invoice,payment_term, partner_bank_id,company_id)"
                               context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}"
