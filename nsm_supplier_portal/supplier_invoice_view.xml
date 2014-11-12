@@ -320,7 +320,8 @@
                                 </tree>
                             </field>
                             <group>
-                                <field name="file"/>
+                                <field name="data_file" invisible="1"/>
+                                <field name="file" filename="data_file" attrs="{'readonly': [('is_submitted','=',True)]}"/>
                             </group>
                             <group class="oe_subtotal_footer oe_right">
                                 <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -478,7 +479,8 @@
                                 </tree>
                             </field>
                             <group>
-                                <field name="file"/>
+                                <field name="data_file" invisible="1"/>
+                                <field name="file" filename="data_file"/>
                             </group>
                             <group class="oe_subtotal_footer oe_right">
                                 <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -521,7 +523,7 @@
                             <field name="data_supplier_terms_file_name" invisible="1"/>
                             <field name="supplier_terms" readonly="1"
                                 filename="data_supplier_terms_file_name"/>
-                            <field name="terms" attrs="{'readonly': [('is_submitted','=',True)]}"/>
+                            <field name="terms"/>
                         </group>
                     </footer>
                 </sheet>
