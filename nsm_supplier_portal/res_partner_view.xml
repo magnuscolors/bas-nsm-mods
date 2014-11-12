@@ -191,7 +191,7 @@
             <field name="act_window_id" ref="action_supplier_form"/>
         </record>
 
-        <!-- Add button (Create User) in Supplier (Partner) -->
+        <!-- Add button (Create User) in Supplier (Partner) >
         <record id="view_nsm_res_partner_form" model="ir.ui.view">
             <field name="name">res.partner.form</field>
             <field name="model">res.partner</field>
@@ -205,7 +205,7 @@
                     </div>
                 </xpath>
             </field>
-        </record>
+        </record-->
 
     </data>
 </openerp>

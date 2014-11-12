@@ -19,7 +19,7 @@
 ##############################################################################
 
 import product
-import res_partner
+#import res_partner
 import res_company
 import account_analytic
 import account_invoice
