@@ -7,14 +7,26 @@ from openerp.tools.translate import _
 
 class sales_team(osv.osv):
     _name = 'sales.team'
-    _description = 'Sales Team'
+    _description = 'Sales Team Mapping'
+    _rec_name = 'name'
+
+    def concate_name(self, cr, uid, ids, name, args=None, context={}):
+        """concate name of product category and analytic account"""
+        result = {}
+        for self_obj in self.browse(cr, uid, ids, context=context):
+            result[self_obj.id] = self_obj.analytic_account_id.name.strip() + ' / ' + self_obj.product_cat_id.name.strip()
+        return result
 
     _columns = {
         'analytic_account_id': fields.many2one('account.analytic.account',
                                                'Analytic Account'),
-        'sale_person_id': fields.many2one('res.users', 'Sales Person',),
         'product_cat_id': fields.many2one('product.category',
                                           'Product Category',),
+        'name': fields.function(concate_name,
+                                string='Name', type='char',
+                                store=True, size=64),
+        'sales_team_id': fields.many2one('crm.case.section', 'Sales Team',
+                                         ),
     }
 
     _sql_constraints = [

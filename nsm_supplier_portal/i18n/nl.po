@@ -513,8 +513,8 @@ msgstr "Verkoper"
 #: model:ir.model,name:nsm_supplier_portal.model_sales_team
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_sales_team
 #: view:sales.team:0
-msgid "Sales Team"
-msgstr "Verkoopteam"
+msgid "Sales Team Mapping"
+msgstr "Sales Team Mapping"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -558,3 +558,15 @@ msgstr "Supplier Portal User"
 #: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal_controller
 msgid "Supplier Portal Controller"
 msgstr "Supplier Portal Controller"
+
+#. module: nsm_supplier_portal
+#: view:res.partner:0
+#: field:sales.team,name:0
+msgid "Name"
+msgstr "Naam"
+
+#. module: nsm_supplier_portal
+#: field:account.invoice,sales_team_id:0
+#: field:sales.team,sales_team_id:0
+msgid "Sales Team"
+msgstr "Sales Team"

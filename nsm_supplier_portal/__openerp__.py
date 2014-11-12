@@ -27,7 +27,8 @@
     """,
     'author': 'BAS Solutions',
     'website': 'http://www.bas-solutions.nl',
-    'depends': ['base', 'account', 'mail', 'account_analytic_analysis', 'portal'],
+    'depends': ['base', 'account', 'mail', 'account_analytic_analysis', 'portal', 'sale_crm',],
+    'depends': ['base', 'account', 'mail', 'account_analytic_analysis', ],
     'data': [
         "security/supplier_portal_security_view.xml",
         "security/ir.model.access.csv",
