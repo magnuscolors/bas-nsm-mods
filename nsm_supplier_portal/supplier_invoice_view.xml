@@ -518,7 +518,10 @@
                     </notebook>
                     <footer>
                         <group>
-                            <field name="terms"/>
+                            <field name="data_supplier_terms_file_name" invisible="1"/>
+                            <field name="supplier_terms" readonly="1"
+                                filename="data_supplier_terms_file_name"/>
+                            <field name="terms" attrs="{'readonly': [('is_submitted','=',True)]}"/>
                         </group>
                     </footer>
                 </sheet>
