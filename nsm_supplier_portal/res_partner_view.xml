@@ -6,7 +6,7 @@
         <record id="view_partner_supplier_tree" model="ir.ui.view">
             <field name="name">res.partner.tree</field>
             <field name="model">res.partner</field>
-            <field eval="8" name="priority"/>
+            <field name="priority" eval="200"/>
             <field name="arch" type="xml">
                 <tree string="Contacts" version="7.0" create="false" copy="false" delete="false">
                     <field name="name"/>
@@ -20,7 +20,7 @@
         <record id="view_partner_supplier_form" model="ir.ui.view">
             <field name="name">res.partner.form</field>
             <field name="model">res.partner</field>
-            <field eval="1" name="priority"/>
+            <field name="priority" eval="200"/>
             <field name="arch" type="xml">
                 <form string="Partners" version="7.0" create="false" copy="false" delete="false">
                 <sheet>
