@@ -8,7 +8,7 @@
             <field name="model">res.partner</field>
             <field eval="8" name="priority"/>
             <field name="arch" type="xml">
-                <tree string="Contacts">
+                <tree string="Contacts" version="7.0" create="false" copy="false" delete="false">
                     <field name="name"/>
                     <field name="phone"/>
                     <field name="email"/>
@@ -22,47 +22,31 @@
             <field name="model">res.partner</field>
             <field eval="1" name="priority"/>
             <field name="arch" type="xml">
-                <form string="Partners" version="7.0">
+                <form string="Partners" version="7.0" create="false" copy="false" delete="false">
                 <sheet>
                     <field name="image" widget='image' class="oe_left oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
                     <div class="oe_title">
                         <div class="oe_edit_only">
-                            <label for="name"/> (
-                            <field name="is_company" on_change="onchange_type(is_company)" class="oe_inline"/> <label for="is_company" string="Is a Company?"/>)
+                            <label for="name"/> 
                         </div>
                         <h1>
                             <field name="name" default_focus="1" placeholder="Name" />
                         </h1>
-                        <field name="parent_id"
-                            placeholder="Company"
-                            domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'form_view_ref':'nsm_supplier_portal.view_partner_supplier_form'}" attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}" on_change="onchange_address(use_parent_address, parent_id)"/>
-                        <field name="category_id" widget="many2many_tags" placeholder="Tags..."/>
                     </div>
                     <div class="oe_right oe_button_box" name="buttons"> </div>
 
                     <group>
                         <group>
-                            <label for="type" attrs="{'invisible': [('parent_id','=', False)]}"/>
-                            <div attrs="{'invisible': [('parent_id','=', False)]}" name="div_type">
-                                <field class="oe_inline"
-                                    name="type"/>
-                            </div>
                             <label for="street" string="Address"/>
                             <div>
-                                <field name="use_parent_address" class="oe_edit_only oe_inline"
-                                       on_change="onchange_address(use_parent_address, parent_id)"
-                                       attrs="{'invisible': ['|', ('is_company', '=', True),('parent_id', '=', False)]}"/>
-                                <label for="use_parent_address" class="oe_edit_only" attrs="{'invisible': ['|', ('is_company', '=', True), ('parent_id', '=', False)]}"/>
-                                <button name="open_parent" type="object" string="(edit company address)" class="oe_link oe_edit_only"
-                                        attrs="{'invisible': ['|',('parent_id','=', False),('use_parent_address','=',False)]}"/>
-                                <field name="street" placeholder="Street..."  attrs="{'readonly': [('use_parent_address','=',True)]}"/>
-                                <field name="street2"  attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <field name="street" placeholder="Street..." />
+                                <field name="street2"  />
                                 <div class="address_format">
-                                    <field name="city" placeholder="City" style="width: 40%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
-                                    <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}' on_change="onchange_state(state_id)" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
-                                    <field name="zip" placeholder="ZIP" style="width: 20%%" attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                    <field name="city" placeholder="City" style="width: 40%%" />
+                                    <field name="state_id" class="oe_no_button" placeholder="State" style="width: 37%%" options='{"no_open": True}' on_change="onchange_state(state_id)" />
+                                    <field name="zip" placeholder="ZIP" style="width: 20%%" />
                                 </div>
-                                <field name="country_id" placeholder="Country" class="oe_no_button" options='{"no_open": True}' attrs="{'readonly': [('use_parent_address','=',True)]}"/>
+                                <field name="country_id" placeholder="Country" class="oe_no_button" options='{"no_open": True}'/>
                             </div>
                             <field name="website" widget="url" placeholder="e.g. www.openerp.com"/>
                         </group>
@@ -74,7 +58,7 @@
                         </group>
                     </group>
                     <notebook colspan="4">
-                        <page string="Accounting" col="4" name="accounting" attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}">
+                        <page string="Accounting" col="4" name="accounting">
                             <group>
                                 <field name="vat"/>
                             </group>
@@ -97,7 +81,7 @@
             <field name="name">res.partner.kanban</field>
             <field name="model">res.partner</field>
             <field name="arch" type="xml">
-                <kanban>
+                <kanban version="7.0" create="false" copy="false" delete="false">
                     <field name="color"/>
                     <field name="name"/>
                     <field name="title"/>
@@ -159,7 +143,7 @@
             <field name="view_type">form</field>
             <field name="domain">[]</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="context">{'search_default_supplier': 1,'default_customer': 0,'default_supplier': 1}</field>
+            <field name="context">{'search_default_supplier': 1,'default_customer': 0,'default_supplier': 1, 'is_portal': True}</field>
             <field name="filter" eval="True"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">

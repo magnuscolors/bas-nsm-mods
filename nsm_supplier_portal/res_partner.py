@@ -28,7 +28,22 @@ class res_partner(osv.osv):
     _columns = {
         'user_create': fields.boolean('User is created'),
     }
+    
+    def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+        """
+        Overrides orm field_view_get.
+        @return: Dictionary of Fields, arch and toolbar.
+        """
 
+        res = {}
+        res = super(res_partner, self).fields_view_get(cr, user, view_id, view_type,
+                                                       context, toolbar=toolbar, submenu=submenu)
+        if not context.get('is_portal'):
+            return res
+        res['toolbar'] = {'print': [], 'other':[]}
+        return res
+
+    '''
     def create_supplier_user(self, cr, uid, ids, context={}):
         if not context:
             context = {}
@@ -51,5 +66,6 @@ class res_partner(osv.osv):
                 'user_create': True,
             }, context=context)
         user_pool.action_reset_password(cr, uid, partner_ids, context)
+    '''
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
