@@ -524,8 +524,8 @@ msgstr "Re-Submit"
 #. module: nsm_supplier_portal
 #: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_supplier_invoice_submited_view
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_invoice_submited
-msgid "Submited Supplier Invoices"
-msgstr "Submited Supplier Invoices"
+msgid "Submitted Supplier Invoices"
+msgstr "Submitted Supplier Invoices"
 
 #. module: nsm_supplier_portal
 #: view:res.partner:0
@@ -539,3 +539,22 @@ msgstr "Create User"
 msgid "%s user is already created"
 msgstr "%s user is already created"
 
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Submitted Invoice"
+msgstr "Submitted Invoice"
+
+#. module: nsm_supplier_portal
+#: model:ir.module.category,name:nsm_supplier_portal.module_supplier_portal
+msgid "Supplier portal"
+msgstr "Supplier portal"
+
+#. module: nsm_supplier_portal
+#: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal
+msgid "Supplier Portal User"
+msgstr "Supplier Portal User"
+
+#. module: nsm_supplier_portal
+#: model:res.groups,name:nsm_supplier_portal.group_module_supplier_portal_controller
+msgid "Supplier Portal Controller"
+msgstr "Supplier Portal Controller"

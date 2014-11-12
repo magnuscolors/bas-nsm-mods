@@ -398,7 +398,7 @@
             <field name="type">form</field>
             <field name="priority" eval="2000"/>
             <field name="arch" type="xml">
-            <form string="Submited Invoice" version="7.0"  create="false">
+            <form string="Submitted Invoice" version="7.0"  create="false">
                 <header>
                     <button name="act_submit" states="draft,proforma2" string="Re-Submit" class="oe_highlight" type="object"/>
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
@@ -532,7 +532,7 @@
         </record>
         
         <record model="ir.actions.act_window" id="act_open_supplier_invoice_submited_view">
-            <field name="name">Submited Supplier Invoices</field>
+            <field name="name">Submitted Supplier Invoices</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
