@@ -3,8 +3,8 @@
     <data noupdate="0">
 
         <record model="crm.case.section" id="section_sales_department1">
-            <field name="name">Sales Department-1</field>
-            <field name="code">Sales-1</field>
+            <field name="name">Onbekend</field>
+            <field name="code">Onbekend</field>
         </record>
     
     </data>
