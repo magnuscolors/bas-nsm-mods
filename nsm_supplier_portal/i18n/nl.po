@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-12 13:07+0100\n"
+"PO-Revision-Date: 2014-11-13 13:08+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -67,10 +67,8 @@ msgid ""
 "<p>\n"
 "                            <b>Good Job!</b> Your inbox is empty.\n"
 "                        </p><p>\n"
-"                            Your inbox contains private messages or emails "
-"sent to you\n"
-"                            as well as information related to documents or "
-"people you\n"
+"                            Your inbox contains private messages or emails sent to you\n"
+"                            as well as information related to documents or people you\n"
 "                            follow.\n"
 "                        </p>\n"
 "                    "
@@ -78,8 +76,7 @@ msgstr ""
 "<p>\n"
 "                    <b>Goed gedaan!</b> Uw postvak in is leeg.\n"
 "                </p><p>\n"
-"                    Uw postvak in bevat privé berichten of e-mails naar u "
-"toegestuurd\n"
+"                    Uw postvak in bevat privé berichten of e-mails naar u toegestuurd\n"
 "                    alsmede informatie over documenten of mensen die u\n"
 "                    volgt.\n"
 "                </p>\n"
@@ -157,11 +154,8 @@ msgstr "Voer uw factuur in"
 #. module: nsm_supplier_portal
 #: code:addons/nsm_supplier_portal/account_analytic.py:48
 #, python-format
-msgid ""
-"You can not use same analytic account for Main portal as well as Sub portal"
-msgstr ""
-"Het is niet toegestaan om dezelfde hoofd-kostenplaats en sub-kostenplaats te "
-"gebruiken"
+msgid "You can not use same analytic account for Main portal as well as Sub portal"
+msgstr "Het is niet toegestaan om dezelfde hoofd-kostenplaats en sub-kostenplaats te gebruiken"
 
 #. module: nsm_supplier_portal
 #: field:account.analytic.account,portal_sub:0
@@ -276,19 +270,8 @@ msgstr "Zet op concept"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
-msgid ""
-"This button only appears when the state of the invoice is 'paid' (showing "
-"that it has been fully reconciled) and auto-computed boolean 'reconciled' is "
-"False (depicting that it's not the case anymore). In other words, the "
-"invoice has been dereconciled and it does not fit anymore the 'paid' state. "
-"You should press this button to re-open it and let it continue its normal "
-"process after having resolved the eventual exceptions it may have created."
-msgstr ""
-"Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat "
-"(en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een "
-"instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te "
-"klikken op deze knop wordt de factuur heropend en kunt u de problemen "
-"oplossen."
+msgid "This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created."
+msgstr "Deze knop verschijnt alleen als de status van de factuur op 'betaald'  staat (en dus volledig afgeletterd zou moeten zijn) terwijl het systeem intern een instelling heeft die aangeeft dat de factuur niet afgeletterd is. Door te klikken op deze knop wordt de factuur heropend en kunt u de problemen oplossen."
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,is_portal:0
@@ -306,19 +289,11 @@ msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "                Click to register a refund you received from a supplier.\n"
 "              </p><p>\n"
-"                Instead of creating the supplier refund manually, you can "
-"generate\n"
-"                refunds and reconcile them directly from the related "
-"supplier invoice.\n"
+"                Instead of creating the supplier refund manually, you can generate\n"
+"                refunds and reconcile them directly from the related supplier invoice.\n"
 "              </p>\n"
 "            "
-msgstr ""
-"<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken "
-"van een credit factuur van uw leverancier.              </"
-"p><p>                In plaats van het handmatig maken van de credit "
-"factuur, kunt u ook rechtstreeks                een credit factuur genereren "
-"en deze afletteren bij de bijbehorende inkoopfactuur.              </"
-"p>            "
+msgstr "<p class=\"oe_view_nocontent_create\">                Klik voor het aanmaken van een credit factuur van uw leverancier.              </p><p>                In plaats van het handmatig maken van de credit factuur, kunt u ook rechtstreeks                een credit factuur genereren en deze afletteren bij de bijbehorende inkoopfactuur.              </p>            "
 
 #. module: nsm_supplier_portal
 #: model:ir.model,name:nsm_supplier_portal.model_product_template
@@ -518,10 +493,8 @@ msgstr "Hergebruik voorwaarden"
 
 #. module: nsm_supplier_portal
 #: sql_constraint:sales.team:0
-msgid ""
-"The combination of Analytic account and Product Category must be unique!"
-msgstr ""
-"De combinatie van de kostenplaats en de productcategorie moet uniek zijn!"
+msgid "The combination of Analytic account and Product Category must be unique!"
+msgstr "De combinatie van de kostenplaats en de productcategorie moet uniek zijn!"
 
 #. module: nsm_supplier_portal
 #: field:sales.team,product_cat_id:0
@@ -590,12 +563,12 @@ msgstr "Verkoopteam"
 #: model:ir.model,name:nsm_supplier_portal.model_generate_mapping
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_generate_mapping
 msgid "Generate Sales Team Mapping"
-msgstr "Generate Sales Team Mapping"
+msgstr "Genereer verkoopteam koppeling"
 
 #. module: nsm_supplier_portal
 #: view:generate.mapping:0
 msgid "No"
-msgstr "No"
+msgstr "Nee"
 
 #. module: nsm_supplier_portal
 #: view:generate.mapping:0
@@ -606,44 +579,45 @@ msgstr "Ok"
 #: field:generate.mapping,state:0
 #: view:res.partner:0
 msgid "State"
-msgstr "Provincie/Staat"
+msgstr "Status"
 
 #. module: nsm_supplier_portal
 #: view:generate.mapping:0
 msgid "Yes"
-msgstr "Yes"
+msgstr "Ja"
 
 #. module: nsm_supplier_portal
 #: view:generate.mapping:0
 msgid "Are you sure you want to generate Sales Team Mapping?"
-msgstr "Are you sure you want to generate Sales Team Mapping?"
+msgstr "Weet u zeker dat u de  verkoopteam koppeling wilt genereren?"
 
 #. module: nsm_supplier_portal
 #: selection:generate.mapping,state:0
 msgid "Draft"
-msgstr "Draft"
+msgstr "Concept"
 
 #. module: nsm_supplier_portal
 #: selection:generate.mapping,state:0
 msgid "Generated"
-msgstr "Generated"
+msgstr "Gegenereerd"
 
 #. module: nsm_supplier_portal
 #: field:generate.mapping,new_create:0
 msgid "New Created"
-msgstr "New Created"
+msgstr "Nieuw aangemaakt"
 
 #. module: nsm_supplier_portal
 #: view:generate.mapping:0
 msgid "Total Sales Team Mapping"
-msgstr "Total Sales Team Mapping"
+msgstr "Totaal aantal verkoopteam koppelingen"
 
 #. module: nsm_supplier_portal
 #: field:generate.mapping,existing_generated:0
 msgid "Existing"
-msgstr "Existing"
+msgstr "Bestaand"
 
 #. module: nsm_supplier_portal
 #: field:generate.mapping,total:0
 msgid "Total"
-msgstr "Total"
+msgstr "Totaal"
+
