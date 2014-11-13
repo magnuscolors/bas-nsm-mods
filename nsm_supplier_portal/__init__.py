@@ -25,4 +25,5 @@ import account_analytic
 import account_invoice
 import res_config
 import sales_team
+import wizard
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

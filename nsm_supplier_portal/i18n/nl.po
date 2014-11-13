@@ -213,6 +213,7 @@ msgstr "(bijwerken)"
 #. module: nsm_supplier_portal
 #. openerp-web
 #: code:addons/nsm_supplier_portal/static/src/xml/mail.xml:44
+#: view:generate.mapping:0
 #, python-format
 msgid "or"
 msgstr "of"
@@ -581,3 +582,52 @@ msgstr "Leverancier portaal controller"
 #: field:account.invoice,sales_team_id:0 field:sales.team,sales_team_id:0
 msgid "Sales Team"
 msgstr "Verkoopteam"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+#: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_generate_mapping_view
+#: model:ir.model,name:nsm_supplier_portal.model_generate_mapping
+#: model:ir.ui.menu,name:nsm_supplier_portal.menu_generate_mapping
+msgid "Generate Sales Team Mapping"
+msgstr "Generate Sales Team Mapping"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+msgid "No"
+msgstr "No"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: nsm_supplier_portal
+#: field:generate.mapping,state:0
+#: view:res.partner:0
+msgid "State"
+msgstr "Provincie/Staat"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+msgid "Yes"
+msgstr "Yes"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+msgid "Sales Team Mapping Generated. Thank You!"
+msgstr "Sales Team Mapping Generated. Thank You!"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+msgid "Are you sure you want to generate Sales Team                     Mapping?"
+msgstr "Are you sure you want to generate Sales Team                     Mapping?"
+
+#. module: nsm_supplier_portal
+#: selection:generate.mapping,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: nsm_supplier_portal
+#: selection:generate.mapping,state:0
+msgid "Generated"
+msgstr "Generated"
