@@ -584,6 +584,7 @@ msgid "Sales Team"
 msgstr "Verkoopteam"
 
 #. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/wizard/generate_mapping.py:69
 #: view:generate.mapping:0
 #: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_generate_mapping_view
 #: model:ir.model,name:nsm_supplier_portal.model_generate_mapping
@@ -614,13 +615,8 @@ msgstr "Yes"
 
 #. module: nsm_supplier_portal
 #: view:generate.mapping:0
-msgid "Sales Team Mapping Generated. Thank You!"
-msgstr "Sales Team Mapping Generated. Thank You!"
-
-#. module: nsm_supplier_portal
-#: view:generate.mapping:0
-msgid "Are you sure you want to generate Sales Team                     Mapping?"
-msgstr "Are you sure you want to generate Sales Team                     Mapping?"
+msgid "Are you sure you want to generate Sales Team Mapping?"
+msgstr "Are you sure you want to generate Sales Team Mapping?"
 
 #. module: nsm_supplier_portal
 #: selection:generate.mapping,state:0
@@ -631,3 +627,23 @@ msgstr "Draft"
 #: selection:generate.mapping,state:0
 msgid "Generated"
 msgstr "Generated"
+
+#. module: nsm_supplier_portal
+#: field:generate.mapping,new_create:0
+msgid "New Created"
+msgstr "New Created"
+
+#. module: nsm_supplier_portal
+#: view:generate.mapping:0
+msgid "Total Sales Team Mapping"
+msgstr "Total Sales Team Mapping"
+
+#. module: nsm_supplier_portal
+#: field:generate.mapping,existing_generated:0
+msgid "Existing"
+msgstr "Existing"
+
+#. module: nsm_supplier_portal
+#: field:generate.mapping,total:0
+msgid "Total"
+msgstr "Total"

@@ -10,10 +10,13 @@
             <field name="arch" type="xml">
             <form string="Generate Sales Team Mapping" version="7.0">
                 <field name="state" invisible="1"/>
-                <group string="Are you sure you want to generate Sales Team
-                    Mapping?" attrs="{'invisible': [('state','=', 'generated')]}"/>
-                <group string="Sales Team Mapping Generated. Thank You!"
+                <group string="Are you sure you want to generate Sales Team Mapping?"
+                    attrs="{'invisible': [('state','=', 'generated')]}"/>
+                <group string="Total Sales Team Mapping"
                     attrs="{'invisible': [('state','=', 'draft')]}">
+                    <field name="existing_generated" readonly="1"/>
+                    <field name="new_create" readonly="1"/>
+                    <field name="total" readonly="1"/>
                 </group>
                 <footer attrs="{'invisible': [('state','=', 'generated')]}">
                     <button string="Yes"

@@ -2,6 +2,7 @@
 
 from openerp.osv import osv
 from openerp.osv import fields
+from openerp.tools.translate import _
 
 
 class generate_mapping(osv.osv_memory):
@@ -12,6 +13,9 @@ class generate_mapping(osv.osv_memory):
         'state': fields.selection([('draft', 'Draft'),
                                    ('generated', 'Generated')],
                                   'State',),
+        'existing_generated': fields.integer('Existing',),
+        'new_create': fields.integer('New Created'),
+        'total': fields.integer('Total'),
 
     }
     _defaults = {
@@ -23,6 +27,9 @@ class generate_mapping(osv.osv_memory):
         product_category_pool = self.pool.get('product.category')
         sales_team_pool = self.pool.get('sales.team')
         crm_sales_pool = self.pool.get('crm.case.section')
+        existing_counter = 0
+        created_counter = 0
+        total = 0
 
         analytic_search_ids = analytic_ac_pool.search(
             cr, uid, [('portal_main', '=',  True)], context=context)
@@ -43,6 +50,7 @@ class generate_mapping(osv.osv_memory):
                     cr, uid, [('analytic_account_id', '=', analytic_obj.id),
                               ('product_cat_id', '=', product_cat_obj.id)], context=context)
                 if existing_search:
+                    existing_counter +=1
                     continue
                 sales_team_pool.create(
                     cr, uid,
@@ -50,8 +58,15 @@ class generate_mapping(osv.osv_memory):
                      'product_cat_id': product_cat_obj.id,
                      'sales_team_id': view_id and view_id[0] or False,
                      }, context=context)
-        self.write(cr, uid, ids, {'state': 'generated'}, context=context)
+                created_counter +=1
+        total = existing_counter + created_counter
+        self.write(cr, uid, ids, {'state': 'generated',
+                                  'existing_generated': existing_counter,
+                                  'new_create': created_counter,
+                                  'total': total,
+                                 }, context=context)
         return {
+            'name': _('Generate Sales Team Mapping'),
             'type': 'ir.actions.act_window',
             'res_model': 'generate.mapping',
             'res_id': ids and ids[0],
