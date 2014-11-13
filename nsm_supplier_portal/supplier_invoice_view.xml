@@ -81,7 +81,7 @@
                     <button name="invoice_cancel" states="draft" string="Cancel Invoice"/>
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
                     <button name='%(account.action_account_state_open)d' type='action' string='Re-Open'  attrs="{'invisible':['|', ('state','&lt;&gt;','paid'), ('reconciled', '=', True)]}" help="This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created." invisible="1"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,open,auth,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                 </header>
                 <sheet string="Supplier Invoice">
                     <div class="oe_title">
@@ -252,7 +252,7 @@
                     <button name="invoice_cancel" states="draft" string="Cancel Invoice"/>
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
                     <button name='%(account.action_account_state_open)d' type='action' string='Re-Open'  attrs="{'invisible':['|', ('state','&lt;&gt;','paid'), ('reconciled', '=', True)]}" help="This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created." invisible="1"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,open,auth,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                 </header>
                 <sheet string="Supplier Invoice">
                     <div class="oe_title">
@@ -410,7 +410,7 @@
                     <button name="invoice_cancel" states="draft" string="Cancel Invoice"/>
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
                     <button name='%(account.action_account_state_open)d' type='action' string='Re-Open'  attrs="{'invisible':['|', ('state','&lt;&gt;','paid'), ('reconciled', '=', True)]}" help="This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created." invisible="1"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,open,auth,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                 </header>
                 <sheet string="Supplier Invoice">
                     <div class="oe_title">
