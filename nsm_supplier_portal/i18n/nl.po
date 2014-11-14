@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-13 13:08+0100\n"
+"PO-Revision-Date: 2014-11-14 15:02+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,12 +31,12 @@ msgstr "Credit inkoopfacturen"
 #. module: nsm_supplier_portal
 #: field:account.invoice,main_account_analytic_id:0
 msgid "Main Analytic account"
-msgstr "Hoofd-kostenplaats"
+msgstr "Maak uw keuze voor de titel"
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,sub_account_analytic_id:0
 msgid "Sub Analytic account"
-msgstr "Sub-kostenplaats"
+msgstr "Maak uw keuze voor de editie"
 
 #. module: nsm_supplier_portal
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_main
@@ -53,7 +53,7 @@ msgstr "Archieven"
 #: field:product.product,avail_supplier_portal:0
 #: field:account.invoice,avail_supplier_portal:0
 msgid "Available Supplier Portal"
-msgstr "Beschikbaar in leveranciers portaal"
+msgstr "Maak uw keuze"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0 field:account.invoice,supplier_id:0
