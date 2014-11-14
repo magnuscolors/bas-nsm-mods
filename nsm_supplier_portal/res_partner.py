@@ -25,9 +25,6 @@ from openerp.tools.translate import _
 class res_partner(osv.osv):
     _inherit = 'res.partner'
 
-    _columns = {
-        'user_create': fields.boolean('User is created'),
-    }
     
     def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         """
