@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-14 15:02+0100\n"
+"PO-Revision-Date: 2014-11-14 15:17+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -256,7 +256,7 @@ msgstr "Overige gegevens"
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
 msgid "Supplier Invoice"
-msgstr "Inkoopfactuur"
+msgstr "Uw facturen"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -328,7 +328,7 @@ msgstr "Concept factuur"
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
 msgid "Refund"
-msgstr "Credit factuur"
+msgstr "Uw credit facturen"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
