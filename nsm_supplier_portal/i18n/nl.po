@@ -557,7 +557,7 @@ msgid "Sales Team"
 msgstr "Verkoopteam"
 
 #. module: nsm_supplier_portal
-#: code:addons/nsm_supplier_portal/wizard/generate_mapping.py:69
+#: code:addons/nsm_supplier_portal/wizard/generate_mapping.py:67
 #: view:generate.mapping:0
 #: model:ir.actions.act_window,name:nsm_supplier_portal.act_open_generate_mapping_view
 #: model:ir.model,name:nsm_supplier_portal.model_generate_mapping

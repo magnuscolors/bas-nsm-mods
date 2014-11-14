@@ -10,9 +10,8 @@ class generate_mapping(osv.osv_memory):
     _description = 'Generate Sales Team Mapping'
 
     _columns = {
-        'state': fields.selection([('draft', 'Draft'),
-                                   ('generated', 'Generated')],
-                                  'State',),
+        'state': fields.selection(
+            [('draft', 'Draft'), ('generated', 'Generated')], 'State',),
         'existing_generated': fields.integer('Existing',),
         'new_create': fields.integer('New Created'),
         'total': fields.integer('Total'),
@@ -40,9 +39,8 @@ class generate_mapping(osv.osv_memory):
             cr, uid, 'nsm_supplier_portal', 'section_sales_department1')
         view_id = view_ref and view_ref[1] or False,
 
-        for analytic_obj in analytic_ac_pool.browse(cr, uid,
-                                                    analytic_search_ids,
-                                                    context=context):
+        for analytic_obj in analytic_ac_pool.browse(
+            cr, uid, analytic_search_ids, context=context):
             for product_cat_obj in product_category_pool.browse(
                 cr, uid, product_cat_ids, context=context):
 
