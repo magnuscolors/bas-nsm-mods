@@ -105,8 +105,8 @@
                             <field name="supplier_id" select="1" readonly="1" on_change="supplier_id_change(supplier_id,context)" context="{'form_view_ref':'nsm_supplier_portal.view_partner_supplier_form', 'is_portal': True}" attrs="{'invisible':[('type', '=', 'in_refund')]}"/>
                             <field string="Supplier" name="partner_id"
                               on_change="onchange_partner_id(type,partner_id,date_invoice,payment_term, partner_bank_id,company_id)"
-                              context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}"
-                              domain="[('supplier', '=', True)]" attrs="{'invisible':[('type', '!=', 'in_refund')]}"/>
+                              context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'form_view_ref':'nsm_supplier_portal.view_partner_supplier_form', 'is_portal': True}"
+                              domain="[('supplier', '=', True)]" attrs="{'invisible':[('type', '!=', 'in_refund')], 'readonly': [('type','=','in_refund')]}"/>
                             <field name="supplier_invoice_number" required="1" attrs="{'readonly': [('is_submitted','=',True)]}" string="Enter Your Invoice Number"/>
                             <field name="avail_supplier_portal" required="1" attrs="{'readonly': [('is_submitted','=',True)]}"/>
                             <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
