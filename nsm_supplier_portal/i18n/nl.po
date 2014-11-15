@@ -621,3 +621,7 @@ msgstr "Bestaand"
 msgid "Total"
 msgstr "Totaal"
 
+#. module: nsm_supplier_portal
+#: view:account.invoice:0
+msgid "Enter Your Invoice Number"
+msgstr "Enter Your Invoice Number"
