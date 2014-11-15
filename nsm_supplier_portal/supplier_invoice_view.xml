@@ -76,7 +76,7 @@
             <field name="arch" type="xml">
             <form string="Enter Your Invoice" version="7.0"  create="false">
                 <header>
-                    <button name="act_submit" states="draft,proforma2" string="Submit" class="oe_highlight" type="object"/>
+                    <button name="act_submit" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('is_submitted','=', True)]}"/>
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
                     <button name="invoice_cancel" states="draft" string="Cancel Invoice"/>
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
@@ -247,7 +247,7 @@
             <field name="arch" type="xml">
             <form string="Supplier Invoice" version="7.0" edit="false" create="false">
                 <header>
-                    <button name="act_submit" states="draft,proforma2" string="Submit" class="oe_highlight" type="object"/>
+                    <button name="act_submit" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('is_submitted','=', True)]}"/>
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
                     <button name="invoice_cancel" states="draft" string="Cancel Invoice"/>
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
