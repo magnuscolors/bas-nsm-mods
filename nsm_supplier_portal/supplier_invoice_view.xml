@@ -111,7 +111,7 @@
                             <field name="avail_supplier_portal" required="1" attrs="{'readonly': [('is_submitted','=',True)]}"/>
                             <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
                         <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
-                        <field name="sales_team_id" widget="selection"/>
+                        <field name="section_id" widget="selection" readonly="1"/>
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
                             <!--label for="reference_type"/>

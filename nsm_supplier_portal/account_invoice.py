@@ -27,28 +27,6 @@ import time
 class custom_account_invoice(osv.osv):
     _inherit = 'account.invoice'
 
-    def _get_invoice(self, cr, uid, ids, context=None):
-        result = {}
-        for line in self.pool.get('account.invoice.line').browse(cr, uid, ids, context=context):
-            result[line.invoice_id.id] = True
-        return result.keys()
-
-    def get_sale_team(self, cr, uid, ids, name, args, context={}):
-        result = {}
-        sale_team_obj = False
-        sale_team_pool = self.pool.get('sales.team')
-        for self_obj in self.browse(cr, uid, ids, context=context):
-            sale_team_id = sale_team_pool.search(
-                cr, uid, [('analytic_account_id', '=', self_obj.main_account_analytic_id.id),
-                          ('product_cat_id', '=', (self_obj.invoice_line and
-                                                   self_obj.invoice_line[0].product_id.categ_id and
-                                                   self_obj.invoice_line[0].product_id.categ_id.id or False)) or False
-                         ],
-                context=context)
-            if sale_team_id:
-                sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
-            result[self_obj.id] = sale_team_obj and sale_team_obj.sales_team_id.id or False
-        return result
 
     _columns = {
         'supplier_id': fields.many2one('res.partner', 'Supplier',),
@@ -65,11 +43,7 @@ class custom_account_invoice(osv.osv):
         'data_supplier_terms_file_name': fields.char('File Name'),
         'supplier_terms': fields.binary("Supplier Invoice Reuse-authorization File"),
         'terms': fields.boolean('I accept the re-use terms'),
-        'sales_team_id': fields.function(
-            get_sale_team, type='many2one',
-            relation='crm.case.section', string='Sales Team',
-             store={'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['main_account_analytic_id'], 10),
-                    'account.invoice.line': (_get_invoice, ['product_id'], 10) })
+             
     }
 
     def _get_terms(self, cr, uid, context=None):
@@ -135,13 +109,26 @@ class custom_account_invoice(osv.osv):
     }
 
     def act_submit(self, cr, uid, ids, context={}):
+        sale_team_obj = False
+        sale_team_pool = self.pool.get('sales.team')
         for self_obj in self.browse(cr, uid, ids, context=context):
             if not self_obj.file:
                 raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
             if not self_obj.terms:
                 raise osv.except_osv(_('Error!'), _('Please Accept re-use terms'))
+            sale_team_id = sale_team_pool.search(
+                cr, uid, [('analytic_account_id', '=', self_obj.main_account_analytic_id.id),
+                          ('product_cat_id', '=', (self_obj.invoice_line and
+                                                   self_obj.invoice_line[0].product_id.categ_id and
+                                                   self_obj.invoice_line[0].product_id.categ_id.id or False)) or False
+                         ],
+                context=context)
+        if sale_team_id:
+                sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
+            
         date = time.strftime('%Y-%m-%d')
-        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date})
+        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date, 
+                                   'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False})
         return True
 
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
