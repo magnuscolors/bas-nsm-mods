@@ -109,8 +109,8 @@
                               domain="[('supplier', '=', True)]" attrs="{'invisible':[('type', '!=', 'in_refund')]}"/>
                             <field name="supplier_invoice_number" required="1" attrs="{'readonly': [('is_submitted','=',True)]}" string="Enter Your Invoice Number"/>
                             <field name="avail_supplier_portal" required="1" attrs="{'readonly': [('is_submitted','=',True)]}"/>
-                            <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
-                        <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
+                            <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
+                        <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
                         <field name="section_id" widget="selection" readonly="1"/>
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
@@ -151,7 +151,7 @@
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
                                     <field name="invoice_line_tax_id" widget="many2many_tags" context="{'type':parent.type}"
-                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]"/>
+                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]" options='{"create": false, "create_edit": false, "no_open": true}'/>
                                     <field name="price_subtotal"/>
                                 </tree>
                             </field>
@@ -279,8 +279,8 @@
                               context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1}"
                               domain="[('supplier', '=', True)]" attrs="{'invisible':[('type', '!=', 'in_refund')]}"/>
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
-                            <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}'/>
-                        <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}'/>
+                            <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                        <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
                             
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
@@ -321,7 +321,7 @@
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
                                     <field name="invoice_line_tax_id" widget="many2many_tags" context="{'type':parent.type}"
-                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]"/>
+                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]" options='{"create": false, "create_edit": false, "no_open": true}'/>
                                     <field name="price_subtotal"/>
                                 </tree>
                             </field>
@@ -443,8 +443,8 @@
                               domain="[('supplier', '=', True)]" attrs="{'invisible':[('type', '!=', 'in_refund')]}"/>
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
                             <field name="avail_supplier_portal" required="1"/>
-                            <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"no_open": True}'/>
-                        <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"no_open": True}'/>
+                            <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                        <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
                             <!--label for="reference_type"/>
@@ -484,7 +484,7 @@
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
                                     <field name="invoice_line_tax_id" widget="many2many_tags" context="{'type':parent.type}"
-                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]"/>
+                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]" options='{"create": false, "create_edit": false, "no_open": true}'/>
                                     <field name="price_subtotal"/>
                                 </tree>
                             </field>
