@@ -27,7 +27,7 @@
     """,
     'author': 'BAS Solutions',
     'website': 'http://www.bas-solutions.nl',
-    'depends': ['base', 'account', 'mail', 'account_analytic_analysis', 'portal', 'sale_crm', 'megis_auth', 'megis_improv'],
+    'depends': ['base', 'account', 'mail', 'account_analytic_analysis', 'portal', 'sale_crm', 'megis_auth', 'megis_improv', 'web_m2x_options'],
     'data': [
         "data/crm_sale_team_data.xml",
         "security/supplier_portal_security_view.xml",
@@ -43,6 +43,7 @@
         "res_company_view.xml",
         "sales_team_view.xml",
         "wizard/generate_mapping_view.xml",
+        "res_bank_view.xml",
     ],
     'demo': [],
     'test': [
