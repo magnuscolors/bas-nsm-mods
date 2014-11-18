@@ -27,6 +27,44 @@ import time
 class custom_account_invoice(osv.osv):
     _inherit = 'account.invoice'
 
+    def _get_file(self, cr, uid, ids, name, args, context={}):
+        res = {}
+        att_pool = self.pool.get('ir.attachment')
+        for self_id in ids:
+            att_ids = att_pool.search(cr, uid, [('res_id', '=', self_id),
+                                                ('res_model', '=',
+                                                 self._name)], order='id')
+            data = False
+            if att_ids:
+                att_data = att_pool.read(cr, uid, att_ids, ['datas'])
+
+                data = att_data[0]['datas']
+            res[self_id] = data
+        return res
+
+    def _set_file(self, cr, uid, id, name, value, args, context={}):
+        att_pool = self.pool.get('ir.attachment')
+        att_ids = att_pool.search(cr, uid, [('res_id', '=', id),
+                                            ('res_model', '=',
+                                             self._name)], order='id')
+        self_obj = self.browse(cr, uid, id, context=context)
+        if not value:
+            return True
+        if att_ids:
+            att_pool.write(cr, uid, att_ids[0],
+                           {'datas': value,
+                            'datas_fname':
+                            self_obj.data_supplier_terms_file_name})
+        else:
+            att_pool.create(cr, uid,
+                            {'datas': value,
+                             'datas_fname':
+                             self_obj.data_file,
+                             'name': self_obj.data_file,
+                             'res_id': self_obj.id, 'res_model': self._name,
+                             'type': 'binary'
+                            })
+        return True
 
     _columns = {
         'supplier_id': fields.many2one('res.partner', 'Supplier',),
@@ -34,16 +72,18 @@ class custom_account_invoice(osv.osv):
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
         'is_portal': fields.boolean('Portal'),
         'data_file': fields.char('File Name'),
-        'file': fields.binary("Upload your invoice"),
+        'supplier_terms': fields.binary(string="Supplier Invoice Reuse-authorization File"),
         'is_submitted': fields.boolean('Submitted'),
         'supplier_ref_related': fields.related("supplier_invoice_number", type="char", size=256),
         'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
                                                    ('editorial', 'Editorial')],
                                                   "Available Supplier Portal",),
         'data_supplier_terms_file_name': fields.char('File Name'),
-        'supplier_terms': fields.binary("Supplier Invoice Reuse-authorization File"),
+        'file': fields.function(
+            _get_file, fnct_inv=_set_file, type='binary',
+            string="Upload Ypur Invoice"),
         'terms': fields.boolean('I accept the re-use terms'),
-             
+
     }
 
     def _get_terms(self, cr, uid, context=None):
@@ -125,9 +165,9 @@ class custom_account_invoice(osv.osv):
                 context=context)
         if sale_team_id:
                 sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
-            
+
         date = time.strftime('%Y-%m-%d')
-        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date, 
+        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date,
                                    'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False})
         return True
 
