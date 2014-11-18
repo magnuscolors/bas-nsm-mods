@@ -224,7 +224,7 @@ msgstr "Indienen"
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,file:0
-msgid "Upload your invoice"
+msgid "Upload Your Invoice"
 msgstr "Upload uw factuur"
 
 #. module: nsm_supplier_portal
