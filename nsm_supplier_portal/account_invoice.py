@@ -81,7 +81,7 @@ class custom_account_invoice(osv.osv):
         'data_supplier_terms_file_name': fields.char('File Name'),
         'file': fields.function(
             _get_file, fnct_inv=_set_file, type='binary',
-            string="Upload Ypur Invoice"),
+            string="Upload Your Invoice"),
         'terms': fields.boolean('I accept the re-use terms'),
 
     }
