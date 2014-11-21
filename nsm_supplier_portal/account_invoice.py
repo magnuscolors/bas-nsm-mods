@@ -169,6 +169,7 @@ class custom_account_invoice(osv.osv):
         date = time.strftime('%Y-%m-%d')
         self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date,
                                    'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False})
+        self.button_reset_taxes(cr, uid, ids, context=context)
         return True
 
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
