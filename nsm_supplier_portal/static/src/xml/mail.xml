@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-
+ <t t-extend="Login">
+        <t t-jquery="div.oe_login_footer" t-operation="replace">
+        </t>
+    </t>
     <!-- 
         wall main template
         Template used to display the communication history in the wall.
         -->
+    
     <div t-name="mail.wall" class="oe_view_manager oe_mail_wall oe_view_manager_current">
         <table class="oe_view_manager_header">
           <colgroup>
