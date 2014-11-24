@@ -626,3 +626,75 @@ msgstr "Totaal"
 msgid "Enter Your Invoice Number"
 msgstr "Voer uw factuurnummer in"
 
+
+#. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/res_users.py:53
+#, python-format
+msgid "Cannot send email: no outgoing email server configured.\n"
+"You can configure it under Settings/General Settings."
+msgstr "Cannot send email: no outgoing email server configured.\n"
+"You can configure it under Settings/General Settings."
+
+#. module: nsm_supplier_portal
+#: code:addons/nsm_supplier_portal/res_users.py:47
+#, python-format
+msgid "Cannot send email: user has no email address."
+msgstr "Cannot send email: user has no email address."
+
+#. module: nsm_supplier_portal
+#: model:email.template,body_html:nsm_supplier_portal.send_invitation_email
+msgid "\n"
+"                \n"
+"                    <p>\n"
+"                        ${object.name},\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        You have been invited to connect to \"${object.company_id.name}\" in order to get access to your documents in ERP system.\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        To accept the invitation, click on the following link:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li><a href=\"${object.signup_url}\">Accept invitation to \"${object.company_id.name}\"</a></li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                        Thanks,\n"
+"                    </p>\n"
+"                    <pre>\n"
+"--\n"
+"${object.company_id.name or ''}\n"
+"${object.company_id.email or ''}\n"
+"${object.company_id.phone or ''}\n"
+"                    </pre>\n"
+"                \n"
+"            "
+msgstr "\n"
+"                \n"
+"                    <p>\n"
+"                        ${object.name},\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        You have been invited to connect to \"${object.company_id.name}\" in order to get access to your documents in ERP system.\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        To accept the invitation, click on the following link:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li><a href=\"${object.signup_url}\">Accept invitation to \"${object.company_id.name}\"</a></li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                        Thanks,\n"
+"                    </p>\n"
+"                    <pre>\n"
+"--\n"
+"${object.company_id.name or ''}\n"
+"${object.company_id.email or ''}\n"
+"${object.company_id.phone or ''}\n"
+"                    </pre>\n"
+"                \n"
+"            "
+
+#. module: nsm_supplier_portal
+#: model:email.template,subject:nsm_supplier_portal.send_invitation_email
+msgid "${object.company_id.name} invitation to connect on ERP System"
+msgstr "${object.company_id.name} invitation to connect on ERP System"
