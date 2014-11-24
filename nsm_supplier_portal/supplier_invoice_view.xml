@@ -218,7 +218,7 @@
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('type','=','in_invoice'), ('state', '=', 'draft')]</field>
+            <field name="domain">[('type','=','in_invoice'), ('state', '=', 'draft'), ('is_submitted','=', False)]</field>
             <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True}</field>
         </record>
 
@@ -238,7 +238,35 @@
 
 
     <!--  Supplier Invoices View  -->
-
+       <record id="view_supplier_invoice_submitted_tree_create" model="ir.ui.view">
+            <field name="name">account.invoice.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="1000"/>
+            <field name="arch" type="xml">
+                <!--tree string="Supplier Invoices"-->
+                <tree colors="green:is_submitted==True;gray:state == 'cancel'" string="Invoice">
+                    <field name="partner_id" />
+                    <field name="date_invoice"/>
+                    <field name="supplier_invoice_number" invisible="0"/>
+                    <field name="number"/>
+                    <field name="is_submitted" invisible="True"/>
+                    <field name="reference" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="period_id" invisible="1"/>
+                    <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="date_due"/>
+                    <field name="origin" invisible="1"/>
+                    <field name="currency_id" groups="base.group_multi_currency"/>
+                    <field name="residual" sum="Residual Amount"/>
+                    <field name="amount_untaxed" sum="Untaxed Amount"/>
+                    <field name="amount_total" sum="Total Amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
         <record id="view_custom_supplier_supplier_invoice_form" model="ir.ui.view">
             <field name="name">account.invoice.form</field>
             <field name="model">account.invoice</field>
@@ -380,7 +408,7 @@
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('type','=','in_invoice'), ('state', 'not in', ['draft'])]</field>
+            <field name="domain">[('type','=','in_invoice'), ('is_submitted','=', True)]</field>
             <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True}</field>
         </record>
 
@@ -396,7 +424,7 @@
             <field name="act_window_id" ref="act_open_supplier_invoice_view"/>
             <field name="sequence" eval="10"/>
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="view_supplier_invoice_tree"/>
+            <field name="view_id" ref="view_supplier_invoice_submitted_tree_create"/>
         </record>
         
         
