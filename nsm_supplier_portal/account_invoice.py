@@ -165,10 +165,11 @@ class custom_account_invoice(osv.osv):
                 context=context)
         if sale_team_id:
                 sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
-
+        
         date = time.strftime('%Y-%m-%d')
         self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date,
-                                   'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False})
+                                   'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
+                                   'user_id':  sale_team_obj and sale_team_obj.sales_team_id.user_id.id or False})
         self.button_reset_taxes(cr, uid, ids, context=context)
         return True
 
