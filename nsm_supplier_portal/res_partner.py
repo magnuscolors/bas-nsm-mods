@@ -25,7 +25,11 @@ from openerp.tools.translate import _
 class res_partner(osv.osv):
     _inherit = 'res.partner'
 
-    
+    _columns = {
+        'reuse': fields.boolean('Reuse-authorization'),
+    }
+
+
     def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         """
         Overrides orm field_view_get.

@@ -197,10 +197,10 @@
                     </notebook>
                     <footer>
                         <group>
+                            <field name="reuse" invisible="1"/>
                             <field name="data_supplier_terms_file_name" invisible="1"/>
-                            <field name="supplier_terms" readonly="1"
-                                filename="data_supplier_terms_file_name"/>
-                            <field name="terms" attrs="{'readonly': [('is_submitted','=',True)]}"/>
+                            <field name="supplier_terms" readonly="1" filename="data_supplier_terms_file_name" attrs="{'invisible': [('reuse','=', False)]}"/>
+                            <field name="terms" attrs="{'readonly': [('is_submitted','=',True)], 'invisible': [('reuse', '=', False)]}"/>
                         </group>
                     </footer>
                 </sheet>

@@ -83,6 +83,7 @@ class custom_account_invoice(osv.osv):
             _get_file, fnct_inv=_set_file, type='binary',
             string="Upload Your Invoice"),
         'terms': fields.boolean('I accept the re-use terms'),
+        'reuse': fields.boolean('Reuse'),
 
     }
 
@@ -140,7 +141,9 @@ class custom_account_invoice(osv.osv):
         res = {}
         if not supplier_id:
             return res
-        res = {'value': {'partner_id': supplier_id}}
+        supplier = self.pool.get('res.partner').browse(cr, uid, supplier_id,
+                                                       context=context)
+        res = {'value': {'partner_id': supplier_id, 'reuse': supplier.reuse}}
         return res
     _defaults = {
         'supplier_id': _get_supplier,
@@ -154,7 +157,7 @@ class custom_account_invoice(osv.osv):
         for self_obj in self.browse(cr, uid, ids, context=context):
             if not self_obj.file:
                 raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
-            if not self_obj.terms:
+            if self_obj.reuse and not self_obj.terms:
                 raise osv.except_osv(_('Error!'), _('Please Accept re-use terms'))
             sale_team_id = sale_team_pool.search(
                 cr, uid, [('analytic_account_id', '=', self_obj.main_account_analytic_id.id),
