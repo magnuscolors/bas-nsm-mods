@@ -19,14 +19,15 @@
 ##############################################################################
 
 {
-    'name': 'Supplier Portal',
+    'name': 'NSM Leveranciers Portaal',
     'version': '1.0',
     'category': 'Invoice',
-    'summary': 'Invoice',
-    'description': """This module holds the BAS-ERP Portal enhanchements.
+    'summary': 'NSM Leveranciers Portaal',
+    'description': """
+    New Skool Media Leveranciers Portaal.
     """,
     'author': 'BAS Solutions',
-    'website': 'http://www.bas-solutions.nl',
+    'website': 'https://www.bas-solutions.nl',
     'depends': ['base', 'account', 'mail', 'account_analytic_analysis', 'portal', 'sale_crm', 'megis_auth', 'megis_improv', 'web_m2x_options', 'portal'],
     'data': [
         "data/crm_sale_team_data.xml",

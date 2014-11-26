@@ -19,16 +19,16 @@
 ##############################################################################
 
 {
-    "name": "NSM Payment Followup Layout",
-    "version": "1.0",
+    "name": "NSM Betaalherinnering layout",
+    "version": "2.0",
     "author": "BAS Solutions",
-    "website": "http://www.bas-solutions.nl",
+    "website": "https://www.bas-solutions.nl",
     "category": "Sales Management",
     "depends": ["base", "account_followup"],
-    "summary": "Customized Payment Followup layout",
+    "summary": "New Skool Media Betaalherinnering layout",
     "description": """
-                This is the internal Customized Payment Followup layout
-     """,
+    New Skool Media Betaalherinnering layout
+    """,
     'images': [
                ],
     "init_xml": [
