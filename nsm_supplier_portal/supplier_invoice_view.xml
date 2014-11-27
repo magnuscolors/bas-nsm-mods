@@ -607,7 +607,6 @@
             <field name="context">{'default_type': 'in_refund', 'type': 'in_refund', 'journal_type': 'purchase_refund', 'is_portal': True, 'no_create':True}</field>
             <field name="search_view_id" ref="account.view_account_invoice_filter"/>
             <field name="help" type="html">
-              </p><p>
             </field>
         </record>
 
