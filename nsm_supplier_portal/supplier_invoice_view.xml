@@ -438,7 +438,7 @@
             <field name="arch" type="xml">
             <form string="Submitted Invoice" version="7.0"  create="false">
                 <header>
-                    <button name="act_submit" states="draft,proforma2" string="Re-Submit" class="oe_highlight" type="object"/>
+                    <button name="invoice_open" states="draft" string="Validate" class="oe_highlight"/>
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
                     <button name="invoice_cancel" states="draft" string="Cancel Invoice"/>
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
