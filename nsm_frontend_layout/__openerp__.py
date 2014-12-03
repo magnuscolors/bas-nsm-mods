@@ -22,13 +22,15 @@
     "category": 'Web',
     'complexity': "easy",
     "description": """
-New Skool Media - FrontEnd Layout
-====================================
+    New Skool Media - FrontEnd Layout
+    ====================================
 
     """,
     'website': 'https://www.bas-solutions.nl',
-    "depends" : [ "base", ],
+    "depends" : ['base'],
     'css': ['static/css/design.css',],
+    'qweb':['static/xml/web_custom.xml'], 
+
     'application': True,
     'installable': True,
     'web_preload': False,

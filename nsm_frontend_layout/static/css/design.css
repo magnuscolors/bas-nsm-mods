@@ -1,9 +1,22 @@
+/* Full background color */
+/*
 .openerp .oe_login {
-  background: url('/nsm_frontend_layout/static/img/logo.png') no-repeat center 200px fixed;
-  
-  
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2bafde), to(#047ba5));
+  background-image: -webkit-linear-gradient(top, #2bafde, #047ba5);
+  background-image: -moz-linear-gradient(top, #2bafde, #047ba5);
+  background-image: -ms-linear-gradient(top, #2bafde, #047ba5);
+  background-image: -o-linear-gradient(top, #2bafde, #047ba5);
+  background-image: linear-gradient(to top, #2bafde, #047ba5);
 }
 
+.openerp .oe_login .oe_login_bottom {
+    display: none;
+}
+*/
+/* Half background color */
+.openerp .oe_login {
+  background: url('/nsm_frontend_layout/static/img/logo.png') no-repeat center 200px fixed;
+}
 .openerp .oe_login .oe_login_logo {
   display: none;
 }
