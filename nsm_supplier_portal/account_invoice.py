@@ -168,7 +168,7 @@ class custom_account_invoice(osv.osv):
                 context=context)
         if sale_team_id:
                 sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
-        
+
         date = time.strftime('%Y-%m-%d')
         self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date,
                                    'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
@@ -193,27 +193,46 @@ class custom_account_invoice(osv.osv):
                                                        context, toolbar=toolbar, submenu=submenu)
         if not context.get('is_portal'):
             return res
-        res['toolbar'] = {'print': [], 'other':[]}
+        res['toolbar'] = {'print': [], 'other': []}
         return res
 
 custom_account_invoice()
 
-#product_packaging
+
 class account_invoice_line(osv.osv):
     _inherit = 'account.invoice.line'
 
+    _columns = {
+        'new_tax_id': fields.many2one('account.tax', 'Tax',),
+    }
 
-    def product_id_change(self, cr, uid, ids, product, uom_id, qty=0, name='', type='out_invoice', partner_id=False,                fposition_id=False, price_unit=False, currency_id=False, context=None, company_id=None):
-        res = super(account_invoice_line,self).product_id_change(cr, uid, ids, product=product,uom_id=uom_id , qty=qty, name=name, type=type, partner_id=partner_id,fposition_id=fposition_id, price_unit=price_unit, currency_id=currency_id, context=context, company_id=company_id)
+    def onchange_tax_id(self, cr, uid, ids, tax_id, context={}):
+        if not tax_id:
+            return {'value': {'invoice_line_tax_id': []}}
+        return {'value': {'invoice_line_tax_id': [tax_id]}}
+
+    def product_id_change(self, cr, uid, ids, product, uom_id,
+                          qty=0, name='', type='out_invoice', partner_id=False,
+                          fposition_id=False, price_unit=False, currency_id=False,
+                          context=None, company_id=None):
+        res = super(account_invoice_line, self).product_id_change(
+            cr, uid, ids, product=product, uom_id=uom_id, qty=qty, name=name,
+            type=type, partner_id=partner_id, fposition_id=fposition_id,
+            price_unit=price_unit, currency_id=currency_id,
+            context=context, company_id=company_id)
         if context is None:
             context = {}
         if not context.get('is_portal'):
             return res
         uom_pool = self.pool.get('product.uom')
-        search_id = uom_pool.search(cr, uid, [('name', '=', 'Piece')], context=context)
+        account_tax_pool = self.pool.get('account.tax')
+        search_id = uom_pool.search(
+            cr, uid, [('name', '=', 'Piece')], context=context)
+        search_tax_ids = account_tax_pool.search(cr, uid, [], context=context)
+        res['value'].update({'new_tax_id': search_tax_ids and search_tax_ids[0] or False})
         if not search_id:
             return res
-        res['value'].update({'uos_id':search_id[0]})
+        res['value'].update({'uos_id': search_id[0], })
         return res
 
 account_invoice_line()

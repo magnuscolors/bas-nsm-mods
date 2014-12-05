@@ -692,3 +692,7 @@ msgstr ""
 msgid "You must have an email address in your User Preferences to send emails."
 msgstr "U dient een e-mail adres in uw voorkeuren te hebben om e-mails te kunnen versturen."
 
+#. module: nsm_supplier_portal
+#: field:account.invoice.line,new_tax_id:0
+msgid "Tax"
+msgstr "Tax"

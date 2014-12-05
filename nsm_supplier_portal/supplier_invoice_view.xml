@@ -150,8 +150,12 @@
                                         on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
+                                    <field name="new_tax_id"
+                                        options='{"create": false, "create_edit": false, "no_open": true}'
+                                        on_change="onchange_tax_id(new_tax_id, context)"/>
                                     <field name="invoice_line_tax_id" widget="many2many_tags" context="{'type':parent.type}"
-                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                                        domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]"
+                                        options='{"create": false, "create_edit": false, "no_open": true}' invisible="1"/>
                                     <field name="price_subtotal"/>
                                 </tree>
                             </field>
