@@ -226,13 +226,12 @@ class account_invoice_line(osv.osv):
             return res
         uom_pool = self.pool.get('product.uom')
         account_tax_pool = self.pool.get('account.tax')
-        search_id = uom_pool.search(
+        uom_search_id = uom_pool.search(
             cr, uid, [('name', '=', 'Piece')], context=context)
-        search_tax_ids = account_tax_pool.search(cr, uid, [], context=context)
-        res['value'].update({'new_tax_id': search_tax_ids and search_tax_ids[0] or False})
-        if not search_id:
+        res['value'].update({'new_tax_id': res['value']['invoice_line_tax_id'][:1] or False})
+        if not uom_search_id:
             return res
-        res['value'].update({'uos_id': search_id[0], })
+        res['value'].update({'uos_id': uom_search_id[0], })
         return res
 
 account_invoice_line()
