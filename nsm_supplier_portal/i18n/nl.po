@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-11-26 12:21+0100\n"
+"PO-Revision-Date: 2014-12-06 15:27+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -695,4 +695,5 @@ msgstr "U dient een e-mail adres in uw voorkeuren te hebben om e-mails te kunnen
 #. module: nsm_supplier_portal
 #: field:account.invoice.line,new_tax_id:0
 msgid "Tax"
-msgstr "Tax"
+msgstr "BTW"
+
