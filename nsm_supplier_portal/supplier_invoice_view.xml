@@ -280,7 +280,9 @@
             <field name="arch" type="xml">
             <form string="Supplier Invoice" version="7.0" edit="false" create="false">
                 <header>
-                    <button name="act_submit" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('is_submitted','=', True)]}"/>
+                    <!--button name="act_submit" string="Submit"
+                    class="oe_highlight" type="object" attrs="{'invisible':
+                    [('is_submitted','=', True)]}"/-->
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
                     <!--button name="invoice_cancel" states="draft" string="Cancel Invoice"/-->
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
@@ -314,7 +316,7 @@
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
                             <field name="main_account_analytic_id" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
                             <field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
-                            
+
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
                             <!--label for="reference_type"/>
@@ -435,10 +437,10 @@
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_supplier_invoice_submitted_tree_create"/>
         </record>
-        
-        
+
+
         <!--  Submited Invoice from Supplier   -->
-       
+
         <record id="view_custom_supplier_invoice_submited_form" model="ir.ui.view">
             <field name="name">account.invoice.form</field>
             <field name="model">account.invoice</field>
@@ -506,7 +508,7 @@
                             <field context="{'default_account_analytic_id': sub_account_analytic_id, 'partner_id': partner_id, 'price_type': context.get('price_type') or False, 'type': type, 'is_portal': True}" name="invoice_line">
                                 <tree string="Invoice lines" editable="bottom">
                                     <field name="sequence" widget="handle" />
-                                    <field name="product_id" domain="[('avail_supplier_portal', '=', parent.avail_supplier_portal)]" 
+                                    <field name="product_id" domain="[('avail_supplier_portal', '=', parent.avail_supplier_portal)]"
                                         on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>
                                     <field name="name"/>
                                     <field name="company_id" invisible="1"/>
@@ -581,7 +583,7 @@
             </form>
             </field>
         </record>
-        
+
         <record model="ir.actions.act_window" id="act_open_supplier_invoice_submited_view">
             <field name="name">Submitted Supplier Invoices</field>
             <field name="type">ir.actions.act_window</field>

@@ -82,6 +82,7 @@
         <record model="ir.ui.view" id="res_supplier_kanban_view">
             <field name="name">res.partner.kanban</field>
             <field name="model">res.partner</field>
+            <field name="priority" eval="200"/>
             <field name="arch" type="xml">
                 <kanban version="7.0" create="false" copy="false" delete="false">
                     <field name="color"/>
