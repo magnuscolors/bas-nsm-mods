@@ -180,10 +180,12 @@ msgid "Invoice Line"
 msgstr "Factuurregel"
 
 #. module: nsm_supplier_portal
+#: code:_description:0
 #: model:ir.model,name:nsm_supplier_portal.model_account_analytic_account
 #: field:sales.team,analytic_account_id:0
+#, python-format
 msgid "Analytic Account"
-msgstr "Kostenplaats"
+msgstr "Editie"
 
 #. module: nsm_supplier_portal
 #: model:ir.actions.client,name:nsm_supplier_portal.action_mail_inbox_feeds_supplier_portal
