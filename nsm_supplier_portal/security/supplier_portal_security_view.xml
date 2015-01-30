@@ -36,5 +36,17 @@
             <field name="domain_force">['|', ('id', 'child_of', user.partner_id.id), ('child_ids', 'in', [user.partner_id.id] )]</field>
             <field name="groups" eval="[(4, ref('group_module_supplier_portal'))]"/>
         </record>
+	
+	<record model="ir.rule" id="domain_open_auth_paid_rule">
+            <field name="name">Posted Invoice</field>
+            <field name="model_id" ref="model_account_invoice"/>
+            <field name="domain_force">['|','&amp;','|',('section_id.member_ids', '=', user.id),('user_id','=',user.id),('state','in',['open','auth','paid']),('is_submitted','=','TRUE')]</field>
+            <field name="global" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('megis_auth.goedk_facturen'))]"/>
+    	</record>
     </data>
 </openerp>

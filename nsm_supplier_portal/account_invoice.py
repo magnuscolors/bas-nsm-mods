@@ -66,13 +66,28 @@ class custom_account_invoice(osv.osv):
                             })
         return True
 
+    def _get_supp_file(self, cr, uid, ids, name, args, context={}):
+        res = {}
+        company_pool = self.pool.get('res.company')
+        company_id = company_pool._company_default_get(
+            cr, uid, 'account.invoice', context=context)
+        data = company_pool.browse(cr, uid, company_id,
+                                   context=context).supplier_terms
+        for self_id in ids:
+            res[self_id] = data
+        return res
+
+    def _set_supp_file(self, cr, uid, id, name, value, args, context={}):
+        return True
+
     _columns = {
         'supplier_id': fields.many2one('res.partner', 'Supplier',),
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account'),
         'sub_account_analytic_id': fields.many2one('account.analytic.account', 'Sub Analytic account'),
         'is_portal': fields.boolean('Portal'),
         'data_file': fields.char('File Name'),
-        'supplier_terms': fields.binary(string="Supplier Invoice Reuse-authorization File"),
+        'supplier_terms': fields.function(
+            _get_supp_file, fnct_inv=_set_supp_file, type='binary', string="Supplier Invoice Reuse-authorization File"),
         'is_submitted': fields.boolean('Submitted'),
         'supplier_ref_related': fields.related("supplier_invoice_number", type="char", size=256),
         'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
