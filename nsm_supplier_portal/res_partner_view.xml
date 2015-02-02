@@ -170,7 +170,7 @@
         </record>
 
         <record id="action_supplier_form_view1" model="ir.actions.act_window.view">
-            <field eval="0" name="sequence"/>
+            <field eval="1" name="sequence"/>
             <field name="view_mode">kanban</field>
             <field name="view_id" ref="res_supplier_kanban_view"/>
             <field name="act_window_id" ref="action_supplier_form"/>
@@ -182,7 +182,7 @@
             <field name="act_window_id" ref="action_supplier_form"/>
         </record>
         <record id="action_supplier_tree_view1" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1"/>
+            <field name="sequence" eval="0"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_partner_supplier_tree"/>
             <field name="act_window_id" ref="action_supplier_form"/>
@@ -204,6 +204,16 @@
                         <field name="user_create" invisible="1"/>
                     </div>
                 </xpath-->
+            </field>
+        </record>
+        <record id="view_res_partner_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                    <filter name="supplier" position="after">
+                        <filter name="portal-partners" string="Portal Users" domain="[('user_ids','!=',0)]" help="Portal Partners"/>
+                    </filter>
             </field>
         </record>
 
