@@ -15,6 +15,16 @@
                 </tree>
             </field>
         </record>
+        <record id="view_partner_supplier_tree_portal_usermgt" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                    <field name="name" position="after">
+                        <field name="user_ids"/>
+                    </field>
+            </field>
+        </record>
 
         <!-- Supplier Form View -->
         <record id="view_partner_supplier_form" model="ir.ui.view">
@@ -145,7 +155,7 @@
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="domain">[]</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="context">{'search_default_supplier': 1,'default_customer': 0,'default_supplier': 1, 'is_portal': True}</field>
             <field name="filter" eval="True"/>
             <field name="help" type="html">

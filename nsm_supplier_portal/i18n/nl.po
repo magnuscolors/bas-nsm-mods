@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-04 14:17+0000\n"
-"PO-Revision-Date: 2014-12-06 15:27+0100\n"
+"PO-Revision-Date: 2015-02-02 05:18+0100\n"
 "Last-Translator: BAS Solutions <erwin@bas-solutions.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: nl\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #. module: nsm_supplier_portal
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_portal_main
@@ -31,12 +31,12 @@ msgstr "Credit inkoopfacturen"
 #. module: nsm_supplier_portal
 #: field:account.invoice,main_account_analytic_id:0
 msgid "Main Analytic account"
-msgstr "Maak uw keuze voor de titel"
+msgstr "Titel"
 
 #. module: nsm_supplier_portal
 #: field:account.invoice,sub_account_analytic_id:0
 msgid "Sub Analytic account"
-msgstr "Maak uw keuze voor de editie"
+msgstr "Editie"
 
 #. module: nsm_supplier_portal
 #: model:ir.ui.menu,name:nsm_supplier_portal.menu_supplier_main
@@ -53,7 +53,7 @@ msgstr "Archieven"
 #: field:product.product,avail_supplier_portal:0
 #: field:account.invoice,avail_supplier_portal:0
 msgid "Available Supplier Portal"
-msgstr "Maak uw keuze"
+msgstr "Redactie/Marketing"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0 field:account.invoice,supplier_id:0
@@ -315,7 +315,7 @@ msgstr "Belastingen"
 #. module: nsm_supplier_portal
 #: field:account.invoice,is_submitted:0
 msgid "Submitted"
-msgstr "Ingedient"
+msgstr "Ingediend"
 
 #. module: nsm_supplier_portal
 #: view:account.invoice:0
@@ -580,6 +580,7 @@ msgstr "Ok"
 #. module: nsm_supplier_portal
 #: field:generate.mapping,state:0
 #: view:res.partner:0
+#, fuzzy
 msgid "State"
 msgstr "Status"
 

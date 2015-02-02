@@ -17,16 +17,16 @@
                         <field name="partner_id" />
                         <field name="date_invoice"/>
                         <field name="supplier_invoice_number" invisible="0"/>
-                        <field name="number"/>
+                        <field name="number" invisible="1"/>
+                        <field name="section_id" string="Redactie"/>
                         <field name="reference" invisible="1"/>
                         <field name="name" invisible="1"/>
                         <field name="journal_id" invisible="1"/>
                         <field name="period_id" invisible="1"/>
-                        <field name="company_id" widget="selection" groups="base.group_multi_company"/>
-                        <field name="user_id" invisible="1"/>
+                        <field name="company_id" widget="selection" groups="base.group_multi_company" invisible="1"/>
+                        <field name="user_id" string="Opdrachtgever" invisible="0"/>
                         <field name="date_due"/>
                         <field name="origin" invisible="1"/>
-                        <field name="currency_id" groups="base.group_multi_currency"/>
                         <field name="residual" sum="Residual Amount"/>
                         <field name="amount_untaxed" sum="Untaxed Amount"/>
                         <field name="amount_total" sum="Total Amount"/>
@@ -47,19 +47,22 @@
                     <!--tree string="Supplier Invoices"-->
                     <tree colors="blue:is_submitted != True;green:is_submitted==True;gray:state == 'cancel'" string="Invoice">
                         <field name="partner_id" />
-                        <field name="date_invoice"/>
+                        <field name="date_invoice" invisible="1"/>
                         <field name="supplier_invoice_number" invisible="0"/>
-                        <field name="number"/>
-                        <field name="is_submitted" invisible="True"/>
+                        <field name="avail_supplier_portal" invisible="0"/>
+                        <field name="main_account_analytic_id" string="Titel" invisible="0"/>
+                        <field name="file" invisible="0"/>
+                        <field name="terms" string="Hergebruik" invisible="0"/>
+                        <field name="number" invisible="1"/>
+                        <field name="is_submitted" invisible="1"/>
                         <field name="reference" invisible="1"/>
                         <field name="name" invisible="1"/>
                         <field name="journal_id" invisible="1"/>
                         <field name="period_id" invisible="1"/>
-                        <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                        <!--<field name="company_id" widget="selection" groups="base.group_multi_company"/>-->
                         <field name="user_id" invisible="1"/>
-                        <field name="date_due"/>
+                        <field name="date_due" invisible="1"/>
                         <field name="origin" invisible="1"/>
-                        <field name="currency_id" groups="base.group_multi_currency"/>
                         <field name="residual" sum="Residual Amount"/>
                         <field name="amount_untaxed" sum="Untaxed Amount"/>
                         <field name="amount_total" sum="Total Amount"/>
@@ -255,13 +258,14 @@
                     <field name="date_invoice"/>
                     <field name="supplier_invoice_number" invisible="0"/>
                     <field name="number"/>
+                    <field name="section_id" string="Redactie"/>
                     <field name="is_submitted" invisible="True"/>
                     <field name="reference" invisible="1"/>
                     <field name="name" invisible="1"/>
                     <field name="journal_id" invisible="1"/>
                     <field name="period_id" invisible="1"/>
-                    <field name="company_id" widget="selection" groups="base.group_multi_company"/>
-                    <field name="user_id" invisible="1"/>
+                    <field name="company_id" widget="selection" groups="base.group_multi_company" invisible="1"/>
+                    <field name="user_id" string="Opdrachtgever" invisible="0"/>
                     <field name="date_due"/>
                     <field name="origin" invisible="1"/>
                     <field name="currency_id" groups="base.group_multi_currency"/>
@@ -348,7 +352,7 @@
                                     <field name="account_id" invisible="1"
                                         domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '=', 'other')]"
                                         on_change="onchange_account_id(product_id, parent.partner_id, parent.type, parent.fiscal_position,account_id)" options='{"no_open": True}'/>
-                                    <field name="account_analytic_id" invisible="1"
+                                    <field name="account_analytic_id" invisible="0"
                                         domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled'))]" options='{"no_open": True}'/>
                                     <field name="quantity"/>
                                     <field name="uos_id" invisible="1"
@@ -419,7 +423,7 @@
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">['|','&amp;',('type','=','in_invoice'),('state','!=','draft'), ('is_submitted','=', True)]</field>
+            <field name="domain">['&amp;',('type','=','in_invoice'),'|',('state','!=','draft'), ('is_submitted','=', True)]</field>
             <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True}</field>
         </record>
 
