@@ -71,6 +71,27 @@
             sequence="3"
             groups="group_module_supplier_portal"
             parent="menu_supplier_invoice_main"/>
+        
+        <menuitem name="Finance" id="account.menu_finance"
+            groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,megis_auth.goedk_facturen"
+            sequence="50"/>
+    
+	<!--menuitem id="account.menu_finance_receivables"
+	    name="Customers" parent="account.menu_finance"
+	    groups="account.group_account_invoice"
+            sequence="2"/-->
+    
+	<menuitem id="account.menu_finance_payables"
+	    name="Suppliers" parent="account.menu_finance"
+	    groups="account.group_account_invoice,megis_auth.goedk_facturen"
+            sequence="3"/>
+            
+        <menuitem id="menu_action_invoice_tree_supportal"
+            action="action_invoice_tree_supportal"
+	    name="Supplier Invoices"
+            parent="account.menu_finance_payables"
+            groups="megis_auth.goedk_facturen"
+            sequence="3"/>
     
     <!-- Submited Invoice Menu Item -->
         <menuitem id="menu_supplier_invoice_submited"
