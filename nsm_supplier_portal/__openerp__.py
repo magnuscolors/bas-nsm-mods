@@ -46,6 +46,7 @@
         "sales_team_view.xml",
         "wizard/generate_mapping_view.xml",
         "res_bank_view.xml",
+        "portal_wizard_view.xml",
     ],
     'demo': [],
     'test': [
