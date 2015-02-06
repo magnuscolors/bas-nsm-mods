@@ -42,11 +42,9 @@ class wizard_user(osv.osv_memory):
                     cr, uid, 'nsm_supplier_portal', 'send_invitation_email')
         ctx = context.copy()
         mail_template_pool = self.pool.get('email.template')
-        for active_id in context.get('active_ids'):
-            mail_template_pool.send_mail(
-                        cr, uid, template_id=template_id, res_id=active_id,
-                        force_send=True, context=ctx)
-        
+        #for active_id in context.get('active_ids'):
+        mail_template_pool.send_mail(cr, uid, template_id=template_id, res_id=wizard_user.partner_id.id,
+                        force_send=True, context=ctx)               
         return True
 
 wizard_user()
