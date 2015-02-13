@@ -174,6 +174,8 @@ class custom_account_invoice(osv.osv):
                 raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
             if self_obj.reuse and not self_obj.terms:
                 raise osv.except_osv(_('Error!'), _('Please Accept re-use terms'))
+            if not self_obj.invoice_line:
+                raise osv.except_osv(_('No Invoice Lines!'), _('Please create some invoice lines.'))
             sale_team_id = sale_team_pool.search(
                 cr, uid, [('analytic_account_id', '=', self_obj.main_account_analytic_id.id),
                           ('product_cat_id', '=', (self_obj.invoice_line and
