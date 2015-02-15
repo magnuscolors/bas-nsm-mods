@@ -303,11 +303,9 @@ msgid "Hergebruik"
 msgstr "Hergebruik"
 
 #. module: nsm_supplier_portal
-<<<<<<< HEAD
 #: field:account.invoice,terms:0
 msgid "I accept the re-use terms"
 msgstr "Ik accepteer de hergebruik voorwaarden"
-=======
 #: code:_description:0
 #: model:ir.model,name:nsm_supplier_portal.model_account_analytic_account
 #: field:sales.team,analytic_account_id:0
