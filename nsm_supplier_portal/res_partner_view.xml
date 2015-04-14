@@ -23,7 +23,7 @@
                     <field name="name" position="after">
                         <field name="user_ids"/>
                         <field name="reuse" string="Hergebruik"/>
-                        <field name="vat_ok" string="VAR OK"/>
+                        <field name="var_ok" string="VAR OK"/>
                     </field>
             </field>
         </record>
@@ -202,7 +202,7 @@
                         <group>
                             <group>
                                 <field name="reuse" string="Hergebruik Voorwaarden"/>
-                                <field name="vat_ok" string="VAR OK"/>
+                                <field name="var_ok" string="VAR OK"/>
                             </group>
                         </group>
                     </page>
