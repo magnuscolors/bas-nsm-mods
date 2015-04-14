@@ -23,6 +23,7 @@
                     <field name="name" position="after">
                         <field name="user_ids"/>
                         <field name="reuse" string="Hergebruik"/>
+                        <field name="vat_ok" string="VAR OK"/>
                     </field>
             </field>
         </record>
@@ -196,15 +197,15 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='active']" position="after">
-                    <field name="reuse"/>
-                </xpath>
-                <!--xpath expr="//div[@class='oe_title']" position="after">
-                    <div class="oe_right oe_button_box" name="buttons">
-                        <button string="Create User" type="object" name="create_supplier_user" attrs="{'invisible': ['|', ('user_create','=', True), ('supplier', '=', False)]}"/>
-                        <field name="user_create" invisible="1"/>
-                    </div>
-                </xpath-->
+                <page string="History" position="before" version="7.0">
+                <page string="Freelancer Portal" col="4" name="supplier_portal" attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}">
+                    <group>
+                        <group>
+                            <field name="reuse" string="Hergebruik Voorwaarden"/>
+                            <field name="vat_ok" string="VAR OK"/>
+                        </group>
+                    </group>
+                </page>
             </field>
         </record>
         <record id="view_res_partner_filter" model="ir.ui.view">

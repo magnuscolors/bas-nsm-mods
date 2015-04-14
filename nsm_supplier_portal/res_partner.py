@@ -27,6 +27,10 @@ class res_partner(osv.osv):
 
     _columns = {
         'reuse': fields.boolean('Reuse-authorization'),
+        'var_ok': fields.boolean('VAR-verklaring OK'),
+    }
+    _defaults = {
+        'reuse': True,
     }
 
 
