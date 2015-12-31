@@ -9,6 +9,7 @@ class account_move_line(osv.osv):
         if not vals.get('analytic_account_id', False):
             vals['analytic_account_id'] = data.get('analytic_account_id', False)
         return super(account_move_line, self).create(cr, uid, vals, context=context)
+
     def _default_get_custom(self, cr, uid, fields, context=None):
         #default_get should only do the following:
         #   -propose the next amount in debit/credit in order to balance the move
