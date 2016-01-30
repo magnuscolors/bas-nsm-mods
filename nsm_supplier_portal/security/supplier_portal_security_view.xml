@@ -18,7 +18,7 @@
             <field name="name">Supplier Portal User</field>
             <field name="is_portal" eval="True"/>
             <field name="category_id" ref="module_supplier_portal"/>
-            <field name="implied_ids" eval="[(4, ref('group_module_supplier_portal'))]"/>
+
         </record>
         <record id="group_module_supplier_portal_controller" model="res.groups">
             <field name="name">Supplier Portal Controller</field>
