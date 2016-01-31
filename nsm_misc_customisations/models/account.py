@@ -4,11 +4,14 @@ from openerp.osv import osv
 class account_move_line(osv.osv):
     _inherit = 'account.move.line'
 
-    def create(self, cr, uid, vals, context=None):
-        data = self._default_get_custom(cr, uid, vals.keys(), context=context)
-        if not vals.get('analytic_account_id', False):
-            vals['analytic_account_id'] = data.get('analytic_account_id', False)
-        return super(account_move_line, self).create(cr, uid, vals, context=context)
+
+    def default_get(self, cr, uid, fields, context=None):
+        data = self._default_get_custom(cr, uid, fields, context=context)
+        for f in data.keys():
+            if f not in fields:
+                del data[f]
+        return data
+
     def _default_get_custom(self, cr, uid, fields, context=None):
         #default_get should only do the following:
         #   -propose the next amount in debit/credit in order to balance the move
@@ -40,7 +43,7 @@ class account_move_line(osv.osv):
                 for move_line_dict in move_obj.resolve_2many_commands(cr, uid, 'line_id', context.get('line_id'), context=context):
                     data['name'] = data.get('name') or move_line_dict.get('name')
                     #changes for the module
-                    data['analytic_account_id'] = data.get('analytic_account_id') or move_line_dict.get('analytic_account_id', [False, False])[0]
+                    data['analytic_account_id'] = data.get('analytic_account_id') or move_line_dict.get('analytic_account_id', False)
                     #changes Ends
                     data['partner_id'] = data.get('partner_id') or move_line_dict.get('partner_id')
                     total += move_line_dict.get('debit', 0.0) - move_line_dict.get('credit', 0.0)
