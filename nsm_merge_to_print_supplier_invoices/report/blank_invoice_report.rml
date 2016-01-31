@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<document filename="No Attachment Invoice.pdf">
+
+    <template title="Blank Invoice Layout" author="BAS Solutions" allowSplitting="20">
+        <pageTemplate id="first">
+            <frame id="first" x1="1.3cm" y1="3.0cm" height="21.7cm" width="19.0cm"/> 
+        </pageTemplate>
+    </template>
+
+    <stylesheet>
+
+        <blockTableStyle id="Factuur1">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+        </blockTableStyle>
+
+        <initialize>
+            <paraStyle name="all" alignment="justify"/>
+        </initialize>
+
+        <paraStyle name="Standard" fontName="Calibri" fontSize="1.0"/>
+        <paraStyle name="Note" fontName="Calibri" fontSize="21.0" leading="23" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+
+        <images/>
+
+    </stylesheet>
+
+    <story>
+
+        <para style="Standard">[[ repeatIn(objects, 'o') ]]</para>
+        <para style="Standard">[[ setLang(o.partner_id.lang) ]]</para>
+
+        <blockTable colWidths="510.0" style="Factuur1">
+            <tr>
+                <td>
+                    <para style="Note">No PDF attachment found for Record: [[ (o.type=='in_invoice' and o.state=='draft' and o.id or removeParentNode('para')) ]]</para>
+                    <para style="Note">No PDF attachment found for Invoice: [[ (o.type=='in_invoice' and o.state not in ('draft', 'cancel') and o.number or removeParentNode('para')) ]]</para>
+                </td>
+            </tr>
+        </blockTable>
+
+    </story>
+
+</document>

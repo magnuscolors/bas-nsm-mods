@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report auto="False"
+            id="blank_invoice_reports"
+            model="account.invoice"
+            name="blank.invoice.report"
+            rml="addons/nsm_merge_to_print_supplier_invoices/report/blank_invoice_report.rml"
+            string="Blank Invoices"
+            menu="False"/>
+
+    </data>
+</openerp>

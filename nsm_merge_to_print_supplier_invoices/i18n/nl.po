@@ -1,0 +1,58 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* nsm_merge_to_print_supplier_invoices
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-22 04:45+0000\n"
+"PO-Revision-Date: 2015-12-22 04:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: model:ir.model,name:nsm_merge_to_print_supplier_invoices.model_supplier_invoice_merge_pdf
+msgid "Supplier Invoice Merge PDF"
+msgstr "Supplier Invoice Merge PDF"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: model:ir.actions.act_window,name:nsm_merge_to_print_supplier_invoices.act_supplier_invoice_merge_pdf_invoice
+msgid "Merge Attachments"
+msgstr "Merge Attachments"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: report:blank.invoice.report:0
+msgid "No PDF attachment found for Record:"
+msgstr "No PDF attachment found for Record:"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: field:supplier.invoice.merge.pdf,file_name:0
+msgid "File Name"
+msgstr "File Name"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: model:ir.actions.act_window,name:nsm_merge_to_print_supplier_invoices.act_open_suplier_invoice_merge_pdf_view
+#: view:supplier.invoice.merge.pdf:0
+msgid "Merge PDF"
+msgstr "Merge PDF"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: field:supplier.invoice.merge.pdf,file_data:0
+msgid "Merged PDF"
+msgstr "Merged PDF"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: view:supplier.invoice.merge.pdf:0
+msgid "Close"
+msgstr "Close"
+
+#. module: nsm_merge_to_print_supplier_invoices
+#: model:ir.actions.report.xml,name:nsm_merge_to_print_supplier_invoices.blank_invoice_reports
+msgid "Blank Invoices"
+msgstr "Blank Invoices"
+
