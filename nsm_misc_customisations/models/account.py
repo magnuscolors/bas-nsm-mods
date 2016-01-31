@@ -4,12 +4,14 @@ from openerp.osv import osv
 class account_move_line(osv.osv):
     _inherit = 'account.move.line'
 
+
     def default_get(self, cr, uid, fields, context=None):
         data = self._default_get_custom(cr, uid, fields, context=context)
         for f in data.keys():
             if f not in fields:
                 del data[f]
         return data
+
     def _default_get_custom(self, cr, uid, fields, context=None):
         #default_get should only do the following:
         #   -propose the next amount in debit/credit in order to balance the move
