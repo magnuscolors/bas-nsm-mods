@@ -18,8 +18,9 @@
 #
 ##############################################################################
 
-from openerp.osv import osv
-from openerp.osv import fields
+import openerp.addons.decimal_precision as dp
+
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
 
@@ -27,11 +28,73 @@ import time
 class custom_account_invoice(osv.osv):
     _inherit = 'account.invoice'
 
-   
+    def _get_state(self, cr, uid, context=None):
+        if context is None:
+            context = {}
+        return context.get('state', 'draft')
+
+    def _get_reference_type(self, cr, uid, context=None):
+        return [('none', _('Free Reference'))]
+
+    def _get_genexp_portal(self, cr, uid, supplier_id, context={}):
+        partner_obj = self.pool.get('res.partner').browse(cr, uid, ids, context=context)
+        res = partner_obj.genexp_portal
+        return res
 
     _columns = {
-        'product_category': fields.many2one('product.category', 'Cost Category'),
+        'state': fields.selection([
+            ('portalcreate','Niet Ingediend'),
+            ('draft','Draft'),
+            ('proforma','Pro-forma'),
+            ('proforma2','Pro-forma'),
+            ('open','Open'),
+            ('auth','Goedgekeurd'),
+            ('paid','Paid'),
+            ('cancel','Cancelled'),
+            ],'Status', select=True, readonly=True, track_visibility='onchange',
+            help='* The \'Niet Ingediend\' status is used when a Portal user is encoding a new and unconfirmed Invoice, before it gets submitted. \
+            \n* The \'Draft\' status is used when an accounting user is encoding a new and unconfirmed Invoice or when a Portal user submitted it. \
+            \n* The \'Pro-forma\' when invoice is in Pro-forma status,invoice does not have an invoice number. \
+            \n* The \'Open\' status is used when user confirms invoice, a invoice number is generated. It is in open status till user authorizes invoice. \
+            \n* The \'Goedgekeurd\' status is used when invoice is authorized for payment. \
+            \n* The \'Paid\' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled. \
+            \n* The \'Cancelled\' status is used when user cancel invoice.'),
+        'name': fields.char('Description', size=64, select=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'origin': fields.char('Source Document', size=64, help="Reference of the document that produced this invoice.", readonly=True, states={'draft':[('readonly',False)]}),
+        'supplier_invoice_number': fields.char('Supplier Invoice Number', size=64, help="The reference of this invoice as provided by the supplier.", readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'reference_type': fields.selection(_get_reference_type, 'Payment Reference',
+            required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'date_invoice': fields.date('Invoice Date', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, select=True, help="Keep empty to use the current date"),
+        'date_due': fields.date('Due Date', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, select=True,
+            help="If you use payment terms, the due date will be computed automatically at the generation "\
+                "of accounting entries. The payment term may compute several due dates, for example 50% now and 50% in one month, but if you want to force a due date, make sure that the payment term is not set on the invoice. If you keep the payment term and the due date empty, it means direct payment."),
+        'partner_id': fields.many2one('res.partner', 'Partner', change_default=True, readonly=True, required=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, track_visibility='always'),
+        'payment_term': fields.many2one('account.payment.term', 'Payment Terms',readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]},
+            help="If you use payment terms, the due date will be computed automatically at the generation "\
+                "of accounting entries. If you keep the payment term and the due date empty, it means direct payment. "\
+                "The payment term may compute several due dates, for example 50% now, 50% in one month."),
+        'period_id': fields.many2one('account.period', 'Force Period', domain=[('state','<>','done')], help="Keep empty to use the period of the validation(invoice) date.", readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'account_id': fields.many2one('account.account', 'Account', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, help="The partner account used for this invoice."),
+        'invoice_line': fields.one2many('account.invoice.line', 'invoice_id', 'Invoice Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'tax_line': fields.one2many('account.invoice.tax', 'invoice_id', 'Tax Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'currency_id': fields.many2one('res.currency', 'Currency', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, track_visibility='always'),
+        'journal_id': fields.many2one('account.journal', 'Journal', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]},
+                                      domain="[('type', 'in', {'out_invoice': ['sale'], 'out_refund': ['sale_refund'], 'in_refund': ['purchase_refund'], 'in_invoice': ['purchase']}.get(type, [])), ('company_id', '=', company_id)]"),
+        'company_id': fields.many2one('res.company', 'Company', required=True, change_default=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'check_total': fields.float('Verification Total', digits_compute=dp.get_precision('Account'), readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
+            help='Bank Account Number to which the invoice will be paid. A Company bank account if this is a Customer Invoice or Supplier Refund, otherwise a Partner bank account number.', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'fiscal_position': fields.many2one('account.fiscal.position', 'Fiscal Position', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'genexp_portal': fields.boolean('Portal Algemene kosten' readonly=True),
     }
+
+    _defaults = {
+        'state': _get_state,
+        'genexp_portal': _get_genexp_portal,
+    }
+
 
     def act_submit(self, cr, uid, ids, context={}):
         sale_team_obj = False
@@ -54,70 +117,15 @@ class custom_account_invoice(osv.osv):
                 sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
 
         date = time.strftime('%Y-%m-%d')
-        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date,
+        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date, 'state': 'draft',
                                    'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
                                    'user_id':  sale_team_obj and sale_team_obj.sales_team_id.user_id.id or False})
         self.button_reset_taxes(cr, uid, ids, context=context)
         return True
 
-    def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
-        if not main_analytic:
-            return {'value': {'sub_account_analytic_id': False}}
-        return {}
 
 
-    def fields_view_get(self, cr, user, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
-        """
-        Overrides orm field_view_get.
-        @return: Dictionary of Fields, arch and toolbar.
-        """
-
-        res = {}
-        res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id, view_type,
-                                                       context, toolbar=toolbar, submenu=submenu)
-        if not context.get('is_portal'):
-            return res
-        res['toolbar'] = {'print': [], 'other': []}
-        return res
 
 custom_account_invoice()
-
-
-class account_invoice_line(osv.osv):
-    _inherit = 'account.invoice.line'
-
-    _columns = {
-        'new_tax_id': fields.many2one('account.tax', 'Tax',),
-    }
-
-    def onchange_tax_id(self, cr, uid, ids, tax_id, context={}):
-        if not tax_id:
-            return {'value': {'invoice_line_tax_id': []}}
-        return {'value': {'invoice_line_tax_id': [tax_id]}}
-
-    def product_id_change(self, cr, uid, ids, product, uom_id,
-                          qty=0, name='', type='out_invoice', partner_id=False,
-                          fposition_id=False, price_unit=False, currency_id=False,
-                          context=None, company_id=None):
-        res = super(account_invoice_line, self).product_id_change(
-            cr, uid, ids, product=product, uom_id=uom_id, qty=qty, name=name,
-            type=type, partner_id=partner_id, fposition_id=fposition_id,
-            price_unit=price_unit, currency_id=currency_id,
-            context=context, company_id=company_id)
-        if context is None:
-            context = {}
-        if not context.get('is_portal'):
-            return res
-        uom_pool = self.pool.get('product.uom')
-        account_tax_pool = self.pool.get('account.tax')
-        uom_search_id = uom_pool.search(
-            cr, uid, [('name', '=', 'Piece')], context=context)
-        res['value'].update({'new_tax_id': res['value']['invoice_line_tax_id'][:1] or False})
-        if not uom_search_id:
-            return res
-        res['value'].update({'uos_id': uom_search_id[0], })
-        return res
-
-account_invoice_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

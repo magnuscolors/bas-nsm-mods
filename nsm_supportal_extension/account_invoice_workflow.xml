@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+
+
+        <record id="act_portalcreate" model="workflow.activity">
+            <field name="wkf_id" ref="account.wkf"/>
+            <field name="flow_start">True</field>
+            <field name="name">portalcreate</field>
+         </record>
+        
+        <record id="portalcreate_to_draft" model="workflow.transition">
+            <field name="act_from" ref="act_portalcreate"/>
+            <field name="act_to" ref="account.act_draft"/>
+            <field name="signal">invoice_portal_submit</field>
+        </record>
+        
+
+    </data>
+</openerp>        

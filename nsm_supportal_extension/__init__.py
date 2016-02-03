@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2015 Magnus
+#    Copyright 2014 BAS Solutions
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,29 +18,9 @@
 #
 ##############################################################################
 
-{
-    'name': 'NSM Leveranciers Portaal uitbreiding',
-    'version': '1.0',
-    'category': 'Invoice',
-    'summary': 'NSM Leveranciers Portaal Uitbreiding',
-    'description': """
-    New Skool Media Leveranciers Portaal uitbreiding.
-    """,
-    'author': 'Magnus',
-    'website': 'http://www.magnus.nl',
-    'depends': ['nsm_supplier_portal'],
-    'data': [
-        "account_invoice_workflow.xml",
-        "account_invoice_view.xml"
-        "res_partner_view.xml"
-    ],
-    'demo': [],
-    'test': [
-    ],
-    'qweb': [
-    ],
-    'installable': True,
-    'auto_install': False,
-    'application': False,
-}
+
+
+import account_invoice
+import res_partner
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

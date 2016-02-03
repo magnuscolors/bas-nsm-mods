@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2015 Magnus
+#    Copyright 2014 BAS Solutions
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,30 +17,32 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp.osv import osv
+from openerp.osv import fields
+from openerp.tools.translate import _
 
-{
-    'name': 'NSM Leveranciers Portaal uitbreiding',
-    'version': '1.0',
-    'category': 'Invoice',
-    'summary': 'NSM Leveranciers Portaal Uitbreiding',
-    'description': """
-    New Skool Media Leveranciers Portaal uitbreiding.
-    """,
-    'author': 'Magnus',
-    'website': 'http://www.magnus.nl',
-    'depends': ['nsm_supplier_portal'],
-    'data': [
-        "account_invoice_workflow.xml",
-        "account_invoice_view.xml"
-        "res_partner_view.xml"
-    ],
-    'demo': [],
-    'test': [
-    ],
-    'qweb': [
-    ],
-    'installable': True,
-    'auto_install': False,
-    'application': False,
-}
+
+class res_partner(osv.osv):
+    _inherit = 'res.partner'
+
+#   NOG NIET KLAAR
+    def _get_genexp_portal(self, cr, uid, supplier_id, context={}):
+        partner_obj = self.pool.get('res.partner')
+        rec = self.pool.get('account.analytic.default').account_get(
+            cr, uid, product, partner_id, uid,
+            fields.date.context_today(self, cr, uid, context=context),
+            context=context)
+
+    _columns = {
+        'genexp_portal': fields.boolean('Portal Algemene kosten'),
+
+    }
+
+#    _defaults = {
+#        'genexp_portal': _get_genexp_portal,
+#    }
+
+
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

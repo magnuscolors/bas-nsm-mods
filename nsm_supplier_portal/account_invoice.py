@@ -160,6 +160,7 @@ class custom_account_invoice(osv.osv):
                                                        context=context)
         res = {'value': {'partner_id': supplier_id, 'reuse': supplier.reuse}}
         return res
+
     _defaults = {
         'supplier_id': _get_supplier,
         'supplier_terms': _get_terms,
