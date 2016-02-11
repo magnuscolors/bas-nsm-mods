@@ -31,8 +31,9 @@
     'depends': ['nsm_supplier_portal'],
     'data': [
         "account_invoice_workflow.xml",
-        "account_invoice_view.xml"
-        "res_partner_view.xml"
+        "account_invoice_view.xml",
+        "res_partner_view.xml",
+        "product_view.xml",
     ],
     'demo': [],
     'test': [

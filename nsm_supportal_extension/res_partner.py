@@ -26,23 +26,23 @@ class res_partner(osv.osv):
     _inherit = 'res.partner'
 
 #   NOG NIET KLAAR
-    def _get_genexp_portal(self, cr, uid, supplier_id, context={}):
-        partner_obj = self.pool.get('res.partner')
-        rec = self.pool.get('account.analytic.default').account_get(
-            cr, uid, product, partner_id, uid,
-            fields.date.context_today(self, cr, uid, context=context),
-            context=context)
+#    def _get_genexp_portal(self, cr, uid, supplier_id, context={}):
+#        partner_obj = self.pool.get('res.partner')
+#        rec = self.pool.get('account.analytic.default').account_get(
+#            cr, uid, product, partner_id, uid,
+#            fields.date.context_today(self, cr, uid, context=context),
+#            context=context)
 
     _columns = {
         'genexp_portal': fields.boolean('Portal Algemene kosten'),
-
+        'analytic_account_ids': fields.many2many('account.analytic.account','partner_analytic_rel','partner_id','analytic_account_id','Titels/Afdelingen'),
     }
 
 #    _defaults = {
 #        'genexp_portal': _get_genexp_portal,
 #    }
 
-
+res_partner()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

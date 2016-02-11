@@ -36,12 +36,10 @@ class custom_account_invoice(osv.osv):
     def _get_reference_type(self, cr, uid, context=None):
         return [('none', _('Free Reference'))]
 
-    def _get_genexp_portal(self, cr, uid, supplier_id, context={}):
-        partner_obj = self.pool.get('res.partner').browse(cr, uid, ids, context=context)
-        res = partner_obj.genexp_portal
-        return res
-
     _columns = {
+
+        'product_category': fields.many2one('product.category', 'Cost Category',),
+        'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'),('portal_main', '=', True)]),
         'state': fields.selection([
             ('portalcreate','Niet Ingediend'),
             ('draft','Draft'),
@@ -87,14 +85,39 @@ class custom_account_invoice(osv.osv):
         'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'fiscal_position': fields.many2one('account.fiscal.position', 'Fiscal Position', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
-        'genexp_portal': fields.boolean('Portal Algemene kosten' readonly=True),
     }
 
     _defaults = {
         'state': _get_state,
-        'genexp_portal': _get_genexp_portal,
     }
 
+    def supplier_id_change(self, cr, uid, ids, supplier_id, company_id, context={}):
+        res = {}
+        if not supplier_id:
+            return res
+        supplier = self.pool.get('res.partner').browse(cr, uid, supplier_id, context=context)
+
+        res =   {'value': {
+                'partner_id': supplier_id,
+                'reuse': supplier.reuse,
+                'is_portal': True,
+                }}
+        if supplier.analytic_account_ids and supplier.genexp_portal:
+            accids = [acc.id for acc in supplier.analytic_account_ids]
+            dom = {'domain': {'main_account_analytic_id':[('id','=', accids)]}}
+            res.update(dom)
+        return res
+
+    def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, supplier_id, context={}):
+        res = {}
+        if not main_analytic:
+                res = {'value': {'sub_account_analytic_id': False}}
+        supplier = self.pool.get('res.partner').browse(cr, uid, supplier_id, context=context)
+        if supplier.analytic_account_ids and supplier.genexp_portal:
+                accids = [acc.id for acc in supplier.analytic_account_ids]
+                res1 = {'domain':{'main_account_analytic_id':[('id','=', accids)]}}
+                res.update(res1)
+        return res
 
     def act_submit(self, cr, uid, ids, context={}):
         sale_team_obj = False
@@ -117,13 +140,11 @@ class custom_account_invoice(osv.osv):
                 sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
 
         date = time.strftime('%Y-%m-%d')
-        self.write(cr, uid, ids, {'is_submitted': True, 'date_invoice': date, 'state': 'draft',
+        self.write(cr, uid, ids, {'is_portal': True, 'date_invoice': date, 'state': 'draft',
                                    'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
                                    'user_id':  sale_team_obj and sale_team_obj.sales_team_id.user_id.id or False})
         self.button_reset_taxes(cr, uid, ids, context=context)
         return True
-
-
 
 
 custom_account_invoice()

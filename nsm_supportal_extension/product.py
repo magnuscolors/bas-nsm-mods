@@ -23,27 +23,57 @@ from openerp.osv import fields
 import openerp.addons.decimal_precision as dp
 
 
-class product_template(osv.osv):
-    _inherit = "product.template"
+class product_category(osv.osv):
+    _inherit = "product.category"
+
+    def name_get(self, cr, uid, ids, context=None):
+        if isinstance(ids, (list, tuple)) and not len(ids):
+            return []
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+        reads = self.read(cr, uid, ids, ['name'], context=context)
+        res = []
+        for record in reads:
+            name = record['name']
+            res.append((record['id'], name))
+        return res
+
+    def name_get_full(self, cr, uid, ids, context=None):
+        if isinstance(ids, (list, tuple)) and not len(ids):
+            return []
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+        reads = self.read(cr, uid, ids, ['name','parent_id'], context=context)
+        res = []
+        for record in reads:
+            name = record['name']
+            if record['parent_id']:
+                name = record['parent_id'][1]+' / '+name
+            res.append((record['id'], name))
+        return res
+
+    def _name_get_fnc(self, cr, uid, ids, prop, unknow_none, context=None):
+        res = self.name_get_full(cr, uid, ids, context=context)
+        return dict(res)
 
     _columns = {
-        'standard_price': fields.float('Cost', digits_compute=dp.get_precision('Product Price'), help="Cost price of the product used for standard stock valuation in accounting and used as a base price on purchase orders.",),
+        'supportal': fields.boolean('Parent Portal Productcategorieen',  help="Indicator that determines the role of this category as parent of supplier portal categories."),
     }
 
-product_template()
+product_category()
 
 
 
-class product_product(osv.osv):
-    _inherit = 'product.product'
-
-    _columns = {
-        'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
-                                                   ('editorial', 'Editorial')],
-                                                  "Available Supplier Portal",),
-
-    }
-
-product_product()
+#class product_product(osv.osv):
+#    _inherit = 'product.product'
+#
+#    _columns = {
+#        'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
+#                                                   ('editorial', 'Editorial')],
+#                                                  "Available Supplier Portal",),
+#
+#    }
+#
+#product_product()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

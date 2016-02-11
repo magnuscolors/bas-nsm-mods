@@ -9,6 +9,12 @@
             <field name="inherit_id" ref="nsm_supplier_portal.view_custom_supplier_invoice_form"/>
             <field name="arch" type="xml">
                 <data>
+                    <button name="act_submit" position="replace">
+                            <button name="act_submit" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('state','!=', 'portalcreate')]}"/>
+                    </button>
+                    <field name="supplier_id" position="replace">
+                            <field name="supplier_id" select="1" readonly="1" on_change="supplier_id_change(supplier_id,company_id,context)" context="{'form_view_ref':'nsm_supplier_portal.view_partner_supplier_form', 'is_portal': True}" attrs="{'invisible':[('type', '=', 'in_refund')]}"/>
+                    </field>
                     <field name="state" position="replace">
                            <field name="state" widget="statusbar" statusbar_visible="portalcreate,draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                     </field>
@@ -17,18 +23,93 @@
                                         string="(update)" class="oe_link oe_edit_only"
                                         type="object" help="Recompute taxes and total"/>
                     </button>
+                    <field name="avail_supplier_portal" position="replace">
+                        <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
+                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_submitted','=',True)],}"/>
+                    </field>
+                    <field name="main_account_analytic_id" position="replace">
+                        <field name="main_account_analytic_id" string="Titel/Afdeling"
+                               on_change="onchange_main_analytic_ac(main_account_analytic_id, supplier_id, context)"
+                               options='{"create": false, "create_edit": false, "no_open": true}' required="True"
+                               attrs="{'readonly': [('is_submitted','=',True)],}"/>
+                    </field>
+                    <field name="section_id" position="replace">
+                        <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
+                    </field>
+                    <field name="product_id" position="replace">
+                        <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
+                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)"
+                                        options='{"create": false, "create_edit": false, "no_open": true}'/>
+                    </field>
+                    <field name="account_analytic_id" position="replace">
+                        <field name="account_analytic_id" string="Editie"
+                                        domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled')), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]"
+                                        options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>
+                    </field>
                 </data>
             </field>
         </record>
 
-        <record model="ir.actions.act_window" id="act_open_custom_supplier_invoice_view">
+
+
+
+        <record model="ir.actions.act_window" id="nsm_supplier_portal.act_open_custom_supplier_invoice_view">
             <field name="name">Enter Your Invoice</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('type','=','in_invoice'), ('state', '=', 'portalcreate'), ('is_submitted','=', False)]</field>
+            <field name="domain">[('type','=','in_invoice'), ('state', '=', 'portalcreate')]</field>
             <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True, 'state': 'portalcreate'}</field>
+        </record>
+        <record model="ir.actions.act_window" id="nsm_supplier_portal.act_open_supplier_invoice_view">
+            <field name="name">Supplier Invoices</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['&amp;',('type','=','in_invoice'),'|',('state','in',['open','auth','paid']),'&amp;', ('state','=','draft'),('is_portal','=', True)]</field>
+            <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True}</field>
+        </record>
+        <record model="ir.actions.act_window" id="nsm_supplier_portal.act_open_supplier_invoice_submited_view">
+            <field name="name">Submitted Supplier Invoices</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','draft'),('is_portal','=',True),('type','=','in_invoice')]</field>
+            <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True}</field>
+        </record>
+        <record id="account.action_invoice_tree2" model="ir.actions.act_window">
+            <field name="name">Supplier Invoices</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','in_invoice'), ('state', '!=', 'portalcreate')]</field>
+            <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase'}</field>
+            <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to record a new supplier invoice.
+              </p><p>
+                You can control the invoice from your supplier according to
+                what you purchased or received. OpenERP can also generate
+                draft invoices automatically from purchase orders or receipts.
+              </p>
+            </field>
+        </record>
+        <record id="view_account_invoice_filter_portal" model="ir.ui.view">
+            <field name="name">invoice.select.nsm_portal</field>
+            <field name="model">account.invoice</field>
+	        <field name="inherit_id" ref="megis_auth.view_account_invoice_filter_auth"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//search/filter[@name='paid']" position="after">
+			            <filter name="portal" string="Portal Invoices" domain="[('is_portal','=',True)]" help="Portal Invoices"/>
+		            </xpath>
+		        </data>
+            </field>
         </record>
 
         
