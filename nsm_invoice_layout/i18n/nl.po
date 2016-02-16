@@ -1,0 +1,101 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* nsm_invoice_layout
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-23 11:57+0000\n"
+"PO-Revision-Date: 2016-01-23 11:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "INVOICE"
+msgstr "FACTUUR"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Invoice Number"
+msgstr "Factuurnummer"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Our Reference"
+msgstr "Onze referentie"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Invoice Date"
+msgstr "Factuurdatum"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Your Reference"
+msgstr "Uw referentie"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Expiry Date"
+msgstr "Vervaldatum"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "IBAN"
+msgstr "IBAN"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Description"
+msgstr "Beschrijving"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Qty"
+msgstr "Aantal"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Price"
+msgstr "Prijs"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Total"
+msgstr "Totaal"
+
+#. module: nsm_invoice_layout
+#: view:account.invoice:0
+msgid "Invoice Description"
+msgstr "Factuur omschrijving"
+
+#. module: nsm_invoice_layout
+#: field:account.invoice,invoice_description:0
+msgid "Description"
+msgstr "Omschrijving"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Subtotal"
+msgstr "Subtotaal"
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Tax"
+msgstr "BTW"
+
+#. module: account
+#: view:account.invoice:0
+msgid "Add description"
+msgstr "Voeg omschrijving toe..."
+
+#. module: nsm_invoice_layout
+#: report:account.invoice.custom:0
+msgid "Attn:"
+msgstr "T.a.v.:"

@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<document filename="Account Invoice.pdf">
+    <template title="Account Invoice" author="Odoo Experts" allowSplitting="20">
+        <pageTemplate id="first">
+            <frame id="first" x1="1.4cm" y1="0.5cm" height="22.2cm" width="18.0cm"/>
+            <pageGraphics>
+                <image x="0.50cm" y="0.10cm" height="32.1cm" width="22.0cm" file="nsm_invoice_layout/image/account_invoice.png"/>
+                <place x="2.5cm" y="18.4cm" height="6.0cm" width="19.0cm">
+				    <blockTable colWidths="320.0,210.0" style="Tableau2">
+				          <tr>
+				            <td>
+				              <!-- directaly to company -->
+				              <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id and o.partner_id and o.partner_id.name) or '' ]]</para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.street) or '' ]]</para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.street2) or removeParentNode('para') ]]</para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.zip) ]] [[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.city) or '' ]] </para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id.country_id and o.partner_id.country_id.name) or '' ]]</para>          
+				              <!-- not directaly to company -->
+				              <para style="Standard_bold">[[ o.partner_id.is_company != True and (o.partner_id and o.partner_id.parent_id and o.partner_id.parent_id.name) or '' ]]</para>
+				              <para style="Standard_bold">Attn: [[ o.partner_id.is_company != True and (o.partner_id and o.partner_id.name) or removeParentNode('para') and '' ]]</para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company != True  and (o.partner_id and o.partner_id.street) or '' ]]</para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company != True  and (o.partner_id and o.partner_id.street2) or removeParentNode('para') ]]</para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company != True  and (o.partner_id and o.partner_id.zip) ]] [[ o.partner_id.is_company != True and (o.partner_id  and o.partner_id.city) or '' ]] </para>
+				              <para style="Standard_bold">[[ o.partner_id.is_company != True  and (o.partner_id and o.partner_id.country_id and  o.partner_id.country_id.name) or removeParentNode('para') ]]</para>
+				            </td>
+				            <td>
+				              <para style="terp_default_8"><font color="white">[[ "Extra Space" ]]</font></para>
+				            </td>
+				          </tr>
+				     </blockTable>
+				 </place>
+            </pageGraphics>
+        </pageTemplate>
+    </template>
+
+    <stylesheet>
+        <blockTableStyle id="Tableau2">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+        </blockTableStyle>
+
+        <blockTableStyle id="Table1">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="6,-1" stop="6,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="7,-1" stop="7,-1"/>
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="8,-1" stop="8,-1"/>
+        </blockTableStyle>
+
+        <initialize>
+            <paraStyle name="all" alignment="justify"/>
+        </initialize>
+
+        <paraStyle name="Standard" fontName="Helvetica" fontSize="8.5"/>
+        <paraStyle name="Standard_bold" fontName="Helvetica-Bold" fontSize="9"/>
+        <paraStyle name="Heading" fontName="Helvetica-Bold" fontSize="13.0" />
+        <paraStyle name="terp_default_9" fontName="Helvetica" fontSize="10.0" leading="11" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+        <paraStyle name="terp_tblheader_Details_Right" fontName="Helvetica-Bold" fontSize="10.0" leading="10" alignment="RIGHT" spaceBefore="6.0" spaceAfter="6.0"/>
+        <paraStyle name="terp_default_Right_9" fontName="Helvetica" fontSize="8.5" leading="10" alignment="RIGHT" spaceBefore="0.0" spaceAfter="0.0"/>
+        <paraStyle name="terp_default_Right_9_bold" fontName="Helvetica-Bold" fontSize="9" leading="10" alignment="RIGHT" spaceBefore="0.0" spaceAfter="0.0"/>
+        <images/>
+    </stylesheet>
+
+    <story>
+        <para style="Standard">[[ repeatIn(objects,'o') ]]</para>
+        <para style="Standard">[[ setLang(o.partner_id.lang) ]]</para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+
+        <blockTable colWidths="450.0" style="Tableau2">
+            <tr>
+                <td>
+                    <para style="Heading">INVOICE</para>
+                </td>
+            </tr>
+        </blockTable>
+
+        <blockTable colWidths="450.0" style="Table1">
+            <tr>
+                <td>
+                    <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+                </td>
+            </tr>
+        </blockTable>
+
+        <blockTable colWidths="125.0,100.0,125.0,100.0" style="Table1">
+            <tr>
+                <td>
+                    <para style="Standard">Invoice Number</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ (o.number) or '' ]]</para>
+                </td>
+                <td>
+                    <para style="Standard">Our Reference</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ (o.partner_id.name) or '' ]]</para>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <para style="Standard">Invoice Date</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ (o.date_invoice) or '' ]]</para>
+                </td>
+                <td>
+                    <para style="Standard">Your Reference</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ o.name or '' ]]</para>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <para style="Standard">Expiry Date</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ (o.date_due) or '' ]]</para>
+                </td>
+                <td>
+                    <para style="Standard">IBAN</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ ''.join([ b.acc_number or '' for b in o.company_id.bank_ids[:1] ]) or '' ]]</para>
+                </td>
+            </tr>
+        </blockTable>
+
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+
+        <blockTable colWidths="450.0" style="Tableau2">
+            [[ (o.invoice_description != False or removeParentNode('blockTable')) and '']]
+            <tr>
+                <td>
+                    <para style="Standard_bold">[[ o.invoice_description or '']]</para>
+                </td>
+            </tr>
+        </blockTable>
+
+        <section>
+            <para style="Standard">[[ repeatIn(o.invoice_line,'l') ]]</para>
+
+            <blockTable colWidths="190.0,65.0,65.0,65.0,65.0" style="Tableau2">
+                <tr>
+                    <td>
+                        <para style="Standard">[[ not o.invoice_description and l.name or removeParentNode('section') ]]</para>
+                    </td>
+                    <td>
+                        <para style="Standard">[[ not o.invoice_description and l.quantity or "" ]]</para>
+                    </td>
+                    <td>
+                        <para style="terp_default_Right_9">[[ not o.invoice_description and ', '.join([x.description  for x in l.invoice_line_tax_id if x.description]) or "" ]]</para>
+                    </td>
+                    <td>
+                        <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
+                    </td>
+                    <td>
+                        <para style="terp_default_Right_9">[[ (l.price_subtotal) or "" ]]</para>
+                    </td>
+                </tr>
+            </blockTable>
+        </section>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+		<blockTable colWidths="450.0">
+            <tr>
+                <td>
+                    <hr/>
+                </td>
+            </tr>
+        </blockTable>
+        <blockTable colWidths="190.0,65.0,65.0,30.0,100.0" style="Tableau2">
+            <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9">Subtotal</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9">[[ (o.amount_untaxed) or '' ]]</para>
+                </td>
+            </tr>
+         </blockTable>
+         <section>
+         <para style="Standard">[[ repeatIn(o.tax_line,'t') ]]</para>
+         <blockTable colWidths="190.0,65.0,65.0,30.0,100.0" style="Tableau2">
+              <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9">[[ t.name ]]</para>
+                </td>
+                <td>
+                    <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9">[[ (t.amount) or '' ]]</para>
+                </td>
+              </tr>
+              </blockTable>
+        </section>
+        <blockTable colWidths="190.0,65.0,65.0,30.0,100.0" style="Tableau2">
+            <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9_bold"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <hr/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9_bold">Total</para>
+                </td>
+                <td>
+                    <para style="Standard_bold">[[ o.currency_id.symbol or "" ]]</para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9_bold">[[ (o.amount_total) or '' ]]</para>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9_bold"></para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <hr/>
+                    <hr/>
+                </td>
+            </tr>
+        </blockTable>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <para style="Standard"><font color="white">[[ "e" ]]</font></para>
+        <blockTable colWidths="450.0" style="Tableau2">
+            <tr>
+                <td>
+                    <hr/>
+                </td>
+            </tr>
+        </blockTable>
+
+    </story>
+</document>
