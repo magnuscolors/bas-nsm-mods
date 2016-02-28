@@ -36,10 +36,12 @@ class custom_account_invoice(osv.osv):
     def _get_reference_type(self, cr, uid, context=None):
         return [('none', _('Free Reference'))]
 
+
     _columns = {
 
+        'supp_analytic_accids': fields.related('supplier_id', 'analytic_account_ids', relation='res.partner', type='many2many',),
         'product_category': fields.many2one('product.category', 'Cost Category',),
-        'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'),('portal_main', '=', True)]),
+        'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'), ('portal_main', '=', True)]),
         'state': fields.selection([
             ('portalcreate','Niet Ingediend'),
             ('draft','Draft'),
@@ -102,22 +104,25 @@ class custom_account_invoice(osv.osv):
                 'reuse': supplier.reuse,
                 'is_portal': True,
                 }}
-        if supplier.analytic_account_ids and supplier.genexp_portal:
+        if supplier.analytic_account_ids :
             accids = [acc.id for acc in supplier.analytic_account_ids]
             dom = {'domain': {'main_account_analytic_id':[('id','=', accids)]}}
             res.update(dom)
         return res
 
-    def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, supplier_id, context={}):
-        res = {}
-        if not main_analytic:
-                res = {'value': {'sub_account_analytic_id': False}}
-        supplier = self.pool.get('res.partner').browse(cr, uid, supplier_id, context=context)
-        if supplier.analytic_account_ids and supplier.genexp_portal:
-                accids = [acc.id for acc in supplier.analytic_account_ids]
-                res1 = {'domain':{'main_account_analytic_id':[('id','=', accids)]}}
-                res.update(res1)
-        return res
+#    def main_account_analytic_change(self, cr, uid, ids, supplier_id, company_id, context={}):
+#        res = {}
+#        if not supplier_id:
+#            return res
+#        supplier = self.pool.get('res.partner').browse(cr, uid, supplier_id, context=context)
+
+#        if supplier.analytic_account_ids :
+#            accids = [acc.id for acc in supplier.analytic_account_ids]
+#            dom = {'domain': {'main_account_analytic_id':[('id','=', accids)]}}
+#            res.update(dom)
+#        return res
+
+
 
     def act_submit(self, cr, uid, ids, context={}):
         sale_team_obj = False
