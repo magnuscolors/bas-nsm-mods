@@ -4,19 +4,19 @@
 
         <!-- Supplier Tree View -->
 
-        <record id="view_partner_supplier_tree_portal_usermgt_ext" model="ir.ui.view">
+        <!--record id="view_partner_supplier_tree_portal_usermgt_ext" model="ir.ui.view">
             <field name="name">res.partner.tree_ext</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="nsm_supplier_portal.view_partner_supplier_tree_portal_usermgt"/>
             <field name="arch" type="xml">
                     <field name="var_ok" position="after">
-                        <!--field name="user_ids"/>
+                        <field name="user_ids"/>
                         <field name="reuse" string="Hergebruik"/>
                         <field name="var_ok" string="VAR OK"/>
-                        <field name="genexp_portal" string="AK Portal"/-->
+                        <field name="genexp_portal" string="AK Portal"/>
                     </field>
             </field>
-        </record>
+        </record-->
 
         <!-- Supplier Form View -->
 
@@ -27,7 +27,6 @@
             <field name="inherit_id" ref="nsm_supplier_portal.view_nsm_res_partner_form"/>
             <field name="arch" type="xml">
                 <field name="var_ok" position="after">
-                    <!--field name="genexp_portal" string="Algemene Kosten Portal"/-->
                     <field name="analytic_account_ids" domain="[('type','=','view')]" string="Titels/Afdelingen"/>
                 </field>
             </field>

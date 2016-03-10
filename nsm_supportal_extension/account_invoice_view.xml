@@ -44,7 +44,7 @@
                     </field>
                     <field name="is_submitted" position="after">
                             <field name="is_portal" invisible="1"/>
-                            <field name="supp_analytic_accids" invisible="1" />
+                            <!--field name="supp_analytic_accids" invisible="1" /-->
 
                     </field>
                     <button name="button_reset_taxes" position="replace">
@@ -57,11 +57,11 @@
                     </field>
                     <field name="avail_supplier_portal" position="replace">
                         <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
-                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"/>
+                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"
+                                on_change="product_category_change(product_category, company_id, context)"/>
                     </field>
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"
-                               domain="[('supp_analytic_accids', '!=', False),('id', '=', supp_analytic_accids and supp_analytic_accids[0][2])]"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
                                attrs="{'readonly': [('state','!=','portalcreate')],}"/>
                     </field>
@@ -69,7 +69,7 @@
                         <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
                     </field>
                     <field name="invoice_line" position="attributes">
-                        <attribute name="attrs">{'readonly': [('state','!=','portalcreate')]}</attribute>
+                        <attribute name="attrs">{'readonly': [('state','!=','portalcreate')],'invisible': [('product_category','=',False)]}</attribute>
                     </field>
                     <field name="product_id" position="replace">
                         <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"

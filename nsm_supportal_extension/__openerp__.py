@@ -32,8 +32,9 @@
     'data': [
         "account_invoice_workflow.xml",
         "account_invoice_view.xml",
-        "res_partner_view.xml",
+#        "res_partner_view.xml",
         "product_view.xml",
+#        "supportal_extension_security_view.xml",
     ],
     'demo': [],
     'test': [
