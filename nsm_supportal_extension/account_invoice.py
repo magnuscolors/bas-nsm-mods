@@ -39,7 +39,6 @@ class custom_account_invoice(osv.osv):
 
     _columns = {
 
-        'supp_analytic_accids': fields.related('supplier_id', 'analytic_account_ids', relation='res.partner', type='many2many',),
         'product_category': fields.many2one('product.category', 'Cost Category',),
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'), ('portal_main', '=', True)]),
         'state': fields.selection([
@@ -104,23 +103,18 @@ class custom_account_invoice(osv.osv):
                 'reuse': supplier.reuse,
                 'is_portal': True,
                 }}
-        if supplier.analytic_account_ids :
-            accids = [acc.id for acc in supplier.analytic_account_ids]
-            dom = {'domain': {'main_account_analytic_id':[('id','=', accids)]}}
-            res.update(dom)
+
         return res
 
-#    def main_account_analytic_change(self, cr, uid, ids, supplier_id, company_id, context={}):
-#        res = {}
-#        if not supplier_id:
-#            return res
-#        supplier = self.pool.get('res.partner').browse(cr, uid, supplier_id, context=context)
 
-#        if supplier.analytic_account_ids :
-#            accids = [acc.id for acc in supplier.analytic_account_ids]
-#            dom = {'domain': {'main_account_analytic_id':[('id','=', accids)]}}
-#            res.update(dom)
-#        return res
+    def product_category_change(self, cr, uid, ids, product_category, company_id, context={}):
+        res = {}
+        if not product_category:
+            return res
+        res = {'value': {
+                'product_category': product_category,
+                }}
+        return res
 
 
 
