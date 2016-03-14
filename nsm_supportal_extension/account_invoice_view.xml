@@ -107,16 +107,18 @@
                     </button>
                     <field name="avail_supplier_portal" position="replace">
                         <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
-                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_portal','=',True)],}"/>
+                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','draft')],}"/>
                     </field>
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"
-                               on_change="onchange_main_analytic_ac(main_account_analytic_id, supplier_id, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
-                               attrs="{'readonly': [('is_portal','=',True)],}"/>
+                               attrs="{'readonly': [('state','!=','draft')],}"/>
                     </field>
                     <field name="section_id" position="replace">
                         <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
+                    </field>
+                    <field name="invoice_line" position="attributes">
+                        <attribute name="attrs">{'readonly': [('state','!=','draft')]}</attribute>
                     </field>
                     <field name="product_id" position="replace">
                         <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
@@ -145,27 +147,16 @@
                             <field name="is_portal" invisible="1"/>
                     </field>
                     <field name="avail_supplier_portal" position="replace">
-                        <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
-                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_portal','=',True)],}"/>
+                        <field name="product_category" string="Factuur Categorie" />
                     </field>
                     <field name="main_account_analytic_id" position="replace">
-                        <field name="main_account_analytic_id" string="Titel/Afdeling"
-                               on_change="onchange_main_analytic_ac(main_account_analytic_id, supplier_id, context)"
-                               options='{"create": false, "create_edit": false, "no_open": true}' required="True"
-                               attrs="{'readonly': [('is_portal','=',True)],}"/>
+                        <field name="main_account_analytic_id" string="Titel/Afdeling"/>
                     </field>
                     <field name="section_id" position="replace">
-                        <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
-                    </field>
-                    <field name="product_id" position="replace">
-                        <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
-                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)"
-                                        options='{"create": false, "create_edit": false, "no_open": true}'/>
+                        <field name="section_id" string="Redactie/Afdeling"  />
                     </field>
                     <field name="account_analytic_id" position="replace">
-                        <field name="account_analytic_id" string="Editie"
-                                        domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled')), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]"
-                                        options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>
+                        <field name="account_analytic_id" string="Editie"/>
                     </field>
                 </data>
 
