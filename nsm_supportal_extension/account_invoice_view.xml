@@ -152,6 +152,9 @@
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"/>
                     </field>
+                    <field name="main_account_analytic_id" position="replace">
+                        <field name="main_account_analytic_id" string="Titel/Afdeling"
+                    </field>
                     <field name="section_id" position="replace">
                         <field name="section_id" string="Redactie/Afdeling"  />
                     </field>
