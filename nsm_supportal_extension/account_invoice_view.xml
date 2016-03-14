@@ -107,13 +107,12 @@
                     </button>
                     <field name="avail_supplier_portal" position="replace">
                         <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
-                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_portal','=',True)],}"/>
+                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','draft')],}"/>
                     </field>
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"
-                               on_change="onchange_main_analytic_ac(main_account_analytic_id, supplier_id, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
-                               attrs="{'readonly': [('is_portal','=',True)],}"/>
+                               attrs="{'readonly': [('state','!=','draft')],}"/>
                     </field>
                     <field name="section_id" position="replace">
                         <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
@@ -146,13 +145,12 @@
                     </field>
                     <field name="avail_supplier_portal" position="replace">
                         <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
-                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_portal','=',True)],}"/>
+                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','not in',('portalcreate','draft'))],}"/>
                     </field>
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"
-                               on_change="onchange_main_analytic_ac(main_account_analytic_id, supplier_id, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
-                               attrs="{'readonly': [('is_portal','=',True)],}"/>
+                               attrs="{'readonly': [('state','not in',('portalcreate','draft'))],}"/>
                     </field>
                     <field name="section_id" position="replace">
                         <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
