@@ -2,7 +2,16 @@
 <openerp>
     <data>
 
-
+        <record id="view_partner_supplier_tree_portal_usermgt_ext" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="nsm_supplier_portal.view_partner_supplier_tree_portal_usermgt"/>
+            <field name="arch" type="xml">
+                    <field name="name" position="after">
+                        <field name="analytic_account_ids"/>
+                    </field>
+            </field>
+        </record>
         <!-- Supplier Form View -->
 
         <record id="view_nsm_res_partner_form_ext" model="ir.ui.view">
