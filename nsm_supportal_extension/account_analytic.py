@@ -25,25 +25,17 @@ from openerp.tools.translate import _
 class account_analytic(osv.osv):
     _inherit = 'account.analytic.account'
 
-
     def _supplier_analytic_search(self, cr, uid, obj, name, args,  context=None):
-        res_user_obj = self.pool.get('res.users').browse(cr, uid, uid, context=context)
-        supplier_id = res_user_obj.partner_id.id or False
-        if not supplier_id:
-            return
-        supplier_obj = self.pool.get('res.partner').browse(cr, uid, supplier_id, context=context)
-        accids = [acc.id for acc in supplier_obj.analytic_account_ids]
-        if accids :
-            anacc_ids = self.search(cr, uid, [('id', 'in', accids)],)
-            return [('id','in', anacc_ids)]
-
-        anacc2_ids = self.search(cr, uid, [(1,'=',1)], context=context)
-        return [('id','in', anacc2_ids)]
-
-
+        if not args or not isinstance(args[0][2], (int, long)) or not args[0][2]:
+            return [('id', '=', False)]  # maybe raise NotImplemented?
+        user = self.pool['res.users'].browse(cr, uid, args[0][2], context=context)
+        supplier = user.partner_id  # partner_id is required on users
+        if not supplier.analytic_account_ids:
+            return [(1,'=',1)]
+        return [('id', 'in', [acc.id for acc in supplier.analytic_account_ids])]
 
     _columns = {
-        'supp_analytic_accids': fields.function(lambda self, cr, uid, ids, field_name, arg, context=None: dict.fromkeys(ids, True), fnct_search=_supplier_analytic_search, type='boolean', method=True,),
+        'supp_analytic_accids': fields.function(lambda self, cr, uid, ids, field_name, arg, context=None: dict.fromkeys(ids, True), fnct_search=_supplier_analytic_search, type='integer', method=True,),
     }
 
 

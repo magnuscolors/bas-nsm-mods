@@ -21,7 +21,7 @@
 import account_invoice
 import product
 import generate_mapping
-#import account_analytic
-#import res_partner
+import account_analytic
+import res_partner
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
