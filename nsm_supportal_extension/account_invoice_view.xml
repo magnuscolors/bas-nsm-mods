@@ -52,10 +52,14 @@
                     </field>
                     <field name="avail_supplier_portal" position="replace">
                         <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
+                               on_change="product_category_change(product_category, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"/>
+                        <!--field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
+                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"/-->
                     </field>
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"
+                               on_change="onchange_main_analytic_ac(main_account_analytic_id, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
                                attrs="{'readonly': [('state','!=','portalcreate')],}"/>
                     </field>
@@ -63,7 +67,8 @@
                         <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
                     </field>
                     <field name="invoice_line" position="attributes">
-                        <attribute name="attrs">{'readonly': [('state','!=','portalcreate')],'invisible': [('product_category','=',False)]}</attribute>
+                        <attribute name="attrs">{'readonly': [('state','!=','portalcreate')]}</attribute>
+                        <!--attribute name="attrs">{'readonly': [('state','!=','portalcreate')],'invisible': [('product_category','=',False)]}</attribute-->
                     </field>
                     <field name="product_id" position="replace">
                         <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
@@ -105,12 +110,18 @@
                                         string="(update)" class="oe_link oe_edit_only"
                                         type="object" help="Recompute taxes and total"/>
                     </button>
+                    <field name="supplier_invoice_number" position="attributes">
+                        <attribute name="attrs">{'readonly': [('state','!=','draft')]}</attribute>
+                    </field>
                     <field name="avail_supplier_portal" position="replace">
-                        <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
+                        <field name="product_category" string="Factuur Categorie"  required="True"
+                               on_change="product_category_change(product_category, context)"
+                               domain="[('parent_id.supportal', '=', True)]"
                                options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','draft')],}"/>
                     </field>
                     <field name="main_account_analytic_id" position="replace">
                         <field name="main_account_analytic_id" string="Titel/Afdeling"
+                               on_change="onchange_main_analytic_ac(main_account_analytic_id, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
                                attrs="{'readonly': [('state','!=','draft')],}"/>
                     </field>

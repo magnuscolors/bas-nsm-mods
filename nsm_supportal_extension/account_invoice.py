@@ -107,13 +107,30 @@ class custom_account_invoice(osv.osv):
         return res
 
 
-    def product_category_change(self, cr, uid, ids, product_category, company_id, context={}):
+    def product_category_change(self, cr, uid, ids, product_category, context={}):
         res = {}
-        if not product_category:
+        if not ids:
             return res
-        res = {'value': {
-                'product_category': product_category,
-                }}
+        inv_obj = self.browse(cr,uid,ids)
+        llist = []
+        if inv_obj[0].invoice_line:
+            for line in inv_obj[0].invoice_line:
+                if line.product_id:
+                    llist.append((1, line.id, {'product_id': [],}))
+            res = { 'value': { 'invoice_line': llist },'warning': {'title': 'Let op!', 'message': 'U heeft de Factuurcategorie aangepast. Nu moet u opnieuw product(-en) en Edities/Kostenplaatsen selecteren in de factuurregel(s)'}}
+        return res
+
+    def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
+        res = {}
+        if not ids:
+            return res
+        inv_obj = self.browse(cr,uid,ids)
+        llist = []
+        if inv_obj[0].invoice_line:
+            for line in inv_obj[0].invoice_line:
+                if line.account_analytic_id:
+                    llist.append((1, line.id, {'account_analytic_id': [],}))
+            res = { 'value': { 'invoice_line': llist },'warning': {'title': 'Let op!', 'message': 'U heeft de Titel/Afdeling aangepast. Nu moet u opnieuw Edities/Kostenplaatsen selecteren in de factuurregel(s)'}}
         return res
 
 
