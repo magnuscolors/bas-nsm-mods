@@ -12,6 +12,7 @@
                           <!-- directaly to company -->
                           <!--para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id and o.partner_id and o.partner_id.property_account_payable.name) or '' ]]</para-->
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id and o.partner_id and o.partner_id.name) or '' ]]</para>
+                          <para style="Standard_bold">[[ (o.partner_id and o.partner_id.is_company and 'T.a.v.: Crediteurenadministratie') or removeParentNode('para') ]]</para>
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.street) or '' ]]</para>
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.street2) or removeParentNode('para') ]]</para>
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.zip) ]] [[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.city) or '' ]] </para>
@@ -164,10 +165,10 @@
                         <para style="Standard">[[ not o.invoice_description and l.name or removeParentNode('section') ]]</para>
                     </td>
                     <td>
-                        <para style="Standard">[[ not o.invoice_description and l.quantity or "" ]]</para>
+                        <para style="Standard">[[ formatLang(not o.invoice_description and l.quantity, digits=get_digits(dp='Account')) or "" ]]</para>
                     </td>
                     <td>
-                        <para style="Standard">[[ not o.invoice_description and l.uos_id.name or "" ]]</para>
+                        <para style="Standard">[[ o.currency_id.symbol or "" ]] [[ formatLang(not o.invoice_description and l.price_unit, digits=get_digits(dp='Account')) or "" ]]</para>
                     </td>
                     <td>
                         <para style="terp_default_Right_9">[[ not o.invoice_description and ', '.join([x.description  for x in l.invoice_line_tax_id if x.description]) or "" ]]</para>
@@ -176,7 +177,7 @@
                         <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
                     </td>
                     <td>
-                        <para style="terp_default_Right_9">[[ (l.price_subtotal) or "" ]]</para>
+                        <para style="terp_default_Right_9">[[ formatLang(l.price_subtotal, digits=get_digits(dp='Account')) or "" ]]</para>
                     </td>
                 </tr>
             </blockTable>
@@ -209,7 +210,7 @@
                     <para style="terp_default_Right_9"></para>
                 </td>
                 <td>
-                    <para style="terp_default_Right_9">[[ (o.amount_untaxed) or '' ]]</para>
+                    <para style="terp_default_Right_9">[[ formatLang(o.amount_untaxed, digits=get_digits(dp='Account')) or '' ]]</para>
                 </td>
             </tr>
          </blockTable>
@@ -224,10 +225,10 @@
                     <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
                 </td>
                 <td>
-                    <para style="terp_default_Right_9">[[ t.base ]]</para>
+                    <para style="terp_default_Right_9">[[ formatLang(t.base, digits=get_digits(dp='Account')) ]]</para>
                 </td>
                 <td>
-                    <para style="terp_default_Right_9">[[ (t.amount) or '' ]]</para>
+                    <para style="terp_default_Right_9">[[ formatLang(t.amount, digits=get_digits(dp='Account')) or '' ]]</para>
                 </td>
               </tr>
               </blockTable>
@@ -264,7 +265,7 @@
                     <para style="Standard_bold">[[ o.currency_id.symbol or "" ]]</para>
                 </td>
                 <td>
-                    <para style="terp_default_Right_9_bold">[[ (o.amount_total) or '' ]]</para>
+                    <para style="terp_default_Right_9_bold">[[ formatLang(o.amount_total, digits=get_digits(dp='Account')) or '' ]]</para>
                 </td>
             </tr>
             <tr>
