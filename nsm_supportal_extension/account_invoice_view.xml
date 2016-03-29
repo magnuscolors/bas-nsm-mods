@@ -95,7 +95,7 @@
                             <button name="portalback" states="draft" type="workflow" string="Terug Portal" attrs="{'invisible': [('state','!=','draft')],}"/>
                     </button>
                     <field name="state" position="replace">
-                           <field name="state" widget="statusbar" statusbar_visible="portalcreate,draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
+                           <field name="state" widget="statusbar" statusbar_visible="portalcreate,draft,open,auth,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                     </field>
                     <label string="Submitted Invoice" position="attributes">
                             <attribute name="attrs">{'invisible': ['|', '|', ('state','&lt;&gt;','draft'), ('type','in ',['in_refund','in_invoice']), ('is_portal','!=', True), ]}</attribute>
@@ -239,6 +239,15 @@
 		        </data>
             </field>
         </record>
+
+        <act_window
+            context="{'search_default_partner_id':[active_id], 'default_partner_id': active_id}"
+            domain="[('state','!=', 'portalcreate')]"
+            id="act_res_partner_2_account_invoice_opened"
+            name="Invoices"
+            res_model="account.invoice"
+            src_model="res.partner"/>
+
 
         
     </data>

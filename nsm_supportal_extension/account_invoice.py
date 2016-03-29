@@ -48,6 +48,7 @@ class custom_account_invoice(osv.osv):
             ('proforma2','Pro-forma'),
             ('open','Open'),
             ('auth','Goedgekeurd'),
+            ('verified','Verified'),
             ('paid','Paid'),
             ('cancel','Cancelled'),
             ],'Status', select=True, readonly=True, track_visibility='onchange',
