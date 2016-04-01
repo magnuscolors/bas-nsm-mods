@@ -168,7 +168,7 @@
                         <para style="Standard">[[ formatLang(not o.invoice_description and l.quantity, digits=get_digits(dp='Account')) or "" ]]</para>
                     </td>
                     <td>
-                        <para style="Standard">[[ o.currency_id.symbol or "" ]] [[ formatLang(not o.invoice_description and l.price_unit, digits=get_digits(dp='Account')) or "" ]]</para>
+                        <para style="terp_default_Right_9">[[ o.currency_id.symbol or "" ]] [[ formatLang(not o.invoice_description and l.price_unit, digits=get_digits(dp='Account')) or "" ]]</para>
                     </td>
                     <td>
                         <para style="terp_default_Right_9">[[ not o.invoice_description and ', '.join([x.description  for x in l.invoice_line_tax_id if x.description]) or "" ]]</para>
