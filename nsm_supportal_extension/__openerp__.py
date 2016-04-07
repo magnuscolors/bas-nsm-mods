@@ -28,7 +28,7 @@
     """,
     'author': 'Magnus',
     'website': 'http://www.magnus.nl',
-    'depends': ['nsm_supplier_portal','nsm_improv02'],
+    'depends': ['nsm_supplier_portal','nsm_improv02' ],
     'data': [
         "account_invoice_workflow.xml",
         "account_invoice_view.xml",

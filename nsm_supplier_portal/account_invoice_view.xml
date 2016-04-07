@@ -755,21 +755,46 @@
             <field name="act_window_id" ref="action_invoice_tree4"/>
             <field name="sequence" eval="20"/>
             <field name="view_mode">form</field>
-            <!--field name="view_id" ref="view_supplier_invoice_form"/-->
             <field name="view_id" ref="view_custom_supplier_invoice_form"/>
         </record>
+
         <record id="view_account_invoice_filter_portal" model="ir.ui.view">
             <field name="name">invoice.select.nsm_portal</field>
             <field name="model">account.invoice</field>
-	        <field name="inherit_id" ref="megis_auth.view_account_invoice_filter_auth"/>
+	        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
             <field name="arch" type="xml">
                 <data>
+		            <xpath expr="//search/filter[@name='invoices']" position="replace">
+			            <filter name="invoices" string="Posted Invoices" domain="[('state','not in',['draft','cancel'])]" help="Proforma/Open/Authorized/Paid Invoices"/>
+                    </xpath>
+		            <xpath expr="//search/filter[@name='unpaid']" position="replace">
+			            <filter name="unpaid" string="Unpaid" domain="[('state','in',['open','auth'])]" help="Unpaid Invoices"/>
+		            </xpath>
+		            <xpath expr="//search/filter[@name='draft']" position="after">
+			            <filter name="open" string="Open Invoices" domain="[('state','=','open')]" help="Open Invoices"/>
+                    </xpath>
+                    <xpath expr="//search/filter[@name='invoices']" position="before">
+			            <filter name="auth" string="Authorized" domain="[('state','=','auth')]" help="Authorized Invoices"/>
+                    </xpath>
+		            <xpath expr="//search/filter[@name='unpaid']" position="after">
+			            <filter name="paid" string="Paid" domain="[('state','=',['paid'])]" help="Paid Invoices"/>
+		            </xpath>
                     <xpath expr="//search/filter[@name='paid']" position="after">
 			            <filter name="portal" string="Portal Invoices" domain="[('is_submitted','=',True)]" help="Portal Invoices"/>
 		            </xpath>
 		        </data>
             </field>
         </record>
+        <!--record id="view_account_invoice_filter_portal" model="ir.ui.view">
+            <field name="name"></field>
+            <field name="model">account.invoice</field>
+	        <field name="inherit_id" ref="megis_auth.view_account_invoice_filter_auth"/>
+            <field name="arch" type="xml">
+                <data>
+
+		        </data>
+            </field>
+        </record-->
             
         <record id="account.action_invoice_tree2" model="ir.actions.act_window">
             <field name="name">Supplier Invoices</field>

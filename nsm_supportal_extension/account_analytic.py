@@ -31,7 +31,7 @@ class account_analytic(osv.osv):
         user = self.pool['res.users'].browse(cr, uid, args[0][2], context=context)
         supplier = user.partner_id  # partner_id is required on users
         if not supplier.analytic_account_ids:
-            return [(1,'=',1)]
+            return [('id', '=', False)]
         return [('id', 'in', [acc.id for acc in supplier.analytic_account_ids])]
 
     _columns = {

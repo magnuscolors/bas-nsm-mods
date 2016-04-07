@@ -9,6 +9,14 @@
             <field name="domain_force">['|',('supp_analytic_accids', '=', user.id),('portal_sub','=', True)]</field>
             <field name="groups" eval="[(4, ref('nsm_supplier_portal.group_module_supplier_portal_user'))]"/>
         </record>
+
+        <record model="ir.rule" id="product_category_user_rule">
+            <field name="name">Product Categories</field>
+            <field name="model_id" ref="model_product_category"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">[('supp_category_ids', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('nsm_supplier_portal.group_module_supplier_portal_user'))]"/>
+        </record>
         
     </data>
 </openerp>
