@@ -761,7 +761,7 @@
         <record id="view_account_invoice_filter_portal" model="ir.ui.view">
             <field name="name">invoice.select.nsm_portal</field>
             <field name="model">account.invoice</field>
-	        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+	        <field name="inherit_id" ref="megis_auth.view_account_invoice_filter_auth"/>
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="//search/filter[@name='paid']" position="after">
