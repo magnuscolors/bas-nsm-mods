@@ -110,7 +110,7 @@
                     <para style="Standard">Our Reference</para>
                 </td>
                 <td>
-                    <para style="Standard">[[ (o.partner_id.name) or '' ]]</para>
+                    <para style="Standard">[[ (o.origin) or '' ]]</para>
                 </td>
             </tr>
             <tr>
@@ -159,13 +159,13 @@
         <section>
             <para style="Standard">[[ repeatIn(o.invoice_line,'l') ]]</para>
 
-            <blockTable colWidths="190.0,65.0,65.0,35.0,35.0,65.0" style="Tableau2">
+            <blockTable colWidths="190.0,30.0,75.0,55.0,35.0,65.0" style="Tableau2">
                 <tr>
                     <td>
                         <para style="Standard">[[ not o.invoice_description and l.name or removeParentNode('section') ]]</para>
                     </td>
                     <td>
-                        <para style="Standard">[[ formatLang(not o.invoice_description and l.quantity, digits=get_digits(dp='Account')) or "" ]]</para>
+                        <para style="terp_default_Right_9">[[ formatLang(not o.invoice_description and l.quantity, digits=0) or "" ]]</para>
                     </td>
                     <td>
                         <para style="terp_default_Right_9">[[ o.currency_id.symbol or "" ]] [[ formatLang(not o.invoice_description and l.price_unit, digits=get_digits(dp='Account')) or "" ]]</para>
@@ -192,11 +192,8 @@
                 </td>
             </tr>
         </blockTable>
-        <blockTable colWidths="160.0,20.0,140.0,30.0,50.0,50.0" style="Tableau2">
+        <blockTable colWidths="190.0,30.0,75.0,55.0,35.0,65.0" style="Tableau2">
             <tr>
-                <td>
-                    <para style="Standard"></para>
-                </td>
                 <td>
                     <para style="Standard"></para>
                 </td>
@@ -204,10 +201,13 @@
                     <para style="terp_default_Right_9">Subtotal</para>
                 </td>
                 <td>
-                    <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
+                    <para style="Standard"></para>
                 </td>
                 <td>
                     <para style="terp_default_Right_9"></para>
+                </td>
+                <td>
+                    <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
                 </td>
                 <td>
                     <para style="terp_default_Right_9">[[ formatLang(o.amount_untaxed, digits=get_digits(dp='Account')) or '' ]]</para>
@@ -216,25 +216,34 @@
          </blockTable>
          <section>
          <para style="Standard">[[ repeatIn(o.tax_line,'t') ]]</para>
-         <blockTable colWidths="320.0,30.0,50.0,50.0" style="Tableau2">
+         <blockTable colWidths="20.0,200.0,40.0,90.0,35.0,65.0" style="Tableau2">
               <tr>
                 <td>
+                    <para style="terp_default_Right_9"></para>
+                </td>
+                <td>
                     <para style="terp_default_Right_9">[[ t.name ]]</para>
+                </td>
+                <td>
+                    <para style="Standard"></para>
+                </td>
+                <td>
+                    <para style="terp_default_Right_9">[[ o.currency_id.symbol or "" ]] [[ formatLang(t.base, digits=get_digits(dp='Account')) ]]</para>
                 </td>
                 <td>
                     <para style="Standard">[[ o.currency_id.symbol or "" ]]</para>
                 </td>
                 <td>
-                    <para style="terp_default_Right_9">[[ formatLang(t.base, digits=get_digits(dp='Account')) ]]</para>
-                </td>
-                <td>
                     <para style="terp_default_Right_9">[[ formatLang(t.amount, digits=get_digits(dp='Account')) or '' ]]</para>
                 </td>
               </tr>
-              </blockTable>
+          </blockTable>
         </section>
-        <blockTable colWidths="190.0,50.0,80.0,30.0,100.0" style="Tableau2">
+        <blockTable colWidths="190.0,30.0,75.0,55.0,35.0,65.0" style="Tableau2">
             <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
                 <td>
                     <para style="Standard"></para>
                 </td>
@@ -256,10 +265,13 @@
                     <para style="Standard"></para>
                 </td>
                 <td>
+                    <para style="terp_default_Right_9_bold">Total</para>
+                </td>
+                <td>
                     <para style="Standard"></para>
                 </td>
                 <td>
-                    <para style="terp_default_Right_9_bold">Total</para>
+                    <para style="Standard"></para>
                 </td>
                 <td>
                     <para style="Standard_bold">[[ o.currency_id.symbol or "" ]]</para>
@@ -269,6 +281,9 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <para style="Standard"></para>
+                </td>
                 <td>
                     <para style="Standard"></para>
                 </td>
