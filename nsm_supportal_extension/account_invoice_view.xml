@@ -14,7 +14,7 @@
                             <attribute name="colors">blue:state == 'portalcreate';green:is_portal==True;gray:state == 'cancel'</attribute>
                         </tree>
                         <field name="avail_supplier_portal" position="replace">
-                            <field name="product_category" string="Factuur Categorie" invisible="0"/>
+                            <field name="product_category" string="Invoice Category" invisible="0"/>
                         </field>
                         <field name="is_submitted" position="after">
                             <field name="is_portal" invisible="1"/>
@@ -51,24 +51,22 @@
                         <attribute name="attrs">{'readonly': [('state','!=','portalcreate')]}</attribute>
                     </field>
                     <field name="avail_supplier_portal" position="replace">
-                        <field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
+                        <field name="product_category" string="Invoice Category"  required="True" domain="[('parent_id.supportal', '=', True)]"
                                on_change="product_category_change(product_category, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"/>
-                        <!--field name="product_category" string="Factuur Categorie"  required="True" domain="[('parent_id.supportal', '=', True)]"
-                               options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"/-->
+
                     </field>
                     <field name="main_account_analytic_id" position="replace">
-                        <field name="main_account_analytic_id" string="Titel/Afdeling"
+                        <field name="main_account_analytic_id" string="Title/Department"
                                on_change="onchange_main_analytic_ac(main_account_analytic_id, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' required="True"
                                attrs="{'readonly': [('state','!=','portalcreate')],}"/>
                     </field>
                     <field name="section_id" position="replace">
-                        <field name="section_id" string="Redactie/Afdeling" widget="selection" readonly="True" />
+                        <field name="section_id" string="Editorial Office" widget="selection" readonly="True" />
                     </field>
                     <field name="invoice_line" position="attributes">
                         <attribute name="attrs">{'readonly': [('state','!=','portalcreate')]}</attribute>
-                        <!--attribute name="attrs">{'readonly': [('state','!=','portalcreate')],'invisible': [('product_category','=',False)]}</attribute-->
                     </field>
                     <field name="product_id" position="replace">
                         <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
@@ -158,16 +156,13 @@
                             <field name="is_portal" invisible="1"/>
                     </field>
                     <field name="avail_supplier_portal" position="replace">
-                        <field name="product_category" string="Factuur Categorie" />
+                        <field name="product_category" string="Invoice Category" />
                     </field>
                     <field name="main_account_analytic_id" position="replace">
-                        <field name="main_account_analytic_id" string="Titel/Afdeling"/>
-                    </field>
-                    <field name="main_account_analytic_id" position="replace">
-                        <field name="main_account_analytic_id" string="Titel/Afdeling"/>
+                        <field name="main_account_analytic_id" string="Title/Department"/>
                     </field>
                     <field name="section_id" position="replace">
-                        <field name="section_id" string="Redactie/Afdeling" />
+                        <field name="section_id" string="Editorial Office" />
                     </field>
                     <field name="account_analytic_id" position="replace">
                         <field name="account_analytic_id" string="Editie"/>
@@ -227,14 +222,14 @@
             </field>
         </record>
 
-        <record id="view_account_invoice_filter_portal" model="ir.ui.view">
-            <field name="name">invoice.select.nsm_portal</field>
+        <record id="view_account_invoice_filter_portal2" model="ir.ui.view">
+            <field name="name">invoice.select.portal2</field>
             <field name="model">account.invoice</field>
-	        <field name="inherit_id" ref="megis_auth.view_account_invoice_filter_auth"/>
+	        <field name="inherit_id" ref="nsm_supplier_portal.view_account_invoice_filter_portal"/>
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//search/filter[@name='paid']" position="after">
-			            <filter name="portal" string="Portal Invoices" domain="[('is_portal','=',True)]" help="Portal Invoices"/>
+		            <xpath expr="//search/filter[@name='portal']" position="replace">
+                        <filter name="portal" string="Portal Invoices" domain="[('is_portal','=',True)]" help="Portal Invoices"/>
 		            </xpath>
 		        </data>
             </field>

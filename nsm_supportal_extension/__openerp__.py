@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2015 Magnus
+#    Copyright 2016 Magnus www.magnus.nl w.hulshof@magnus.nl
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -28,7 +28,7 @@
     """,
     'author': 'Magnus',
     'website': 'http://www.magnus.nl',
-    'depends': ['nsm_supplier_portal','nsm_improv02'],
+    'depends': ['nsm_supplier_portal','nsm_improv02' ],
     'data': [
         "account_invoice_workflow.xml",
         "account_invoice_view.xml",

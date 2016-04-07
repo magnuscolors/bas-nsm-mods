@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2014 BAS Solutions
+#    Copyright 2016 Magnus www.magnus.nl w.hulshof@magnus.nl
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -27,7 +27,8 @@ class res_partner(osv.osv):
 
 
     _columns = {
-        'analytic_account_ids': fields.many2many('account.analytic.account','partner_analytic_rel','partner_id','analytic_account_id','Titels/Afdelingen'),
+        'analytic_account_ids': fields.many2many('account.analytic.account','partner_analytic_rel','partner_id','analytic_account_id','Titles/Departments'),
+        'product_category_ids': fields.many2many('product.category','partner_category_rel','partner_id','product_category_id','Cost Categories'),
     }
 
 

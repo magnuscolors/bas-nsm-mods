@@ -21,7 +21,8 @@
             <field name="inherit_id" ref="nsm_supplier_portal.view_nsm_res_partner_form"/>
             <field name="arch" type="xml">
                 <field name="var_ok" position="after">
-                    <field name="analytic_account_ids" domain="[('type','=','view'),('portal_main','=', True)]" string="Titels/Afdelingen"/>
+                    <field name="analytic_account_ids" domain="[('type','=','view'),('portal_main','=', True)]" string="Titles/Departments"/>
+                    <field name="product_category_ids" domain="[('parent_id.supportal', '=', True)]" string="Cost Categories"/>
                 </field>
             </field>
         </record>

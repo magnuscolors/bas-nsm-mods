@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2014 BAS Solutions
+#    Copyright 2016 Magnus www.magnus.nl w.hulshof@magnus.nl
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,8 +20,7 @@
 
 from openerp.osv import osv
 from openerp.osv import fields
-import openerp.addons.decimal_precision as dp
-
+from openerp.tools.translate import _
 
 class product_category(osv.osv):
     _inherit = "product.category"
@@ -56,24 +55,24 @@ class product_category(osv.osv):
         res = self.name_get_full(cr, uid, ids, context=context)
         return dict(res)
 
+    def _supplier_category_search(self, cr, uid, obj, name, args,  context=None):
+        if not args or not isinstance(args[0][2], (int, long)) or not args[0][2]:
+            return [('id', '=', False)]  # maybe raise NotImplemented?
+        user = self.pool['res.users'].browse(cr, uid, args[0][2], context=context)
+        supplier = user.partner_id  # partner_id is required on users
+        if not supplier.product_category_ids:
+            return [('id', '=', False)]
+        return [('id', 'in', [cat.id for cat in supplier.product_category_ids])]
+
+
     _columns = {
+        'complete_name': fields.function(_name_get_fnc, type="char", string='Name'),
         'supportal': fields.boolean('Parent Portal Productcategorieen',  help="Indicator that determines the role of this category as parent of supplier portal categories."),
+        'supp_category_ids': fields.function(lambda self, cr, uid, ids, field_name, arg, context=None: dict.fromkeys(ids, True), fnct_search=_supplier_category_search, type='integer', method=True,),
     }
 
-product_category()
 
 
 
-#class product_product(osv.osv):
-#    _inherit = 'product.product'
-#
-#    _columns = {
-#        'avail_supplier_portal': fields.selection([('marketing', 'Marketing'),
-#                                                   ('editorial', 'Editorial')],
-#                                                  "Available Supplier Portal",),
-#
-#    }
-#
-#product_product()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

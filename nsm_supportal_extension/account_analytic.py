@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2014 BAS Solutions
+#    Copyright 2016 Magnus www.magnus.nl w.hulshof@magnus.nl
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -31,7 +31,7 @@ class account_analytic(osv.osv):
         user = self.pool['res.users'].browse(cr, uid, args[0][2], context=context)
         supplier = user.partner_id  # partner_id is required on users
         if not supplier.analytic_account_ids:
-            return [(1,'=',1)]
+            return [('id', '=', False)]
         return [('id', 'in', [acc.id for acc in supplier.analytic_account_ids])]
 
     _columns = {

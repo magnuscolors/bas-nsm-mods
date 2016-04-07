@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2014 BAS Solutions
+#    Copyright 2016 Magnus www.magnus.nl w.hulshof@magnus.nl
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -57,6 +57,7 @@ class custom_account_invoice(osv.osv):
             \n* The \'Pro-forma\' when invoice is in Pro-forma status,invoice does not have an invoice number. \
             \n* The \'Open\' status is used when user confirms invoice, a invoice number is generated. It is in open status till user authorizes invoice. \
             \n* The \'Goedgekeurd\' status is used when invoice is authorized for payment. \
+            \n* The \'Verified\' status is used when invoice is already authorized, but not yet confirmed for payment, because it is of higher value than Company Verification treshold. \
             \n* The \'Paid\' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled. \
             \n* The \'Cancelled\' status is used when user cancel invoice.'),
         'name': fields.char('Description', size=64, select=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
