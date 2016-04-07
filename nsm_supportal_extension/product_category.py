@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2014 BAS Solutions
+#    Copyright 2016 Magnus www.magnus.nl w.hulshof@magnus.nl
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,8 +20,7 @@
 
 from openerp.osv import osv
 from openerp.osv import fields
-import openerp.addons.decimal_precision as dp
-
+from openerp.tools.translate import _
 
 class product_category(osv.osv):
     _inherit = "product.category"
@@ -67,11 +66,11 @@ class product_category(osv.osv):
 
 
     _columns = {
+        'complete_name': fields.function(_name_get_fnc, type="char", string='Name'),
         'supportal': fields.boolean('Parent Portal Productcategorieen',  help="Indicator that determines the role of this category as parent of supplier portal categories."),
         'supp_category_ids': fields.function(lambda self, cr, uid, ids, field_name, arg, context=None: dict.fromkeys(ids, True), fnct_search=_supplier_category_search, type='integer', method=True,),
     }
 
-product_category()
 
 
 

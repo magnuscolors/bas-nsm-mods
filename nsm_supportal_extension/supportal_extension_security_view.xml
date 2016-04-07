@@ -3,7 +3,7 @@
     <data noupdate="0">
          
         <record model="ir.rule" id="analytic_account_user_rule">
-            <field name="name">Analytic Accounts</field>
+            <field name="name">Supplier Analytic Accounts</field>
             <field name="model_id" ref="analytic.model_account_analytic_account"/>
             <field name="global" eval="False"/>
             <field name="domain_force">['|',('supp_analytic_accids', '=', user.id),('portal_sub','=', True)]</field>
@@ -11,12 +11,24 @@
         </record>
 
         <record model="ir.rule" id="product_category_user_rule">
-            <field name="name">Product Categories</field>
+            <field name="name">Supplier Product Categories</field>
             <field name="model_id" ref="account.model_product_category"/>
             <field name="global" eval="False"/>
             <field name="domain_force">[('supp_category_ids', '=', user.id)]</field>
             <field name="groups" eval="[(4, ref('nsm_supplier_portal.group_module_supplier_portal_user'))]"/>
         </record>
+
+        <record model="ir.rule" id="megis_auth.domain_open_auth_paid_rule">
+            <field name="name">Posted Invoice</field>
+            <field name="model_id" ref="model_account_invoice"/>
+            <field name="domain_force">['&amp;','|',('section_id.member_ids', '=', user.id),('user_id','=',user.id),'|',('state','in',['open','auth','paid']),('is_portal','=',True)]</field>
+            <field name="global" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('megis_auth.goedk_facturen'))]"/>
+    	</record>
         
     </data>
 </openerp>
