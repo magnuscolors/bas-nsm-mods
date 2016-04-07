@@ -764,21 +764,6 @@
 	        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
             <field name="arch" type="xml">
                 <data>
-		            <xpath expr="//search/filter[@name='invoices']" position="replace">
-			            <filter name="invoices" string="Posted Invoices" domain="[('state','not in',['draft','cancel'])]" help="Proforma/Open/Authorized/Paid Invoices"/>
-                    </xpath>
-		            <xpath expr="//search/filter[@name='unpaid']" position="replace">
-			            <filter name="unpaid" string="Unpaid" domain="[('state','in',['open','auth'])]" help="Unpaid Invoices"/>
-		            </xpath>
-		            <xpath expr="//search/filter[@name='draft']" position="after">
-			            <filter name="open" string="Open Invoices" domain="[('state','=','open')]" help="Open Invoices"/>
-                    </xpath>
-                    <xpath expr="//search/filter[@name='invoices']" position="before">
-			            <filter name="auth" string="Authorized" domain="[('state','=','auth')]" help="Authorized Invoices"/>
-                    </xpath>
-		            <xpath expr="//search/filter[@name='unpaid']" position="after">
-			            <filter name="paid" string="Paid" domain="[('state','=',['paid'])]" help="Paid Invoices"/>
-		            </xpath>
                     <xpath expr="//search/filter[@name='paid']" position="after">
 			            <filter name="portal" string="Portal Invoices" domain="[('is_submitted','=',True)]" help="Portal Invoices"/>
 		            </xpath>
