@@ -7,6 +7,7 @@
             <field name="inherit_id" ref="account.invoice_form" />
             <field name="priority" eval="90" />
             <field name="arch" type="xml">
+                <data>
                 <xpath expr="//notebook/page[@string='Invoice Lines']" position="after">
                     <page string="Invoice Description">
                         <div class="oe_clear">
@@ -15,6 +16,15 @@
                         <field name="invoice_description" class="oe_inline" placeholder="Add description" />
                     </page>
                 </xpath>
+                <xpath expr="//notebook/page/group/group/field[@name='origin']" position="replace">
+                </xpath>
+                <xpath expr="//notebook/page/group/group/field[@name='name']" position="replace">
+                </xpath>
+                <xpath expr="//sheet/group/group/field[@name='account_id']" position="after">
+                    <field name="origin" groups="account.group_account_user" string="Our Reference"/>
+                    <field name="name" groups="account.group_account_user" string="Your Reference"/>
+                </xpath>
+                </data>
             </field>
         </record>
     </data>
