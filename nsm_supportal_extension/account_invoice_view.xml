@@ -51,7 +51,7 @@
                         <attribute name="attrs">{'readonly': [('state','!=','portalcreate')]}</attribute>
                     </field>
                     <field name="avail_supplier_portal" position="replace">
-                        <field name="product_category" string="Invoice Category"  required="True" domain="[('parent_id.supportal', '=', True)]"
+                        <field name="product_category" string="Invoice Category"  required="True"
                                on_change="product_category_change(product_category, context)"
                                options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('state','!=','portalcreate')],}"/>
 
