@@ -62,7 +62,10 @@ class product_category(osv.osv):
         supplier = user.partner_id  # partner_id is required on users
         if not supplier.product_category_ids:
             return [('id', '=', False)]
-        return [('id', 'in', [cat.id for cat in supplier.product_category_ids])]
+        cat_ids = [cat.id for cat in supplier.product_category_ids]
+        portal_category_ids = self.search(cr, uid, [('supportal', '=', True)], context=context)
+        portal_category_ids.extend(cat_ids)
+        return [('id', 'in', portal_category_ids)]
 
 
     _columns = {

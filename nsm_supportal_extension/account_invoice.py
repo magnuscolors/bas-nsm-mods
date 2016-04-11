@@ -39,7 +39,7 @@ class custom_account_invoice(osv.osv):
 
     _columns = {
 
-        'product_category': fields.many2one('product.category', 'Cost Category',),
+        'product_category': fields.many2one('product.category', 'Cost Category',domain=[('parent_id.supportal', '=', True)]),
         'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'), ('portal_main', '=', True)]),
         'state': fields.selection([
             ('portalcreate','Niet Ingediend'),
