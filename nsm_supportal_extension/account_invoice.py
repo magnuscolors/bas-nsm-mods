@@ -86,7 +86,7 @@ class custom_account_invoice(osv.osv):
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
             help='Bank Account Number to which the invoice will be paid. A Company bank account if this is a Customer Invoice or Supplier Refund, otherwise a Partner bank account number.', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
-        'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)],'open':[('readonly',False)]}),
         'fiscal_position': fields.many2one('account.fiscal.position', 'Fiscal Position', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
     }
 
