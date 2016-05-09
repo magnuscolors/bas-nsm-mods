@@ -63,11 +63,10 @@
                                attrs="{'readonly': [('state','!=','portalcreate')],}"/>
                     </field>
                     <field name="section_id" position="replace">
-                        <field name="section_id" string="Editorial Office" widget="selection" readonly="True" />
+                        <!--field name="section_id" string="Editorial Office" widget="selection" readonly="True" /-->
                     </field>
                     <field name="invoice_line" position="attributes">
                         <attribute name="attrs">{'readonly': [('state','!=','portalcreate')]}</attribute>
-                        <!--attribute name="attrs">{'readonly': [('state','!=','portalcreate')],'invisible': [('product_category','=',False)]}</attribute-->
                     </field>
                     <field name="product_id" position="replace">
                         <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
@@ -163,7 +162,6 @@
                         <field name="main_account_analytic_id" string="Title/Department"/>
                     </field>
                     <field name="section_id" position="replace">
-                        <field name="section_id" string="Editorial Office" />
                     </field>
                     <field name="account_analytic_id" position="replace">
                         <field name="account_analytic_id" string="Editie"/>
