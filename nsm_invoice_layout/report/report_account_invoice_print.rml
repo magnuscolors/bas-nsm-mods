@@ -9,7 +9,7 @@
                 <blockTable colWidths="320.0,210.0" style="Tableau2">
                       <tr>
                         <td>
-                          <!-- directaly to company -->
+                          <!-- directly to company -->
                           <!--para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id and o.partner_id and o.partner_id.property_account_payable.name) or '' ]]</para-->
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id and o.partner_id and o.partner_id.name) or '' ]]</para>
                           <para style="Standard_bold">[[ (o.partner_id and o.partner_id.is_company and 'T.a.v.: Crediteurenadministratie') or removeParentNode('para') ]]</para>
@@ -17,7 +17,7 @@
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.street2) or removeParentNode('para') ]]</para>
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.zip) ]] [[ o.partner_id.is_company == True and (o.partner_id  and o.partner_id.city) or '' ]] </para>
                           <para style="Standard_bold">[[ o.partner_id.is_company == True and (o.partner_id.country_id and o.partner_id.country_id.name) or '' ]]</para>
-                          <!-- not directaly to company -->
+                          <!-- not directly to company -->
                           <para style="Standard_bold">[[ o.partner_id.is_company != True and (o.partner_id and o.partner_id.parent_id and o.partner_id.parent_id.name) or '' ]]</para>
                           <para style="Standard_bold">T.a.v.: [[ o.partner_id.is_company != True and (o.partner_id and o.partner_id.name) or removeParentNode('para') and '' ]]</para>
                           <para style="Standard_bold">[[ o.partner_id.is_company != True  and (o.partner_id and o.partner_id.street) or '' ]]</para>

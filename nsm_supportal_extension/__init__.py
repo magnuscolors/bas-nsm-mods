@@ -23,5 +23,6 @@ import product_category
 import generate_mapping
 import account_analytic
 import res_partner
+import portal_wizard
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
