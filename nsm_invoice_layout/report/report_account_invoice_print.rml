@@ -139,7 +139,8 @@
                     <para style="Standard">IBAN</para>
                 </td>
                 <td>
-                    <para style="Standard">[[ ''.join([ b.acc_number or '' for b in o.company_id.bank_ids[:1] ]) or '' ]]</para>
+                    <para style="Standard">[[ repeatIn(o.company_id.bank_ids,'b') ]]</para>
+                    <para style="Standard">[[ b.footer != True and removeParentNode('tr') ]][[ b.footer == True and (b.acc_number) or '' ]]</para>
                 </td>
             </tr>
         </blockTable>
