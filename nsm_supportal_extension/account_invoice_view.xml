@@ -187,7 +187,7 @@
             <field name="res_model">account.invoice</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">['&amp;',('type','=','in_invoice'),'|',('state','in',['open','auth','paid']),'&amp;', ('state','=','draft'),('is_portal','=', True)]</field>
+            <field name="domain">['&amp;',('type','=','in_invoice'),'|',('state','not in',['cancel','draft','portalcreate']),'&amp;', ('state','=','draft'),('is_portal','=', True)]</field>
             <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'is_portal': True}</field>
         </record>
 
