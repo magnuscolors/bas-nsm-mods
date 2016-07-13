@@ -220,6 +220,16 @@
               </p>
             </field>
         </record>
+        <record id="nsm_supplier_portal.action_invoice_tree_supportal" model="ir.actions.act_window">
+            <field name="name">Supplier Invoices</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','in_invoice'), ('state','not in',['portalcreate','draft'])]</field>
+            <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase'}</field>
+            <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        </record>
 
         <record id="view_account_invoice_filter_portal2" model="ir.ui.view">
             <field name="name">invoice.select.portal2</field>
