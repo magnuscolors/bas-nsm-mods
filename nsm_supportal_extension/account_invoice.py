@@ -88,6 +88,8 @@ class custom_account_invoice(osv.osv):
         'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)],'open':[('readonly',False)]}),
         'fiscal_position': fields.many2one('account.fiscal.position', 'Fiscal Position', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        'topf': fields.boolean('To Portal Flow', states={'draft':[('readonly',False)]}, help="Checking makes routing to Portal Flow possible"),
+        #'create_uid': fields.many2one('res.user', readonly=True ),
     }
 
     _defaults = {
@@ -154,16 +156,33 @@ class custom_account_invoice(osv.osv):
                                                    self_obj.invoice_line[0].product_id.categ_id.id or False)) or False
                          ],
                 context=context)
-        if sale_team_id:
+            if sale_team_id:
                 sale_team_obj = sale_team_pool.browse(cr, uid, sale_team_id[0], context=context)
 
-        date = time.strftime('%Y-%m-%d')
-        self.write(cr, uid, ids, {'is_portal': True, 'date_invoice': date, 'state': 'draft',
-                                   'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
-                                   'user_id':  sale_team_obj and sale_team_obj.sales_team_id.user_id.id or False})
-        self.button_reset_taxes(cr, uid, ids, context=context)
+            date = time.strftime('%Y-%m-%d')
+            self.write(cr, uid, ids, {'is_portal': True,
+                                    'date_invoice': date,
+                                    'state': 'draft',
+                                    'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
+                                    'user_id':  sale_team_obj and sale_team_obj.sales_team_id.user_id.id or False})
+            self.button_reset_taxes(cr, uid, ids, context=context)
         return True
 
+    def act_portal_back(self, cr, uid, ids, context={}):
+        for self_obj in self.browse(cr, uid, ids, context=context):
+            cr.execute('SELECT create_uid FROM account_invoice WHERE id=%s', (self_obj.id,))
+            res_user_id = cr.fetchone()
+            [res_user_obj] = self.pool.get('res.users').browse(cr, uid, [res_user_id[0]], context=context)
+            if not self_obj.supplier_id or self_obj.supplier_id is not self_obj.partner_id:
+                if not res_user_obj.partner_id or res_user_obj.partner_id.id is not self_obj.partner_id.id:
+                    self.write(cr, uid, ids,({'state':'portalcreate','is_portal': False, 'topf': True, 'supplier_id': self_obj.partner_id and self_obj.partner_id.id or False}))
+                else:
+                    self.write(cr, uid, ids,({'state':'portalcreate','is_portal': False, 'supplier_id': self_obj.partner_id and self_obj.partner_id.id or False}))
+            if not res_user_obj.partner_id or res_user_obj.partner_id.id is not self_obj.partner_id.id:
+                self.write(cr, uid, ids,({'state':'portalcreate','is_portal': False, 'topf': True }))
+            else:
+                self.write(cr, uid, ids,({'state':'portalcreate','is_portal': False }))
+        return True
 
 custom_account_invoice()
 

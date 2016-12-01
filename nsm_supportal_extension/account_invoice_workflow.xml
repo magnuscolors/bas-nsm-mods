@@ -11,7 +11,7 @@
         <record model="workflow.activity" id="act_back_portal">
             <field name="wkf_id" ref="account.wkf"/>
             <field name="name">back-portal</field>
-            <field name="action">write({'state':'portalcreate','is_portal': False})</field>
+            <field name="action">act_portal_back()</field>
             <field name="kind">function</field>
         </record>
 
