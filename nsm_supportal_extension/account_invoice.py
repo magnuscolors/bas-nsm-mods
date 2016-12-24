@@ -94,6 +94,8 @@ class custom_account_invoice(osv.osv):
 
     _defaults = {
         'state': _get_state,
+        'company_id': lambda self,cr,uid,c:
+            self.pool.get('res.company')._company_default_get(cr, uid, 'account.invoice', context=c),
     }
 
     def supplier_id_change(self, cr, uid, ids, supplier_id, company_id, context={}):
