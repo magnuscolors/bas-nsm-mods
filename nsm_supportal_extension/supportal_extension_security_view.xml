@@ -29,6 +29,13 @@
             <field name="perm_unlink" eval="False"/>
             <field name="groups" eval="[(4, ref('megis_auth.goedk_facturen'))]"/>
     	</record>
+
+        <record id="sales_team_rule" model="ir.rule">
+	        <field name="name">Verkoopteam-koppeling multi-company Rule</field>
+	        <field name="model_id" ref="nsm_supplier_portal.model_sales_team"/>
+	        <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+	    </record>
         
     </data>
 </openerp>
