@@ -4,7 +4,7 @@
         <pageTemplate id="first">
             <frame id="first" x1="1.4cm" y1="0.5cm" height="22.2cm" width="18.0cm"/>
             <pageGraphics>
-                <image x="0.30cm" y="0.10cm" height="28cm" width="25cm" >[[ (o.company_id and o.company_id.report_background_image) or removeParentNode('para') ]] </image>
+                <image x="0.50cm" y="0.10cm" height="32.1cm" width="22.0cm" >[[ (o.company_id and o.company_id.report_background_image) or removeParentNode('para') ]] </image>
                 <place x="2.5cm" y="18.4cm" height="6.0cm" width="19.0cm">
                 <blockTable colWidths="320.0,210.0" style="Tableau2">
                       <tr>
