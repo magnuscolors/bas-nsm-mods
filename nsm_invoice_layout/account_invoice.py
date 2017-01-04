@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp.osv import osv, orm, fields
 
 
 class account_invoice(osv.osv):
@@ -46,5 +46,13 @@ class account_invoice(osv.osv):
             'nodestroy': True
         }
 
-account_invoice()
+class res_company(osv.osv):
+    _inherit = 'res.company'
+
+    _columns = {
+        'report_background_image': fields.binary(
+            'Background Image for Report',
+            help='Set Background Image for Report'),
+    }
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
