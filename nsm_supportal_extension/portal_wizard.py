@@ -18,43 +18,22 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
-from openerp.osv import fields
+from openerp.osv import osv, orm, fields
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
-
-
-
 
 class wizard_user(orm.TransientModel):
     _inherit = 'portal.wizard.user'
 
     def action_apply(self, cr, uid, ids, context=None):
-        for wizard_user in self.browse(cr, SUPERUSER_ID, ids, context):
-            portal = wizard_user.wizard_id.portal_id
-            partner = wizard_user.partner_id
-            user = self._retrieve_user(cr, SUPERUSER_ID, wizard_user, context)
-            if wizard_user.in_portal:
+        for wiz_user in self.browse(cr, SUPERUSER_ID, ids, context):
+            if wiz_user.in_portal:
+                partner = wiz_user.partner_id
                 if not partner.product_category_ids:
                     raise orm.except_orm(_('No Categories defined for %s' % partner.name),
                     _('For this supplier to be invited to the Portal you have to grant him one or more Invoice Categories and one or more Titles/Departments.'))
                 if not partner.analytic_account_ids:
-                    raise orm.except_orm(_('No Titles/Departments defined for %s' % partner.name),
-                    _('For this supplier to be invited to the Portal you have to grant him one or more Invoice Categories and one or more Titles/Departments.'))
-                # create a user if necessary, and make sure it is in the portal group
-                if not user:
-                    user = self._create_user(cr, SUPERUSER_ID, wizard_user, context)
-                if (not user.active) or (portal not in user.groups_id):
-                    user.write({'active': True, 'groups_id': [(4, portal.id)]})
-                    # prepare for the signup process
-                    user.partner_id.signup_prepare()
-                    wizard_user = self.browse(cr, SUPERUSER_ID, wizard_user.id, context)
-                    self._send_email(cr, uid, wizard_user, context)
-            else:
-                # remove the user (if it exists) from the portal group
-                if user and (portal in user.groups_id):
-                    # if user belongs to portal only, deactivate it
-                    if len(user.groups_id) <= 1:
-                        user.write({'groups_id': [(3, portal.id)], 'active': False})
-                    else:
-                        user.write({'groups_id': [(3, portal.id)]})
+                    if not partner.product_price_ids:
+                       raise orm.except_orm(_('No Titles/Departments/Prices defined for %s' % partner.name),
+                       _('For this supplier to be invited to the Portal you have to grant him one or more Invoice Categories and one or more Titles/Departments/Prices.'))
+        return super(wizard_user, self).action_apply(cr, uid, ids, context=context)
