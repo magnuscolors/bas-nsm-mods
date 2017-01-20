@@ -36,7 +36,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/notebook/page/group[@string='Bank Accounts']" position="before">
                     <separator string="Background Image for Report"/>
-                    <field name="report_background_image" widget="image" class="oe_avatar oe_left"/>
+                    <field name="report_background_image1" widget="image" class="oe_avatar oe_left"/>
+                    <field name="report_background_image2" widget="image" class="oe_avatar oe_left"/>
                 </xpath>
             </field>
         </record>

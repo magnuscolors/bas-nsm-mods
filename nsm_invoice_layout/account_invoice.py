@@ -50,9 +50,12 @@ class res_company(osv.osv):
     _inherit = 'res.company'
 
     _columns = {
-        'report_background_image': fields.binary(
-            'Background Image for Report',
-            help='Set Background Image for Report'),
+        'report_background_image1': fields.binary(
+            'Background Image for Report Frontpage',
+            help='Set Background Image for Report Frontpage'),
+        'report_background_image2': fields.binary(
+            'Background Image for Report Following Pages',
+            help='Set Background Image for Report Following Pages'),
     }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
