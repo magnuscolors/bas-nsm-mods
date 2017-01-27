@@ -36,6 +36,7 @@
         "product_view.xml",
         "analytic_line.xml",
         "supportal_extension_security_view.xml",
+        "product_category_supportal.xml",
     ],
     'demo': [],
     'test': [
