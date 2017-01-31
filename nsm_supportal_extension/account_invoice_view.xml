@@ -259,14 +259,14 @@
         <record id="invoice_supplier_form_NSM_ext" model="ir.ui.view">
             <field name="name">account.invoice.supplier.form.NSM_ext</field>
             <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="nsm_improv.invoice_supplier_form_NSM"/>
+            <field name="inherit_id" ref="megis_auth.invoice_supplier_form_auth"/>
             <field name="arch" type="xml">
                 <data>
                         <!--field name="supplier_invoice_number" position="after">
                             <field name="topf" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="account.group_account_invoice"/>
                         </field-->
                         <button name="invoice_open" position="after">
-                            <button name="portalback" states="draft" type="workflow" string="Terug Portal" attrs="{'invisible': [('state','!=','draft')],}"/>
+                            <button name="portalback" states="draft" type="workflow" string="Terug Portal" />
                         </button>
                         <field name="state" position="replace">
                            <field name="state" widget="statusbar" statusbar_visible="portalcreate,draft,open,auth,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
