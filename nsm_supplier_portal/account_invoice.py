@@ -168,6 +168,7 @@ class custom_account_invoice(osv.osv):
     }
 
     def act_submit(self, cr, uid, ids, context={}):
+        print "act_submit"
         sale_team_obj = False
         sale_team_pool = self.pool.get('sales.team')
         for self_obj in self.browse(cr, uid, ids, context=context):
@@ -205,10 +206,9 @@ class custom_account_invoice(osv.osv):
         Overrides orm field_view_get.
         @return: Dictionary of Fields, arch and toolbar.
         """
-
         res = {}
-        res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id, view_type,
-                                                       context, toolbar=toolbar, submenu=submenu)
+        res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id=view_id, view_type=view_type,
+                                                       context=context, toolbar=toolbar, submenu=submenu)
         if not context.get('is_portal'):
             return res
         res['toolbar'] = {'print': [], 'other': []}
@@ -229,24 +229,35 @@ class account_invoice_line(osv.osv):
             return {'value': {'invoice_line_tax_id': []}}
         return {'value': {'invoice_line_tax_id': [tax_id]}}
 
+    # -- deep
+    # def product_id_change(self, cr, uid, ids, product, uom_id,
+    #                       qty=0, name='', type='out_invoice', partner_id=False,
+    #                       fposition_id=False, price_unit=False, currency_id=False,
+    #                       context=None, company_id=None):
+
     def product_id_change(self, cr, uid, ids, product, uom_id,
                           qty=0, name='', type='out_invoice', partner_id=False,
                           fposition_id=False, price_unit=False, currency_id=False,
-                          context=None, company_id=None):
+                          company_id=None, context=None):
+
         res = super(account_invoice_line, self).product_id_change(
             cr, uid, ids, product=product, uom_id=uom_id, qty=qty, name=name,
             type=type, partner_id=partner_id, fposition_id=fposition_id,
             price_unit=price_unit, currency_id=currency_id,
             context=context, company_id=company_id)
+
         if context is None:
             context = {}
+
         if not context.get('is_portal'):
             return res
+
         uom_pool = self.pool.get('product.uom')
         account_tax_pool = self.pool.get('account.tax')
         uom_search_id = uom_pool.search(
             cr, uid, [('name', '=', 'Piece')], context=context)
-        res['value'].update({'new_tax_id': res['value']['invoice_line_tax_id'][:1] or False})
+
+        res['value'].update({'new_tax_id': res['value'].get('invoice_line_tax_id',[])[:1] or False})
         if not uom_search_id:
             return res
         res['value'].update({'uos_id': uom_search_id[0], })

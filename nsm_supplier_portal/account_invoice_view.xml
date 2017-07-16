@@ -58,6 +58,7 @@
                         <field name="name" invisible="1"/>
                         <field name="journal_id" invisible="1"/>
                         <field name="period_id" invisible="1"/>
+                        <!--<field name="company_id" widget="selection" groups="base.group_multi_company"/>-->
                         <field name="user_id" invisible="1"/>
                         <field name="date_due" invisible="1"/>
                         <field name="origin" invisible="1"/>
@@ -79,6 +80,7 @@
                 <header>
                     <button name="act_submit" string="Submit" class="oe_highlight" type="object" attrs="{'invisible': [('is_submitted','=', True)]}"/>
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
+                    <!--button name="invoice_cancel" states="draft" string="Cancel Invoice"/-->
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
                     <button name='%(account.action_account_state_open)d' type='action' string='Re-Open'  attrs="{'invisible':['|', ('state','&lt;&gt;','paid'), ('reconciled', '=', True)]}" help="This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created." invisible="1"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
@@ -110,9 +112,15 @@
                             <field name="supplier_invoice_number" required="1" attrs="{'readonly': [('is_submitted','=',True)]}" string="Enter Your Invoice Number"/>
                             <field name="avail_supplier_portal" string="Redactie/Marketing" required="1" attrs="{'readonly': [('is_submitted','=',True)]}"/>
                             <field name="main_account_analytic_id" string="Titel" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_submitted','=',True)]}"/>
+                            <!--<field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}' attrs="{'readonly': [('is_submitted','=',True)]}"/-->
                             <field name="section_id" string="Redactie" widget="selection" readonly="1"/>
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
+                            <!--label for="reference_type"/>
+                            <div>
+                                <field name="reference_type" class="oe_inline oe_edit_only" invisible="1"/>
+                                <field name="reference" class="oe_inline" invisible="1"/>
+                            </div-->
                         </group>
                         <group>
                             <field name="date_invoice" invisible="1"/>
@@ -127,11 +135,16 @@
                     </group>
                     <notebook>
                         <page string="Invoice">
+                            <!--field context="{'default_account_analytic_id': sub_account_analytic_id, 'partner_id': partner_id, 'price_type': context.get('price_type') or False, 'type': type, 'is_portal': True}" name="invoice_line" attrs="{'readonly': [('is_submitted','=',True)]}"-->
                             <field context="{'partner_id': partner_id, 'price_type': context.get('price_type') or False, 'type': type, 'is_portal': True}" name="invoice_line" attrs="{'readonly': [('is_submitted','=',True)]}">
                                 <tree string="Invoice lines" editable="bottom">
                                     <field name="sequence" widget="handle" />
+                                    <!--<field name="product_id" domain="[('avail_supplier_portal', '=', parent.avail_supplier_portal)]"  required="1"-->
+                                        <!--on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>-->
+
                                     <field name="product_id" domain="[('avail_supplier_portal', '=', parent.avail_supplier_portal)]"  required="1"
-                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id, context)" options='{"create": false, "create_edit": false, "no_open": true}'/>
+
                                     <field name="name"/>
                                     <field name="company_id" invisible="1"/>
                                     <field name="account_id" invisible="1"
@@ -140,8 +153,11 @@
                                     <field name="account_analytic_id" string="Editie"
                                         domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled')), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]" options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>
                                     <field name="quantity"/>
+                                    <!--<field name="uos_id" invisible="1"-->
+                                        <!--on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>-->
+
                                     <field name="uos_id" invisible="1"
-                                        on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>
+                                        on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id, context)" options='{"no_open": True}'/>
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
                                     <field name="new_tax_id" context="{'type':parent.type}"
@@ -259,7 +275,11 @@
             <field name="arch" type="xml">
             <form string="Supplier Invoice" version="7.0" edit="false" create="false">
                 <header>
+                    <!--button name="act_submit" string="Submit"
+                    class="oe_highlight" type="object" attrs="{'invisible':
+                    [('is_submitted','=', True)]}"/-->
                     <button name="%(account.action_account_invoice_refund)d" type='action' string='Ask Refund' states='open,paid' invisible="1"/>
+                    <!--button name="invoice_cancel" states="draft" string="Cancel Invoice"/-->
                     <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" />
                     <button name='%(account.action_account_state_open)d' type='action' string='Re-Open'  attrs="{'invisible':['|', ('state','&lt;&gt;','paid'), ('reconciled', '=', True)]}" help="This button only appears when the state of the invoice is 'paid' (showing that it has been fully reconciled) and auto-computed boolean 'reconciled' is False (depicting that it's not the case anymore). In other words, the invoice has been dereconciled and it does not fit anymore the 'paid' state. You should press this button to re-open it and let it continue its normal process after having resolved the eventual exceptions it may have created." invisible="1"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,auth,open,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
@@ -291,6 +311,7 @@
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
                             <field name="avail_supplier_portal" string="Redactie/Marketing" required="1"/>
                             <field name="main_account_analytic_id" string="Titel" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                            <!--field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}'/-->
                             <field name="section_id" string="Redactie" widget="selection" readonly="1"/>
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
@@ -311,8 +332,11 @@
                             <field context="{'partner_id': partner_id, 'price_type': context.get('price_type') or False, 'type': type, 'is_portal': True}" name="invoice_line">
                                 <tree string="Invoice lines" editable="bottom">
                                     <field name="sequence" widget="handle" />
+                                    <!--<field name="product_id"-->
+                                        <!--on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>-->
+
                                     <field name="product_id"
-                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id, context)" options='{"create": false, "create_edit": false, "no_open": true}'/>
                                     <field name="name"/>
                                     <field name="company_id" invisible="1"/>
                                     <field name="account_id" invisible="1"
@@ -321,8 +345,11 @@
                                     <field name="account_analytic_id" string="Editie"
                                         domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled')), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]" options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>
                                     <field name="quantity"/>
+                                    <!--<field name="uos_id" invisible="1"-->
+                                        <!--on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>-->
+
                                     <field name="uos_id" invisible="1"
-                                        on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>
+                                        on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id, context)" options='{"no_open": True}'/>
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
                                     <field name="new_tax_id" context="{'type':parent.type}"
@@ -381,6 +408,7 @@
             <field name="act_window_id" ref="act_open_supplier_invoice_view"/>
             <field name="sequence" eval="20"/>
             <field name="view_mode">form</field>
+            <!--field name="view_id" ref="view_supplier_invoice_form"/-->
             <field name="view_id" ref="view_custom_supplier_supplier_invoice_form"/>
         </record>
 
@@ -436,9 +464,15 @@
                             <field name="supplier_invoice_number" invisible="0" required="1"/>
                             <field name="avail_supplier_portal" string="Redactie/Marketing" required="1"/>
                             <field name="main_account_analytic_id" string="Titel" domain="[('portal_main', '=', True)]" on_change="onchange_main_analytic_ac(main_account_analytic_id,context)" required="True" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                            <!--field name="sub_account_analytic_id" domain="[('portal_sub', '=', True),('id', 'child_of', main_account_analytic_id)]"  required="True" options='{"create": false, "create_edit": false, "no_open": true}'/-->
                             <field name="section_id" string="Redactie" widget="selection" readonly="1"/>
                             <field name="fiscal_position" widget="selection" invisible="1"/>
                             <field name="origin" invisible="1"/>
+                            <!--label for="reference_type"/>
+                            <div>
+                                <field name="reference_type" class="oe_inline oe_edit_only" invisible="1"/>
+                                <field name="reference" class="oe_inline" invisible="1"/>
+                            </div-->
                         </group>
                         <group>
                             <field name="date_invoice" invisible="1"/>
@@ -456,8 +490,12 @@
                             <field context="{'partner_id': partner_id, 'price_type': context.get('price_type') or False, 'type': type, 'is_portal': True}" name="invoice_line">
                                 <tree string="Invoice lines" editable="bottom">
                                     <field name="sequence" widget="handle" />
+
+                                    <!--<field name="product_id" domain="[('avail_supplier_portal', '=', parent.avail_supplier_portal)]"-->
+                                        <!--on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>-->
+
                                     <field name="product_id" domain="[('avail_supplier_portal', '=', parent.avail_supplier_portal)]"
-                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"create": false, "create_edit": false, "no_open": true}'/>
+                                        on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id, context)" options='{"create": false, "create_edit": false, "no_open": true}'/>
                                     <field name="name"/>
                                     <field name="company_id" invisible="1"/>
                                     <field name="account_id" invisible="1"
@@ -466,8 +504,11 @@
                                      <field name="account_analytic_id" string= "Editie"
                                         domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled')), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]" options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>
                                     <field name="quantity"/>
+                                    <!--<field name="uos_id" invisible="1"-->
+                                        <!--on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>-->
                                     <field name="uos_id" invisible="1"
-                                        on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" options='{"no_open": True}'/>
+                                        on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id)" options='{"no_open": True}'/>
+
                                     <field name="price_unit"/>
                                     <field name="discount" invisible="1"/>
                                     <field name="new_tax_id" context="{'type':parent.type}"
@@ -497,6 +538,22 @@
                                 <field name="residual" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                 <field name="reconciled" invisible="1"/>
                             </group>
+                            <!--div style="width: 50%%">
+                                <field name="tax_line">
+                                    <tree editable="bottom" string="Taxes">
+                                        <field name="name"/>
+                                        <field name="account_id" />
+                                        <field name="account_analytic_id" domain="[('type','&lt;&gt;','view'), ('company_id', '=', parent.company_id)]"/>
+                                        <field name="base" on_change="base_change(base,parent.currency_id,parent.company_id,parent.date_invoice)" readonly="1"/>
+                                        <field name="amount" on_change="amount_change(amount,parent.currency_id,parent.company_id,parent.date_invoice)"/>
+
+                                        <field invisible="True" name="base_amount"/>
+                                        <field invisible="True" name="tax_amount"/>
+                                        <field name="factor_base" invisible="True"/>
+                                        <field name="factor_tax" invisible="True"/>
+                                    </tree>
+                                </field>
+                            </div-->
                             <div class="oe_clear">
                                 <label for="comment"/>
                             </div>
@@ -530,6 +587,7 @@
             <field name="act_window_id" ref="act_open_supplier_invoice_submited_view"/>
             <field name="sequence" eval="20"/>
             <field name="view_mode">form</field>
+            <!--field name="view_id" ref="view_supplier_invoice_form"/-->
             <field name="view_id" ref="view_custom_supplier_invoice_submited_form"/>
         </record>
 
@@ -552,8 +610,8 @@
             <field name="domain">[('type','=','in_refund')]</field>
             <field name="context">{'default_type': 'in_refund', 'type': 'in_refund', 'journal_type': 'purchase_refund', 'is_portal': True, 'no_create':True}</field>
             <field name="search_view_id" ref="account.view_account_invoice_filter"/>
-            <field name="help" type="html">
-            </field>
+            <!--<field name="help" type="html">-->
+            <!--</field>-->
         </record>
 
         <record model="ir.actions.act_window.view" id="act_open_action_invoice_tree4_tree">
@@ -582,6 +640,16 @@
 		        </data>
             </field>
         </record>
+        <!--record id="view_account_invoice_filter_portal" model="ir.ui.view">
+            <field name="name"></field>
+            <field name="model">account.invoice</field>
+	        <field name="inherit_id" ref="megis_auth.view_account_invoice_filter_auth"/>
+            <field name="arch" type="xml">
+                <data>
+
+		        </data>
+            </field>
+        </record-->
             
         <record id="account.action_invoice_tree2" model="ir.actions.act_window">
             <field name="name">Supplier Invoices</field>

@@ -1,0 +1,4 @@
+---Fields in module 'nsm_supplier_portal'---
+---XML records in module 'nsm_supplier_portal'---
+DEL ir.model.access: nsm_supplier_portal.custom_portal_user_res_bank
+DEL ir.model.access: nsm_supplier_portal.custom_res_bank

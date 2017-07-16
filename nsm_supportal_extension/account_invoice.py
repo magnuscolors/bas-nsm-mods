@@ -24,6 +24,7 @@ from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
 
+from openerp import models, fields as fields2, api, _
 
 class custom_account_invoice(osv.osv):
     _inherit = 'account.invoice'
@@ -76,8 +77,8 @@ class custom_account_invoice(osv.osv):
                 "The payment term may compute several due dates, for example 50% now, 50% in one month."),
         'period_id': fields.many2one('account.period', 'Force Period', domain=[('state','<>','done')], help="Keep empty to use the period of the validation(invoice) date.", readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'account_id': fields.many2one('account.account', 'Account', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, help="The partner account used for this invoice."),
-        'invoice_line': fields.one2many('account.invoice.line', 'invoice_id', 'Invoice Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
-        'tax_line': fields.one2many('account.invoice.tax', 'invoice_id', 'Tax Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'invoice_line': fields.one2many('account.invoice.line', 'invoice_id', 'Invoice Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'tax_line': fields.one2many('account.invoice.tax', 'invoice_id', 'Tax Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'currency_id': fields.many2one('res.currency', 'Currency', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, track_visibility='always'),
         'journal_id': fields.many2one('account.journal', 'Journal', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]},
                                       domain="[('type', 'in', {'out_invoice': ['sale'], 'out_refund': ['sale_refund'], 'in_refund': ['purchase_refund'], 'in_invoice': ['purchase']}.get(type, [])), ('company_id', '=', company_id)]"),
@@ -85,7 +86,7 @@ class custom_account_invoice(osv.osv):
         'check_total': fields.float('Verification Total', digits_compute=dp.get_precision('Account'), readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
             help='Bank Account Number to which the invoice will be paid. A Company bank account if this is a Customer Invoice or Supplier Refund, otherwise a Partner bank account number.', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
-        'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)],'open':[('readonly',False)]}),
         'fiscal_position': fields.many2one('account.fiscal.position', 'Fiscal Position', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'topf': fields.boolean('To Portal Flow', states={'draft':[('readonly',False)]}, help="Checking makes routing to Portal Flow possible"),
@@ -187,5 +188,22 @@ class custom_account_invoice(osv.osv):
         return True
 
 custom_account_invoice()
+
+
+class Invoice(models.Model):
+    _inherit = ["account.invoice"]
+
+    invoice_line = fields2.One2many('account.invoice.line', 'invoice_id', string='Invoice Lines',
+        readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, copy=True)
+    tax_line = fields2.One2many('account.invoice.tax', 'invoice_id', string='Tax Lines',
+        readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, copy=True)
+    move_name = fields2.Char(string='Journal Entry', readonly=True,
+        states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, copy=False)
+
+    internal_number = fields2.Char(string='Invoice Number', readonly=True,
+        default=False, copy=False,
+        states={'draft': [('readonly', False)]},
+        help="Unique number of the invoice, computed automatically when the invoice is created.")
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
