@@ -5,7 +5,8 @@
        <!-- Email template for new users -->
        
        
-        <record id="send_invitation_email" model="email.template">
+        <!--<record id="send_invitation_email" model="email.template">-->
+        <record id="send_invitation_email" model="mail.template">
             <field name="name">Welcome to Erp system</field>
             <field name="model_id" ref="base.model_res_partner"/>
             <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>

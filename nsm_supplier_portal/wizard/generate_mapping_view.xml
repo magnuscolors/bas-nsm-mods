@@ -54,8 +54,9 @@
         
         
         <menuitem id="menu_generate_mapping"
-            parent="base.menu_base_config"
+            parent="base.menu_sale_config"
             sequence="15"
             action="act_open_generate_mapping_view"/>
+            <!--parent="base.menu_base_config"-->
     </data>
 </openerp>

@@ -9,9 +9,10 @@
                       'default_model': 'res.users',
                       'default_res_id': uid,
                     }</field>
+                    <!-- ('to_read', '=', True),-->
                     <field name="params" eval="&quot;{
                         'domain': [
-                          ('to_read', '=', True),
+                          ('needaction', '=', True),
                         ],
                         'show_compose_message': False,
                         'show_link': False,

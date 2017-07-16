@@ -20,7 +20,8 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
-                    <field name="name" position="after">
+                    <!--<field name="name" position="after">-->
+                    <field name="display_name" position="after">
                         <field name="user_ids"/>
                         <field name="reuse" string="Hergebruik"/>
                         <field name="var_ok" string="VAR OK"/>
@@ -80,7 +81,8 @@
                                 <tree string="Bank Details">
                                     <field name="acc_number"/>
                                     <field name="bank_name"/>
-                                    <field name="owner_name"/>
+                                    <!--<field name="owner_name"/>-->
+                                    <field name="partner_id"/>
                                 </tree>
                             </field>
                         </page>
@@ -112,15 +114,17 @@
                     <field name="mobile"/>
                     <field name="state_id"/>
                     <field name="category_id"/>
-                    <field name="has_image"/>
+                    <!--<field name="has_image"/>-->
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_vignette oe_semantic_html_override">
                                 <a type="open">
-                                    <t t-if="record.has_image.raw_value === true">
+                                    <!--<t t-if="record.has_image.raw_value === true">-->
+                                    <t t-if="record.image.raw_value">
                                         <img t-att-src="kanban_image('res.partner', 'image_small', record.id.value)" class="oe_kanban_image"/>
                                     </t>
-                                    <t t-if="record.has_image.raw_value === false">
+                                    <!--<t t-if="record.has_image.raw_value === false">-->
+                                    <t t-if="!record.image.raw_value">
                                         <t t-if="record.is_company.raw_value === true">
                                             <img t-att-src='_s + "/base/static/src/img/company_image.png"' class="oe_kanban_image"/>
                                         </t>
@@ -137,9 +141,9 @@
                                         <li t-if="record.parent_id.raw_value and !record.function.raw_value"><field name="parent_id"/></li>
                                         <li t-if="!record.parent_id.raw_value and record.function.raw_value"><field name="function"/></li>
                                         <li t-if="record.parent_id.raw_value and record.function.raw_value"><field name="function"/> at <field name="parent_id"/></li>
-                                        <li t-if="record.city.raw_value and !record.country.raw_value"><field name="city"/></li>
-                                        <li t-if="!record.city.raw_value and record.country.raw_value"><field name="country"/></li>
-                                        <li t-if="record.city.raw_value and record.country.raw_value"><field name="city"/>, <field name="country"/></li>
+                                        <li t-if="record.city.raw_value and !record.country_id.raw_value"><field name="city"/></li>
+                                        <li t-if="!record.city.raw_value and record.country_id.raw_value"><field name="country_id"/></li>
+                                        <li t-if="record.city.raw_value and record.country_id.raw_value"><field name="city"/>, <field name="country_id"/></li>
                                         <li t-if="record.email.raw_value"><a t-attf-href="mailto:#{record.email.raw_value}"><field name="email"/></a></li>
                                     </ul>
                                 </div>
@@ -195,9 +199,11 @@
             <field name="name">res.partner.form</field>
             <field name="model">res.partner</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
+            <!--<field name="inherit_id" ref="base.view_partner_form"/>-->
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="arch" type="xml">
-                <page string="History" position="before" version="7.0">
+                <!--<page string="History" position="before" version="7.0">-->
+                <page name="accounting" position="after" >
                     <page string="Freelancer Portal" col="4" name="supplier_portal" attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}">
                         <group>
                             <group>
@@ -209,6 +215,7 @@
                 </page>
             </field>
         </record>
+
         <record id="view_res_partner_filter" model="ir.ui.view">
             <field name="name">res.partner.select</field>
             <field name="model">res.partner</field>

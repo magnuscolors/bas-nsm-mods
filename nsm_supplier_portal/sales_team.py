@@ -25,8 +25,9 @@ class sales_team(osv.osv):
         'name': fields.function(concate_name,
                                 string='Name', type='char',
                                 store=True, size=64),
-        'sales_team_id': fields.many2one('crm.case.section', 'Sales Team',
-                                         ),
+        # 'sales_team_id': fields.many2one('crm.case.section', 'Sales Team',),
+
+        'sales_team_id': fields.many2one('crm.team', 'Sales Team',),
     }
 
     _sql_constraints = [

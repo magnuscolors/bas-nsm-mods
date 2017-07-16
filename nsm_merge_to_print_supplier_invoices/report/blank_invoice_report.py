@@ -19,7 +19,7 @@
 ##############################################################################
 
 import time
-from report import report_sxw
+from openerp.report import report_sxw
 
 
 class blank_invoice_report(report_sxw.rml_parse):
@@ -35,5 +35,8 @@ report_sxw.report_sxw('report.blank.invoice.report',
                       'account.invoice',
                       'addons/nsm_merge_to_print_supplier_invoices/report/blank_invoice_report.rml',
                       parser=blank_invoice_report, header=True)
+
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

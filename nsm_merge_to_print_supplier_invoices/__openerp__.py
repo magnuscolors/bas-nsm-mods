@@ -31,7 +31,7 @@
     'website': 'https://www.odooexperts.nl',
     'depends': ['base', 'account', 'document'],
     'data': [
-        'report/blank_invoice_report.rml',
+        # 'report/blank_invoice_report.rml',
         'wizard/supplier_merge_pdf_view.xml',
         'view/supplier_invoice_report.xml',
     ],

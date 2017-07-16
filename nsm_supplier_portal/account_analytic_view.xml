@@ -17,19 +17,36 @@
                 </xpath>
             </field>
         </record>
-        <record id="view_account_analytic_account_tree_nsm_portal" model="ir.ui.view">
-            <field name="name">account.analytic.account.tree.nsm.portal</field>
+        <!--<record id="view_account_analytic_account_tree_nsm_portal" model="ir.ui.view">-->
+            <!--<field name="name">account.analytic.account.tree.nsm.portal</field>-->
+            <!--<field name="model">account.analytic.account</field>-->
+            <!--<field name="inherit_id" ref="account.view_account_analytic_account_tree"/>-->
+            <!--<field name="arch" type="xml">-->
+                    <!--<field name="name" position="replace">-->
+                        <!--<field name="name"/>-->
+                    <!--</field>-->
+                    <!--<field name="complete_name" position="replace">-->
+                        <!--<field name="complete_name" invisible="1"/>-->
+                        <!--<field name="portal_main" string="Portal"/>-->
+                        <!--<field name="portal_sub" string="Portal" />-->
+                    <!--</field>-->
+            <!--</field>-->
+        <!--</record>-->
+
+
+        <!--
+            Analytic Tree
+             deep
+        -->
+        <record id="view_account_analytic_account_list_inherit" model="ir.ui.view">
+            <field name="name">view_account_analytic_account_list_inherit</field>
             <field name="model">account.analytic.account</field>
-            <field name="inherit_id" ref="account.view_account_analytic_account_tree"/>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
             <field name="arch" type="xml">
-                    <field name="name" position="replace">
-                        <field name="name"/>
-                    </field>
-                    <field name="complete_name" position="replace">
-                        <field name="complete_name" invisible="1"/>
+                    <xpath expr="//field[@name='code']" position="before">
                         <field name="portal_main" string="Portal"/>
-                        <field name="portal_sub" string="Portal" />
-                    </field>
+                        <field name="portal_sub" string="Portal"/>
+                    </xpath>
             </field>
         </record>
     </data>

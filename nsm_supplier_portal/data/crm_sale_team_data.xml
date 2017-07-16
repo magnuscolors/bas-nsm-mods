@@ -2,10 +2,12 @@
 <openerp>
     <data noupdate="0">
 
-        <record model="crm.case.section" id="section_sales_department1">
+        <!--<record model="crm.case.section" id="section_sales_department1">-->
+        <record model="crm.team" id="section_sales_department1">
             <field name="name">Onbekend</field>
             <field name="code">Onbekend</field>
         </record>
+
     
     </data>
 </openerp>

@@ -26,6 +26,8 @@ import StringIO
 import pyPdf
 from openerp import netsvc
 
+from openerp import models, fields as fields2, api, _
+
 class supplier_invoice_merge_pdf(osv.osv_memory):
     _name = 'supplier.invoice.merge.pdf'
     _description = 'Supplier Invoice Merge PDF'
@@ -42,7 +44,8 @@ class supplier_invoice_merge_pdf(osv.osv_memory):
             att_ids = att_pool.search(cr ,uid, [('res_model', '=', 'account.invoice'),
                                        ('res_id', '=', invoice.id)])
             for att_data in att_pool.browse(cr, uid, att_ids, context=context):
-                if 'PDF' not in att_data.file_type.upper() :
+                # if 'PDF' not in att_data.file_type.upper() :
+                if 'PDF' not in att_data.mimetype.upper() :
                     continue
                 if att_data.datas_fname and att_data.datas and att_data.datas_fname.split(".")[-1].upper() == "PDF":
                     data = base64.decodestring(att_data.datas)
@@ -51,6 +54,7 @@ class supplier_invoice_merge_pdf(osv.osv_memory):
                     flg = True
                     for page in range(input_attachment.getNumPages()):
                         output.addPage(input_attachment.getPage(page))
+
             if not flg:
                 ctx = context.copy()
                 ctx['model'] = 'account.invoice'
@@ -68,9 +72,8 @@ class supplier_invoice_merge_pdf(osv.osv_memory):
         output.write(outputStream)
         res =  outputStream.getvalue().encode('base64')
         outputStream.close()
+
         return res
-
-
 
 
     _columns = {
@@ -82,6 +85,37 @@ class supplier_invoice_merge_pdf(osv.osv_memory):
         'file_data': _get_file_data
     }
 
+
 supplier_invoice_merge_pdf()
+
+
+
+class Invoice(models.Model):
+    _inherit = 'account.invoice'
+
+    @api.multi
+    def button_merge_attachments(self):
+        '''
+            Migration Fixes:
+            Added this alternate method to achieve the above requirement
+        '''
+
+        mergePDF = self.env['supplier.invoice.merge.pdf']
+        vals = mergePDF.default_get(['file_name', 'file_data'])
+        res = mergePDF.create(vals)
+
+        view = self.env.ref('nsm_merge_to_print_supplier_invoices.view_suplier_invoice_merge_pdf_form')
+        return {
+            'name': _('Merge PDF'),
+            'context': self._context,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'supplier.invoice.merge.pdf',
+            'res_id': res.id,
+            'views': [(view.id, 'form')],
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

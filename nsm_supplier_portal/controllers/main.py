@@ -24,7 +24,8 @@ from openerp.tools.translate import _
 from openerp.addons.web import http
 openerpweb = http
 import urllib2
-from web.controllers.main import Binary
+# from web.controllers.main import Binary
+from openerp.addons.web.controllers.main import Binary
 #----------------------------------------------------------
 # OpenERP Binary saveas_ajax improved
 #----------------------------------------------------------

@@ -24,6 +24,7 @@ from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 import time
 
+from openerp import api, fields as fields1, models, _
 
 class custom_account_invoice(osv.osv):
     _inherit = 'account.invoice'
@@ -40,7 +41,8 @@ class custom_account_invoice(osv.osv):
     _columns = {
 
         'product_category': fields.many2one('product.category', 'Cost Category',domain=[('parent_id.supportal', '=', True)]),
-        'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'), ('portal_main', '=', True)]),
+        # 'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('type','=','view'), ('portal_main', '=', True)]),
+        'main_account_analytic_id': fields.many2one('account.analytic.account', 'Main Analytic account', domain=[('portal_main', '=', True)]),
         'state': fields.selection([
             ('portalcreate','Niet Ingediend'),
             ('draft','Draft'),
@@ -74,10 +76,11 @@ class custom_account_invoice(osv.osv):
             help="If you use payment terms, the due date will be computed automatically at the generation "\
                 "of accounting entries. If you keep the payment term and the due date empty, it means direct payment. "\
                 "The payment term may compute several due dates, for example 50% now, 50% in one month."),
-        'period_id': fields.many2one('account.period', 'Force Period', domain=[('state','<>','done')], help="Keep empty to use the period of the validation(invoice) date.", readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'period_id': fields.many2one('account.period', 'Force Period', domain=[('state','<>','done')], help="Keep empty to use the period of the validation(invoice) date.", readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'account_id': fields.many2one('account.account', 'Account', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, help="The partner account used for this invoice."),
-        'invoice_line': fields.one2many('account.invoice.line', 'invoice_id', 'Invoice Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
-        'tax_line': fields.one2many('account.invoice.tax', 'invoice_id', 'Tax Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'invoice_line': fields.one2many('account.invoice.line', 'invoice_id', 'Invoice Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'tax_line': fields.one2many('account.invoice.tax', 'invoice_id', 'Tax Lines', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+
         'currency_id': fields.many2one('res.currency', 'Currency', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, track_visibility='always'),
         'journal_id': fields.many2one('account.journal', 'Journal', required=True, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]},
                                       domain="[('type', 'in', {'out_invoice': ['sale'], 'out_refund': ['sale_refund'], 'in_refund': ['purchase_refund'], 'in_invoice': ['purchase']}.get(type, [])), ('company_id', '=', company_id)]"),
@@ -85,7 +88,8 @@ class custom_account_invoice(osv.osv):
         'check_total': fields.float('Verification Total', digits_compute=dp.get_precision('Account'), readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account',
             help='Bank Account Number to which the invoice will be paid. A Company bank account if this is a Customer Invoice or Supplier Refund, otherwise a Partner bank account number.', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
-        'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+        # 'move_name': fields.char('Journal Entry', size=64, readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
+
         'user_id': fields.many2one('res.users', 'Salesperson', readonly=True, track_visibility='onchange', states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)],'open':[('readonly',False)]}),
         'fiscal_position': fields.many2one('account.fiscal.position', 'Fiscal Position', readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}),
         'topf': fields.boolean('To Portal Flow', states={'draft':[('readonly',False)]}, help="Checking makes routing to Portal Flow possible"),
@@ -119,11 +123,11 @@ class custom_account_invoice(osv.osv):
             return res
         inv_obj = self.browse(cr,uid,ids)
         llist = []
-        if inv_obj[0].invoice_line:
-            for line in inv_obj[0].invoice_line:
+        if inv_obj[0].invoice_line_ids:
+            for line in inv_obj[0].invoice_line_ids:
                 if line.product_id:
                     llist.append((1, line.id, {'product_id': [],}))
-            res = { 'value': { 'invoice_line': llist },'warning': {'title': 'Let op!', 'message': 'U heeft de Factuurcategorie aangepast. Nu moet u opnieuw product(-en) en Edities/Kostenplaatsen selecteren in de factuurregel(s)'}}
+            res = { 'value': { 'invoice_line_ids': llist },'warning': {'title': 'Let op!', 'message': 'U heeft de Factuurcategorie aangepast. Nu moet u opnieuw product(-en) en Edities/Kostenplaatsen selecteren in de factuurregel(s)'}}
         return res
 
     def onchange_main_analytic_ac(self, cr, uid, ids, main_analytic, context={}):
@@ -132,11 +136,11 @@ class custom_account_invoice(osv.osv):
             return res
         inv_obj = self.browse(cr,uid,ids)
         llist = []
-        if inv_obj[0].invoice_line:
-            for line in inv_obj[0].invoice_line:
+        if inv_obj[0].invoice_line_ids:
+            for line in inv_obj[0].invoice_line_ids:
                 if line.account_analytic_id:
                     llist.append((1, line.id, {'account_analytic_id': [],}))
-            res = { 'value': { 'invoice_line': llist },'warning': {'title': 'Let op!', 'message': 'U heeft de Titel/Afdeling aangepast. Nu moet u opnieuw Edities/Kostenplaatsen selecteren in de factuurregel(s)'}}
+            res = { 'value': { 'invoice_line_ids': llist },'warning': {'title': 'Let op!', 'message': 'U heeft de Titel/Afdeling aangepast. Nu moet u opnieuw Edities/Kostenplaatsen selecteren in de factuurregel(s)'}}
         return res
 
 
@@ -149,13 +153,13 @@ class custom_account_invoice(osv.osv):
                 raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
             if self_obj.reuse and not self_obj.terms:
                 raise osv.except_osv(_('Error!'), _('Please Accept re-use terms'))
-            if not self_obj.invoice_line:
+            if not self_obj.invoice_line_ids:
                 raise osv.except_osv(_('No Invoice Lines!'), _('Please create some invoice lines.'))
             sale_team_id = sale_team_pool.search(
                 cr, uid, [('analytic_account_id', '=', self_obj.main_account_analytic_id.id),
-                          ('product_cat_id', '=', (self_obj.invoice_line and
-                                                   self_obj.invoice_line[0].product_id.categ_id and
-                                                   self_obj.invoice_line[0].product_id.categ_id.id or False)) or False
+                          ('product_cat_id', '=', (self_obj.invoice_line_ids and
+                                                   self_obj.invoice_line_ids[0].product_id.categ_id and
+                                                   self_obj.invoice_line_ids[0].product_id.categ_id.id or False)) or False
                          ],
                 context=context)
             if sale_team_id:
@@ -167,7 +171,7 @@ class custom_account_invoice(osv.osv):
                                     'state': 'draft',
                                     'section_id': sale_team_obj and sale_team_obj.sales_team_id.id or False,
                                     'user_id':  sale_team_obj and sale_team_obj.sales_team_id.user_id.id or False})
-            self.button_reset_taxes(cr, uid, ids, context=context)
+            # self.button_reset_taxes(cr, uid, ids, context=context)
         return True
 
     def act_portal_back(self, cr, uid, ids, context={}):
@@ -187,5 +191,19 @@ class custom_account_invoice(osv.osv):
         return True
 
 custom_account_invoice()
+
+class Invoice(models.Model):
+    _inherit = ["account.invoice"]
+
+    move_name = fields1.Char(string='Journal Entry', readonly=False,
+        default=False, copy=False, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]},
+        help="Technical field holding the number given to the invoice, automatically set when the invoice is validated then stored to set the same number again if the invoice is cancelled, set to draft and re-validated.")
+
+    invoice_line_ids = fields1.One2many('account.invoice.line', 'invoice_id', string='Invoice Lines', oldname='invoice_line',
+        readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, copy=True)
+    tax_line_ids = fields1.One2many('account.invoice.tax', 'invoice_id', string='Tax Lines', oldname='tax_line',
+        readonly=True, states={'draft':[('readonly',False)],'portalcreate':[('readonly',False)]}, copy=True)
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

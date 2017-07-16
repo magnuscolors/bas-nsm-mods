@@ -1,0 +1,3 @@
+---Fields in module 'nsm_supportal_extension'---
+---XML records in module 'nsm_supportal_extension'---
+DEL ir.ui.view: nsm_supportal_extension.view_account_analytic_line_form_ext

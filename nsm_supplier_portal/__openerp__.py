@@ -28,7 +28,10 @@
     """,
     'author': 'BAS Solutions',
     'website': 'https://www.bas-solutions.nl',
-    'depends': ['base', 'account', 'mail', 'account_analytic_analysis', 'portal', 'sale_crm', 'megis_auth', 'web_m2x_options', 'stock', 'nsm_analytic'],
+    'depends': ['base', 'account', 'mail',
+                # 'account_analytic_analysis',
+                'portal', 'sale_crm', 'megis_auth', 'web_m2x_options', 'stock', 'nsm_analytic',
+                'account_invoice_supplier_ref_unique'],
     'data': [
         "data/crm_sale_team_data.xml",
         "data/auth_signup_send_mail_data.xml",

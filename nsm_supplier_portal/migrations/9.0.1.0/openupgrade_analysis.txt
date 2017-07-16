@@ -1,0 +1,25 @@
+---Fields in module 'nsm_supplier_portal'---
+nsm_supplier_portal / sales.team               / sales_team_id (many2one)      : relation is now 'crm.team' ('crm.case.section')
+---XML records in module 'nsm_supplier_portal'---
+DEL crm.case.section: nsm_supplier_portal.section_sales_department1
+NEW crm.team: nsm_supplier_portal.section_sales_department1
+DEL email.template: nsm_supplier_portal.send_invitation_email
+DEL ir.model.access: nsm_supplier_portal.custom_account_fiscal_seq_year
+DEL ir.model.access: nsm_supplier_portal.custom_account_fiscal_seq_year_controller
+DEL ir.model.access: nsm_supplier_portal.custom_account_journal_period
+DEL ir.model.access: nsm_supplier_portal.custom_account_journal_period_controller
+DEL ir.model.access: nsm_supplier_portal.custom_account_period
+DEL ir.model.access: nsm_supplier_portal.custom_account_period_controller
+DEL ir.model.access: nsm_supplier_portal.custom_portal_mail_mail
+DEL ir.model.access: nsm_supplier_portal.custom_portal_supplier_mail_notification
+DEL ir.model.access: nsm_supplier_portal.custom_portal_supplier_mail_notification_controller
+DEL ir.model.access: nsm_supplier_portal.custom_portal_user_account_fiscal_seq_year
+DEL ir.model.access: nsm_supplier_portal.custom_portal_user_account_journal_period
+DEL ir.model.access: nsm_supplier_portal.custom_portal_user_account_period
+DEL ir.model.access: nsm_supplier_portal.custom_portal_user_mail_mail
+DEL ir.model.access: nsm_supplier_portal.custom_portal_user_supplier_mail_notification
+DEL ir.ui.menu: nsm_supplier_portal.mail_archivesfeeds_new
+DEL ir.ui.menu: nsm_supplier_portal.supplier_portal_inbox
+NEW ir.ui.view: nsm_supplier_portal.view_account_analytic_account_list_inherit
+DEL ir.ui.view: nsm_supplier_portal.view_account_analytic_account_tree_nsm_portal
+NEW mail.template: nsm_supplier_portal.send_invitation_email

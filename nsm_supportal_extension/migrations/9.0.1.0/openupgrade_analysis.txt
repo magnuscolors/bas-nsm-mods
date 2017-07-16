@@ -1,0 +1,3 @@
+---Fields in module 'nsm_supportal_extension'---
+nsm_supportal_extension / account.invoice          / fiscal_position (many2one)    : NEW relation: account.fiscal.position
+---XML records in module 'nsm_supportal_extension'---

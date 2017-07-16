@@ -6,7 +6,8 @@
             id="blank_invoice_reports"
             model="account.invoice"
             name="blank.invoice.report"
-            rml="addons/nsm_merge_to_print_supplier_invoices/report/blank_invoice_report.rml"
+            rml="nsm_merge_to_print_supplier_invoices/report/blank_invoice_report.rml"
+            report_type="pdf"
             string="Blank Invoices"
             menu="False"/>
 

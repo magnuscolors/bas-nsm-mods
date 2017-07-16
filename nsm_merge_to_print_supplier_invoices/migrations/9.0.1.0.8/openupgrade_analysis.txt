@@ -1,0 +1,5 @@
+---Fields in module 'nsm_merge_to_print_supplier_invoices'---
+---XML records in module 'nsm_merge_to_print_supplier_invoices'---
+DEL ir.actions.act_window: nsm_merge_to_print_supplier_invoices.act_supplier_invoice_merge_pdf_invoice
+NEW ir.actions.server: nsm_merge_to_print_supplier_invoices.invoice_merge_pdf_server_action
+NEW ir.values: nsm_merge_to_print_supplier_invoices.run_invoice_merge_pdf_action

@@ -17,19 +17,19 @@
             groups="group_module_supplier_portal,group_module_supplier_portal_user"
             name = "Messaging"/>
 
-        <menuitem id="supplier_portal_inbox"
-            parent="menu_supplier_portal_main"
-            action="action_mail_inbox_feeds_supplier_portal"
-            sequence="1"
-            name="Inbox"
-            groups="group_module_supplier_portal,group_module_supplier_portal_user"/>
+        <!--<menuitem id="supplier_portal_inbox"-->
+            <!--parent="menu_supplier_portal_main"-->
+            <!--action="action_mail_inbox_feeds_supplier_portal"-->
+            <!--sequence="1"-->
+            <!--name="Inbox"-->
+            <!--groups="group_module_supplier_portal,group_module_supplier_portal_user"/>-->
 
-        <record id="mail_archivesfeeds_new" model="ir.ui.menu">
-            <field name="name">Archives</field>
-            <field name="sequence" eval="2"/>
-            <field name="action" ref="mail.action_mail_archives_feeds"/>
-            <field name="parent_id" ref="menu_supplier_portal_main"/>
-        </record>
+        <!--<record id="mail_archivesfeeds_new" model="ir.ui.menu">-->
+            <!--<field name="name">Archives</field>-->
+            <!--<field name="sequence" eval="2"/>-->
+            <!--<field name="action" ref="mail.action_mail_archives_feeds"/>-->
+            <!--<field name="parent_id" ref="menu_supplier_portal_main"/>-->
+        <!--</record>-->
 
     <!-- Supplier Menu Item -->
 
@@ -83,10 +83,11 @@
             
         <menuitem id="menu_action_invoice_tree_supportal"
             action="action_invoice_tree_supportal"
-	    name="Supplier Invoices"
+	        name="Vendor Bills"
             parent="account.menu_finance_payables"
             groups="megis_auth.goedk_facturen"
             sequence="3"/>
+	    <!--name="Supplier Invoices"-->
     
     <!-- Submited Invoice Menu Item -->
         <menuitem id="menu_supplier_invoice_submited"

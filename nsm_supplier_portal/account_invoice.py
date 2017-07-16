@@ -23,6 +23,8 @@ from openerp.osv import fields
 from openerp.tools.translate import _
 import time
 
+from openerp import models, fields as fields2, api, _
+
 
 class custom_account_invoice(osv.osv):
     _inherit = 'account.invoice'
@@ -122,31 +124,33 @@ class custom_account_invoice(osv.osv):
             return company_obj.data_fname
         return False
 
-    def create(self, cr, uid, vals, context={}):
-        follower_ids = []
-        partner_id = self.pool.get('res.partner').browse(
-            cr, uid, vals['partner_id'], context=context)
-        if partner_id.message_follower_ids:
-            for follower_id in partner_id.message_follower_ids:
-                follower_ids.append(follower_id.id)
-        vals['message_follower_ids'] = follower_ids
-        res = super(custom_account_invoice, self).create(
-            cr, uid, vals, context=context)
-        obj = self.browse(cr, uid, res, context=context)
-        partner_ids = []
-        if obj.partner_id.message_follower_ids:
-            for follower_id in partner_id.message_follower_ids:
-                partner_ids.append(follower_id.id)
-        partner_id = self.pool.get('res.users').browse(
-            cr, uid, uid, context=context).partner_id.id
-        if partner_id in partner_ids:
-            partner_ids.remove(partner_id)
-        if obj.message_ids:
-            for msg in obj.message_ids:
-             self.pool.get('mail.notification')._notify(
-                 cr, uid, msg.id, partners_to_notify=partner_ids,
-                 context=context)
-        return res
+    # --deep: rewritten this method below
+    # def create(self, cr, uid, vals, context={}):
+    #     follower_ids = []
+    #     partner_id = self.pool.get('res.partner').browse(
+    #         cr, uid, vals['partner_id'], context=context)
+    #     if partner_id.message_follower_ids:
+    #         for follower_id in partner_id.message_follower_ids:
+    #             follower_ids.append(follower_id.id)
+    #     vals['message_follower_ids'] = follower_ids
+    #
+    #     res = super(custom_account_invoice, self).create(
+    #         cr, uid, vals, context=context)
+    #     obj = self.browse(cr, uid, res, context=context)
+    #     partner_ids = []
+    #     if obj.partner_id.message_follower_ids:
+    #         for follower_id in partner_id.message_follower_ids:
+    #             partner_ids.append(follower_id.id)
+    #     partner_id = self.pool.get('res.users').browse(
+    #         cr, uid, uid, context=context).partner_id.id
+    #     if partner_id in partner_ids:
+    #         partner_ids.remove(partner_id)
+    #     if obj.message_ids:
+    #         for msg in obj.message_ids:
+    #          self.pool.get('mail.notification')._notify(
+    #              cr, uid, msg.id, partners_to_notify=partner_ids,
+    #              context=context)
+    #     return res
 
     def _get_supplier(self, cr, uid, ids, context={}):
         res_user_obj = self.pool.get('res.users').browse(cr, uid, uid, context=context)
@@ -175,13 +179,13 @@ class custom_account_invoice(osv.osv):
                 raise osv.except_osv(_('Error!'), _('Please Upload your invoice File before submit.'))
             if self_obj.reuse and not self_obj.terms:
                 raise osv.except_osv(_('Error!'), _('Please Accept re-use terms'))
-            if not self_obj.invoice_line:
+            if not self_obj.invoice_line_ids:
                 raise osv.except_osv(_('No Invoice Lines!'), _('Please create some invoice lines.'))
             sale_team_id = sale_team_pool.search(
                 cr, uid, [('analytic_account_id', '=', self_obj.main_account_analytic_id.id),
-                          ('product_cat_id', '=', (self_obj.invoice_line and
-                                                   self_obj.invoice_line[0].product_id.categ_id and
-                                                   self_obj.invoice_line[0].product_id.categ_id.id or False)) or False
+                          ('product_cat_id', '=', (self_obj.invoice_line_ids and
+                                                   self_obj.invoice_line_ids[0].product_id.categ_id and
+                                                   self_obj.invoice_line_ids[0].product_id.categ_id.id or False)) or False
                          ],
                 context=context)
         if sale_team_id:
@@ -205,10 +209,9 @@ class custom_account_invoice(osv.osv):
         Overrides orm field_view_get.
         @return: Dictionary of Fields, arch and toolbar.
         """
-
         res = {}
-        res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id, view_type,
-                                                       context, toolbar=toolbar, submenu=submenu)
+        res = super(custom_account_invoice, self).fields_view_get(cr, user, view_id=view_id, view_type=view_type,
+                                                       context=context, toolbar=toolbar, submenu=submenu)
         if not context.get('is_portal'):
             return res
         res['toolbar'] = {'print': [], 'other': []}
@@ -225,23 +228,36 @@ class account_invoice_line(osv.osv):
     }
 
     def onchange_tax_id(self, cr, uid, ids, tax_id, context={}):
+        print "onchange_tax_id"
         if not tax_id:
             return {'value': {'invoice_line_tax_id': []}}
         return {'value': {'invoice_line_tax_id': [tax_id]}}
 
+    # -- deep
+    # def product_id_change(self, cr, uid, ids, product, uom_id,
+    #                       qty=0, name='', type='out_invoice', partner_id=False,
+    #                       fposition_id=False, price_unit=False, currency_id=False,
+    #                       context=None, company_id=None):
+
     def product_id_change(self, cr, uid, ids, product, uom_id,
                           qty=0, name='', type='out_invoice', partner_id=False,
                           fposition_id=False, price_unit=False, currency_id=False,
-                          context=None, company_id=None):
+                          company_id=None, context=None):
+
         res = super(account_invoice_line, self).product_id_change(
             cr, uid, ids, product=product, uom_id=uom_id, qty=qty, name=name,
             type=type, partner_id=partner_id, fposition_id=fposition_id,
             price_unit=price_unit, currency_id=currency_id,
             context=context, company_id=company_id)
+
+        print "product_id_change deep", res
+
         if context is None:
             context = {}
+
         if not context.get('is_portal'):
             return res
+
         uom_pool = self.pool.get('product.uom')
         account_tax_pool = self.pool.get('account.tax')
         uom_search_id = uom_pool.search(
@@ -253,5 +269,49 @@ class account_invoice_line(osv.osv):
         return res
 
 account_invoice_line()
+
+
+class Invoice(models.Model):
+    _inherit = 'account.invoice'
+
+    # --deep
+    @api.multi
+    def _add_followers_notify(self):
+        """
+            Adding followers of Partner to Invoice
+        """
+        self.ensure_one()
+        mappedPartner = map(lambda x: x.partner_id.id, self.message_follower_ids)
+
+        PartnerIDs = []
+        for mf in self.partner_id.message_follower_ids:
+            if mf.partner_id.id in mappedPartner: continue
+            PartnerIDs.append(mf.partner_id.id)
+
+        if not PartnerIDs:
+            return False
+
+        mail_invite = self.env['mail.wizard.invite'].with_context({
+            'default_res_model': self._name,
+            'default_res_id': self.id}).create({
+            'partner_ids': [(4, PartnerIDs)], 'send_mail': True})
+        return mail_invite.add_followers()
+
+
+    @api.model
+    def create(self, vals):
+        res = super(Invoice, self).create(vals)
+        res._add_followers_notify()
+        return res
+
+
+class InvoiceLine(models.Model):
+    _inherit = 'account.invoice.line'
+
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        res = super(InvoiceLine, self)._onchange_product_id()
+        print "_onchange_product_id", res
+        return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
