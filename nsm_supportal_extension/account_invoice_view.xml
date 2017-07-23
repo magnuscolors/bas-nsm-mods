@@ -10,7 +10,7 @@
                 <field name="arch" type="xml">
                     <!--tree string="Supplier Invoices"-->
                     <data>
-                        <tree string="Invoice" position="attributes">
+                        <tree position="attributes">
                             <attribute name="colors">blue:topf != True;green:topf == True; gray:state == 'cancel'</attribute>
                         </tree>
                         <field name="avail_supplier_portal" position="replace">
@@ -108,9 +108,9 @@
                     <field name="state" position="replace">
                            <field name="state" widget="statusbar" statusbar_visible="portalcreate,draft,open,auth,paid" statusbar_colors='{"proforma":"blue","proforma2":"blue"}'/>
                     </field>
-                    <label string="Submitted Invoice" position="attributes">
+                    <xpath expr="//sheet/div/h1/label[2]" position="attributes">
                             <attribute name="attrs">{'invisible': ['|', '|', ('state','&lt;&gt;','draft'), ('type','in ',['in_refund','in_invoice']), ('is_portal','!=', True), ]}</attribute>
-                    </label>
+                    </xpath>
 
                     <field name="is_submitted" position="after">
                             <field name="is_portal" invisible="1"/>
@@ -155,18 +155,18 @@
                                         <!--on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)"-->
                                         <!--options='{"create": false, "create_edit": false, "no_open": true}'/>-->
 
-                        <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
+                    <field name="product_id" domain="[('categ_id', '=', parent.product_category)]"  required="1"
                                         options='{"create": false, "create_edit": false, "no_open": true}'/>
                     </field>
                     <field name="account_analytic_id" position="replace">
                         <!--<field name="account_analytic_id" string="Editie"-->
                                         <!--domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled')), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]"-->
                                         <!--options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>-->
-                        <field name="account_analytic_id" string="Editie"
-                                        domain="[('company_id', '=', parent.company_id), ('account_type', '=', 'normal'), ('portal_sub', '=', True)]"
+                    <field name="account_analytic_id" string="Editie"
+                                        domain="[('company_id', '=', parent.company_id), ('account_type', '=', 'normal'), ('portal_sub', '=', True),('id', 'child_of', parent.main_account_analytic_id)]"
                                         options='{"create": false, "create_edit": false, "no_open": True}' required="True"/>
                     </field>
-                    <sheet string="Supplier Invoice" position="after" >
+                    <sheet position="after" >
                             <div class="oe_chatter">
                                 <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
                                 <field name="message_ids" widget="mail_thread" nolabel="1"/>

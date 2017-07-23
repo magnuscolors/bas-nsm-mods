@@ -17,6 +17,7 @@
                 </xpath>
             </field>
         </record>
+
         <!--<record id="view_account_analytic_account_tree_nsm_portal" model="ir.ui.view">-->
             <!--<field name="name">account.analytic.account.tree.nsm.portal</field>-->
             <!--<field name="model">account.analytic.account</field>-->
