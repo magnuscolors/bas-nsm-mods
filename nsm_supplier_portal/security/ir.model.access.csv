@@ -105,3 +105,4 @@ custom_account_fiscal_position_controller,custom_account_fiscal_position_control
 custom_crm_case_section_controller,custom_crm_case_section_controller,crm.model_crm_case_section,group_module_supplier_portal_controller,1,1,0,0
 custom_res_user_controller,custom_portal_user,base.model_res_users,group_module_supplier_portal_controller,1,1,1,0
 access_sales_team,access_sales_team,model_sales_team,,1,1,1,1
+"custom_access_ir_config_parameter","custom_ir_config_parameter","base.model_ir_config_parameter","group_module_supplier_portal_user",1,0,0,0

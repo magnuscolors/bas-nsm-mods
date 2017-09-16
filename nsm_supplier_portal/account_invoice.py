@@ -229,6 +229,28 @@ class account_invoice_line(osv.osv):
             return {'value': {'invoice_line_tax_id': []}}
         return {'value': {'invoice_line_tax_id': [tax_id]}}
 
+    def onchange_quantity(self, cr, uid, ids, quantity, context={}):
+        if not quantity:
+            return {'value': {'price_unit': 0}}
+        if quantity < 0:
+            res = {'value': {'quantity': 0},
+                   'warning': {'title': 'Let op!',
+                                'message': 'U mag geen negatieve hoeveelheid invoeren!'}}
+        else:
+            res = {}
+        return res
+
+    def onchange_price_unit(self, cr, uid, ids, price_unit, context={}):
+        if not price_unit:
+            return {'value': {'price_unit': 0}}
+        if price_unit < 0:
+            res = {'value': {'price_unit': 0},
+                   'warning': {'title': 'Let op!',
+                                'message': 'U mag geen negatieve prijs invoeren!'}}
+        else:
+            res = {}
+        return res
+
     def product_id_change(self, cr, uid, ids, product, uom_id,
                           qty=0, name='', type='out_invoice', partner_id=False,
                           fposition_id=False, price_unit=False, currency_id=False,
